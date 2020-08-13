@@ -7,8 +7,15 @@ class Companies {
     }
 
     fetchAndLoadCompanies() {
-        this.adapter.getCompanies().then(companies => {
-            console.log(companies)
-        })
+        this.adapter.getCompanies()
+            .then(companies => { 
+                companies.forEach(company => this.companies.push(company))
+            }).then (() => {
+                this.render()
+            })
+    }
+
+    render() {
+        let companiesContainer = document.querySelector('.company').innerHTML = this.companies
     }
 }
