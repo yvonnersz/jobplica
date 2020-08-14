@@ -9,8 +9,13 @@
   .company-card {
     border: 1px solid black;
     text-align: center;
+    padding-bottom: 20px;
   }
 
   ul {
-    margin-left: 0 auto;
+    padding:0;
+    margin:0;
+    text-align: center;
+    width: 300px;
+    list-style:none;
   }
