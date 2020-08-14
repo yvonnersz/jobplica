@@ -9,13 +9,13 @@ class Companies {
     fetchAndLoadCompanies() {
         this.adapter.getCompanies()
             .then(companies => { 
-                companies.forEach(company => this.companies.push(company))
+                companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.render()
             })
     }
 
     render() {
-        let companiesContainer = document.querySelector('.company').innerHTML = this.companies
+        let companiesContainer = document.querySelector('.company').innerHTML = 'ok'
     }
 }
