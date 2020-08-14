@@ -24,7 +24,11 @@ class Companies {
             div.className = "company-card"
 
             let h1 = document.createElement('h1')
-            div.appendChild(h1).innerHTML = company.name
+
+            let a = document.createElement('a')
+            a.text = h1.innerHTML = company.name
+            a.href = `${company.url}`
+            div.appendChild(a)
 
             let ul = document.createElement('ul')
 
