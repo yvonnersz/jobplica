@@ -1,8 +1,15 @@
-  div.company-card {
-    display: inline-flex;
+  body {
+    width: 75%;
     float: right;
-    height: 300px;
-    width: 300px;
-    margin: 5px;
+  }
+  
+  .company {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+
+  .company-card {
     border: 1px solid black;
+    padding: 5px;
   }
