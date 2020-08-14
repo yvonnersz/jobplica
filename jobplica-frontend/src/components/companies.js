@@ -2,7 +2,7 @@ class Companies {
     constructor() {
         this.companies = []
         this.adapter = new CompaniesAdapter()
-        // this.bindEventulsteners()
+        // this.bindEventh1steners()
         this.fetchAndLoadCompanies()
     }
 
@@ -23,12 +23,22 @@ class Companies {
             div.setAttribute('id', company.id)
             div.className = "company-card"
 
-            let card = companiesContainer.appendChild(div)
+            let h1 = document.createElement('h1')
+            div.appendChild(h1).innerHTML = company.name
 
-            let ul = document.createElement('ul')        
-            let appendUl = card.appendChild(ul)
+            let locationUl = document.createElement('ul')
+            div.appendChild(locationUl).innerHTML = company.location
 
-            appendUl.innerHTML = company.name
+            let dateUl = document.createElement('ul')
+            div.appendChild(dateUl).innerHTML = company.date_applied
+
+            let takeawayUl = document.createElement('ul')
+            div.appendChild(takeawayUl).innerHTML = company.takeaway
+
+            let statusUl = document.createElement('ul')
+            div.appendChild(statusUl).innerHTML = company.status
+
+            let companyCard = companiesContainer.appendChild(div)
         }
     }
 }
