@@ -23,10 +23,8 @@ class Companies {
             div.setAttribute('id', company.id)
             div.className = "company-card"
 
-            let h1 = document.createElement('h1')
-
             let a = document.createElement('a')
-            a.text = h1.innerHTML = company.name
+            a.text = company.name
             a.href = `${company.url}`
             div.appendChild(a)
 
