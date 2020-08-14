@@ -1,0 +1,8 @@
+  div.company-card {
+    display: inline-flex;
+    float: right;
+    height: 300px;
+    width: 300px;
+    margin: 5px;
+    border: 1px solid black;
+  }
