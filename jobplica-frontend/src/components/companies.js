@@ -26,19 +26,23 @@ class Companies {
             let h1 = document.createElement('h1')
             div.appendChild(h1).innerHTML = company.name
 
-            let locationUl = document.createElement('ul')
-            div.appendChild(locationUl).innerHTML = company.location
+            let ul = document.createElement('ul')
 
-            let dateUl = document.createElement('ul')
-            div.appendChild(dateUl).innerHTML = company.date_applied
+            let locationLi = document.createElement('li')
+            ul.appendChild(locationLi).innerHTML = company.location
 
-            let takeawayUl = document.createElement('ul')
-            div.appendChild(takeawayUl).innerHTML = company.takeaway
+            let dateLi = document.createElement('li')
+            ul.appendChild(dateLi).innerHTML = company.date_applied
 
-            let statusUl = document.createElement('ul')
-            div.appendChild(statusUl).innerHTML = company.status
+            let takeawayLi = document.createElement('li')
+            ul.appendChild(takeawayLi).innerHTML = company.takeaway
 
-            let companyCard = companiesContainer.appendChild(div)
+            let statusLi = document.createElement('li')
+            ul.appendChild(statusLi).innerHTML = company.status
+
+            let companyInfo = div.appendChild(ul)
+            
+            companiesContainer.appendChild(div)
         }
     }
 }
