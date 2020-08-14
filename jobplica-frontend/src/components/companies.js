@@ -41,7 +41,19 @@ class Companies {
             ul.appendChild(statusLi).innerHTML = company.status
 
             let companyInfo = div.appendChild(ul)
-            
+
+            let responseButton = document. createElement("button");
+            responseButton.innerHTML = "Response"
+            div.appendChild(responseButton)
+
+            let noReplyButton = document. createElement("button");
+            noReplyButton.innerHTML = "No Reply"
+            div.appendChild(noReplyButton)
+
+            let rejectedButton = document. createElement("button");
+            rejectedButton.innerHTML = "Rejected"
+            div.appendChild(rejectedButton)
+
             companiesContainer.appendChild(div)
         }
     }
