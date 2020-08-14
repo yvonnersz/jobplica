@@ -12,6 +12,11 @@
     padding-bottom: 20px;
   }
 
+  .company-card a {
+    font-size: 35px;
+    text-decoration: none;
+  }
+
   ul {
     padding:0;
     margin:0;
