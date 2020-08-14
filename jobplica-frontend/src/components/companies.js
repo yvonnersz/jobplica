@@ -32,7 +32,7 @@ class Companies {
             ul.appendChild(locationLi).innerHTML = company.location
 
             let dateLi = document.createElement('li')
-            ul.appendChild(dateLi).innerHTML = company.date_applied
+            ul.appendChild(dateLi).innerHTML = company.renderDate()
 
             let takeawayLi = document.createElement('li')
             ul.appendChild(takeawayLi).innerHTML = company.takeaway

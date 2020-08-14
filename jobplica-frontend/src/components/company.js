@@ -8,4 +8,10 @@ class Company {
         this.takeaway = company.takeaway;
         this.status = company.status;
     }
+
+    renderDate() {
+        let date = new Date(this.date_applied)
+        let fullDate = date.toDateString()
+        return fullDate
+    }
 }
