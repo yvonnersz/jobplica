@@ -1,5 +1,6 @@
 class Company {
     constructor(company) {
+        this.id = company.id;
         this.name  = company.name;
         this.location = company.location;
         this.url = company.url;

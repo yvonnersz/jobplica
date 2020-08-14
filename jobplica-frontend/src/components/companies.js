@@ -2,7 +2,7 @@ class Companies {
     constructor() {
         this.companies = []
         this.adapter = new CompaniesAdapter()
-        // this.bindEventListeners()
+        // this.bindEventulsteners()
         this.fetchAndLoadCompanies()
     }
 
@@ -10,13 +10,25 @@ class Companies {
         this.adapter.getCompanies()
             .then(companies => { 
                 companies.forEach(company => this.companies.push(new Company(company)))
-                console.log(this.companies)
             }).then (() => {
                 this.render()
             })
     }
 
     render() {
-        let companiesContainer = document.querySelector('.company').innerHTML = 'my notes'
+        let companiesContainer = document.querySelector('.company')
+
+        for (const company of this.companies) {
+            let div = document.createElement('div')
+            div.setAttribute('id', company.id)
+            div.className = "company-card"
+
+            let card = companiesContainer.appendChild(div)
+
+            let ul = document.createElement('ul')        
+            let appendUl = card.appendChild(ul)
+
+            appendUl.innerHTML = company.name
+        }
     }
 }
