@@ -19,3 +19,11 @@
     width: 300px;
     list-style:none;
   }
+
+  button {
+    display: inline-block;
+    width: 30%;
+    height: 30px;
+    margin: 1px;
+    margin-top: 10px;
+  }
