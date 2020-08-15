@@ -11,10 +11,8 @@ class CompaniesAdapter {
         return fetch(this.baseUrl).then(resp => resp.json())
     }
 
-    createCompany(companyName) {
-        const company = {
-            name: companyName
-        }
+    createCompany(companyObject) {
+        const company = companyObject
 
         return fetch(this.baseUrl, {
             method: 'POST',

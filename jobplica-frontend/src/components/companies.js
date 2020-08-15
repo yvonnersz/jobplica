@@ -69,9 +69,12 @@ class Companies {
 
     createCompany(e) {
         e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
-        const companyName = this.newCompanyName.value
 
-        this.adapter.createCompany(companyName).then(company => {
+        const companyObject = {
+            name: this.newCompanyName.value
+        }
+
+        this.adapter.createCompany(companyObject).then(company => {
             this.companies.push(new Company(company))
             this.render()
         })
