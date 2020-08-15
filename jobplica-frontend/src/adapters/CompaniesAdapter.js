@@ -10,4 +10,18 @@ class CompaniesAdapter {
     getCompanies() {
         return fetch(this.baseUrl).then(resp => resp.json())
     }
+
+    createCompany(value) {
+        const company = {
+            body: value
+        }
+
+        return fetch(this.baseUrl, {
+            method: "POST",
+            headers: {
+                'content-type':'application/json',
+            },
+            body: JSON.stringify({company})
+        }).then(resp => resp.json())
+    }
 }

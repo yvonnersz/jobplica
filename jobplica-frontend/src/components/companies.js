@@ -4,6 +4,7 @@ class Companies {
         this.adapter = new CompaniesAdapter()
         // this.bindEventh1steners()
         this.fetchAndLoadCompanies()
+        this.bindingAndEventListener()
     }
 
     fetchAndLoadCompanies() {
@@ -58,5 +59,21 @@ class Companies {
 
             companiesContainer.appendChild(div)
         }
+    }
+
+    bindingAndEventListener() {
+        this.companyForm = document.getElementById('new-company')
+        this.companyForm.addEventListener('submit', this.createCompany.bind(this))
+        this.newCompanyName = document.getElementById('new-company-name')
+    }
+
+    createCompany(e) {
+        e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
+        const companyName = this.newCompanyName.value
+
+        this.adapter.createCompany(companyName).then(company => {
+            this.companies.push(new Company(company))
+            this.render()
+        })
     }
 }
