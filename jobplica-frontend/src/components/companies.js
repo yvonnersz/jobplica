@@ -64,14 +64,25 @@ class Companies {
     bindingAndEventListener() {
         this.companyForm = document.getElementById('new-company')
         this.companyForm.addEventListener('submit', this.createCompany.bind(this))
+        
         this.newCompanyName = document.getElementById('new-company-name')
+        this.newCompanyLocation = document.getElementById('new-company-location')
+        this.newCompanyUrl = document.getElementById('new-company-url')
+        this.newCompanyDate = document.getElementById('new-company-date')
+        this.newCompanyTakeaway = document.getElementById('new-company-takeaway')
+        this.newCompanyStatus = document.getElementById('new-company-status')
     }
 
     createCompany(e) {
         e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
 
         const companyObject = {
-            name: this.newCompanyName.value
+            name: this.newCompanyName.value,
+            location: this.newCompanyLocation.value,
+            url: this.newCompanyUrl.value,
+            date: this.newCompanyDate.value,
+            takeaway: this.newCompanyTakeaway.value,
+            status: this.newCompanyStatus.value
         }
 
         this.adapter.createCompany(companyObject).then(company => {
