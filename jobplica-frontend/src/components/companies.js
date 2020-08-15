@@ -24,6 +24,12 @@ class Companies {
             div.setAttribute('id', company.id)
             div.className = "company-card"
 
+            let editDiv = document.createElement('div')
+            editDiv.setAttribute('id', company.id)
+            editDiv.className = "edit"
+            editDiv.innerHTML = 'edit'
+            div.appendChild(editDiv)
+
             let a = document.createElement('a')
             a.text = company.name
             a.href = `${company.url}`
@@ -56,6 +62,7 @@ class Companies {
             let rejectedButton = document. createElement("button");
             rejectedButton.innerHTML = "Rejected"
             div.appendChild(rejectedButton)
+
 
             companiesContainer.appendChild(div)
         }
