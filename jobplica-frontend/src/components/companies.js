@@ -10,7 +10,7 @@ class Companies {
     fetchAndLoadCompanies() {
         this.adapter.getCompanies()
             .then(companies => { 
-                companies.forEach(company => this.companies.push(new Company(company)))
+                companies.sort((a, b) => a.id - b.id).forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.render()
             })
@@ -112,7 +112,7 @@ class Companies {
         let editContainer = document.querySelector(`#container-${selectedId}`)
 
         let editButton = document.querySelector(`#edit-${selectedId}`)
-        editContainer.removeChild(editButton)
+        editButton.style.visibility = "hidden"
 
         let deleteButton = document.querySelector(`#delete-${selectedId}`)
         deleteButton.style.visibility = "visible"
@@ -124,15 +124,13 @@ class Companies {
             edit.addEventListener('keydown', function(e) {
                 if (event.key == "Enter") {
                     const newValue = edit.innerHTML
-                    edit.contentEditable = false
 
-
-                    let companyName = document.querySelector(`#edit-${selectedId} a`).innerText
-                    let companyUrl = document.querySelector(`#edit-${selectedId} a`).href
-                    let companyLocation = document.querySelector(`#edit-${selectedId} ul li:nth-child(1)`).innerText
-                    let companyDate = document.querySelector(`#edit-${selectedId} ul li:nth-child(2)`).innerText
-                    let companyTakeaway = document.querySelector(`#edit-${selectedId} ul li:nth-child(3)`).innerText
-                    let companyResponse = document.querySelector(`#edit-${selectedId} ul li:nth-child(4)`).innerText
+                    let companyName = document.querySelector(`#container-${selectedId} a`).innerText
+                    let companyUrl = document.querySelector(`#container-${selectedId} a`).href
+                    let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
+                    let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
+                    let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
+                    let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
 
                     let newCompanyObject = {
                         name: companyName,
@@ -144,6 +142,7 @@ class Companies {
                     }
 
                     savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
+                    edit.contentEditable = false
                 }
             })
         })
