@@ -21,15 +21,22 @@ class Companies {
 
         for (const company of this.companies) {
             let div = document.createElement('div')
-            div.setAttribute('id', "edit-" + company.id)
+            div.setAttribute('id', 'container-' + company.id)
             div.className = "company-card"
 
             let editDiv = document.createElement('button')
             editDiv.className = "edit"
-            editDiv.setAttribute('id', company.id)
+            editDiv.setAttribute('id', 'edit-' + company.id)
             editDiv.innerHTML = 'Edit'
             editDiv.addEventListener('click', this.updateCompany.bind(this))
             div.appendChild(editDiv)
+
+            let deleteButton = document.createElement('button')
+            deleteButton.className = "delete"
+            deleteButton.setAttribute('id', 'delete-' + company.id)
+            deleteButton.innerHTML = "Delete"
+            deleteButton.style.visibility = "hidden"
+            div.appendChild(deleteButton)
 
             let a = document.createElement('a')
             a.text = company.name
@@ -100,9 +107,15 @@ class Companies {
     }
 
     updateCompany(e) {
-        let editContainer = document.querySelector(`#edit-${e.target.id}`)
         let savedThis = this
-        let selectedId = e.target.id
+        let selectedId = e.target.id.split('-')[1]
+        let editContainer = document.querySelector(`#container-${selectedId}`)
+
+        let editButton = document.querySelector(`#edit-${selectedId}`)
+        editContainer.removeChild(editButton)
+
+        let deleteButton = document.querySelector(`#delete-${selectedId}`)
+        deleteButton.style.visibility = "visible"
 
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target

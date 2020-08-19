@@ -41,3 +41,10 @@
     float: left;
     margin: 1px;
   }
+  .delete {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    float: left;
+    margin: 1px;
+  }
