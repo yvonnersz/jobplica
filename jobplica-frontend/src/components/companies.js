@@ -24,10 +24,9 @@ class Companies {
             div.setAttribute('id', company.id)
             div.className = "company-card"
 
-            let editDiv = document.createElement('div')
-            editDiv.setAttribute('id', company.id)
+            let editDiv = document.createElement('button')
             editDiv.className = "edit"
-            editDiv.innerHTML = 'edit'
+            editDiv.innerHTML = 'Edit'
             div.appendChild(editDiv)
 
             let a = document.createElement('a')
