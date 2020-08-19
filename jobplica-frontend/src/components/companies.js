@@ -10,7 +10,7 @@ class Companies {
     fetchAndLoadCompanies() {
         this.adapter.getCompanies()
             .then(companies => { 
-                companies.sort((a, b) => a.id - b.id).forEach(company => this.companies.push(new Company(company)))
+                companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.render()
             })
@@ -28,7 +28,7 @@ class Companies {
             editDiv.className = "edit"
             editDiv.setAttribute('id', 'edit-' + company.id)
             editDiv.innerHTML = 'Edit'
-            editDiv.addEventListener('click', this.updateCompany.bind(this))
+            editDiv.addEventListener('focus', this.updateCompany.bind(this))
             div.appendChild(editDiv)
 
             let deleteButton = document.createElement('button')
@@ -116,6 +116,7 @@ class Companies {
 
         let deleteButton = document.querySelector(`#delete-${selectedId}`)
         deleteButton.style.visibility = "visible"
+        deleteButton.addEventListener('click', this.deleteCompany.bind(this))
 
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target
@@ -146,5 +147,28 @@ class Companies {
                 }
             })
         })
+    }
+
+    deleteCompany(e) {
+        let savedThis = this
+        let selectedId = e.target.id.split('-')[1]
+
+        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
+        let companyUrl = document.querySelector(`#container-${selectedId} a`).href
+        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
+        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
+        let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
+        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+
+        let newCompanyObject = {
+            name: companyName,
+            location: companyLocation,
+            url: companyUrl,
+            date_applied: companyDate,
+            takeaway: companyTakeaway,
+            status: companyResponse
+        }
+
+        savedThis.adapter.deleteCompany(newCompanyObject, selectedId)
     }
 }

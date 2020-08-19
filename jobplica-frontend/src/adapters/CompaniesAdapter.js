@@ -34,4 +34,17 @@ class CompaniesAdapter {
             body: JSON.stringify({company}),
         }).then(resp => resp.json())
     }
+
+    deleteCompany(newCompanyObject, id) {
+        const company = newCompanyObject
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({company}),
+        }).then(resp => resp.json())
+    }
+
 }
