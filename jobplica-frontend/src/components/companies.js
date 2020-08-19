@@ -170,5 +170,9 @@ class Companies {
         }
 
         savedThis.adapter.deleteCompany(newCompanyObject, selectedId)
+
+        let cards = document.querySelector('.company')
+        let card = document.querySelector(`#container-${selectedId}`)
+        cards.removeChild(card)
     }
 }
