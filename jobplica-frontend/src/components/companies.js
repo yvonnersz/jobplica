@@ -109,6 +109,12 @@ class Companies {
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target
             edit.contentEditable = true
+            edit.addEventListener('keydown', function(e) {
+                if (event.key == "Enter") {
+                    console.log("update")
+                    edit.contentEditable = false
+                }
+            })
         })
     }
 }
