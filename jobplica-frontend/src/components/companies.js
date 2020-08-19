@@ -110,10 +110,27 @@ class Companies {
             edit.contentEditable = true
             edit.addEventListener('keydown', function(e) {
                 if (event.key == "Enter") {
-                    edit.contentEditable = false
                     const newValue = edit.innerHTML
+                    edit.contentEditable = false
 
-                    savedThis.adapter.updateCompany(newValue, selectedId)
+
+                    let companyName = document.querySelector(`#edit-${selectedId} a`).innerText
+                    let companyUrl = document.querySelector(`#edit-${selectedId} a`).href
+                    let companyLocation = document.querySelector(`#edit-${selectedId} ul li:nth-child(1)`).innerText
+                    let companyDate = document.querySelector(`#edit-${selectedId} ul li:nth-child(2)`).innerText
+                    let companyTakeaway = document.querySelector(`#edit-${selectedId} ul li:nth-child(3)`).innerText
+                    let companyResponse = document.querySelector(`#edit-${selectedId} ul li:nth-child(4)`).innerText
+
+                    let newCompanyObject = {
+                        name: companyName,
+                        location: companyLocation,
+                        url: companyUrl,
+                        date_applied: companyDate,
+                        takeaway: companyTakeaway,
+                        status: companyResponse
+                    }
+
+                    savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
                 }
             })
         })
