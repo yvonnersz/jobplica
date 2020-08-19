@@ -26,7 +26,9 @@ class Companies {
 
             let editDiv = document.createElement('button')
             editDiv.className = "edit"
+            editDiv.setAttribute('id', company.id)
             editDiv.innerHTML = 'Edit'
+            editDiv.addEventListener('click', this.editCompany.bind(this))
             div.appendChild(editDiv)
 
             let a = document.createElement('a')
@@ -95,5 +97,10 @@ class Companies {
             this.companies.push(new Company(company))
             this.render()
         })
+    }
+
+    editCompany(e) {
+        e.preventDefault()
+        console.log(this)
     }
 }
