@@ -28,17 +28,19 @@ class CompaniesAdapter {
             name: value,
             location: value,
             url: value,
-            date: value,
+            date_applied: value,
             takeaway: value,
             status: value
         }
+
+        const company = companyObject
 
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({companyObject}),
+            body: JSON.stringify({company}),
         }).then(resp => resp.json())
     }
 }

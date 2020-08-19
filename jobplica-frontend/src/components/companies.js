@@ -88,7 +88,7 @@ class Companies {
             name: this.newCompanyName.value,
             location: this.newCompanyLocation.value,
             url: this.newCompanyUrl.value,
-            date: this.newCompanyDate.value,
+            date_applied: this.newCompanyDate.value,
             takeaway: this.newCompanyTakeaway.value,
             status: this.newCompanyStatus.value
         }
@@ -100,6 +100,10 @@ class Companies {
     }
 
     updateCompany(e) {
+        let editContainer = document.querySelector(`#edit-${e.target.id}`)
+        let savedThis = this
+        let selectedId = e.target.id
+
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target
 
