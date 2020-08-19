@@ -21,7 +21,7 @@ class Companies {
 
         for (const company of this.companies) {
             let div = document.createElement('div')
-            div.setAttribute('id', company.id)
+            div.setAttribute('id', "edit-" + company.id)
             div.className = "company-card"
 
             let editDiv = document.createElement('button')
@@ -100,7 +100,15 @@ class Companies {
     }
 
     editCompany(e) {
-        e.preventDefault()
-        console.log(this)
+        console.log(e.target)
+
+        let selectedId = e.target.id
+
+        let editContainer = document.querySelector('#edit-' + selectedId)
+
+        editContainer.addEventListener('dblclick', function(e) {
+            let edit = e.target
+            edit.contentEditable = true
+        })
     }
 }
