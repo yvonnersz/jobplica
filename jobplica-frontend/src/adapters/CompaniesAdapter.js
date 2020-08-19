@@ -22,4 +22,23 @@ class CompaniesAdapter {
             body: JSON.stringify({company}),
         }).then(resp => resp.json())
     }
+
+    updateCompany(value, id) {
+        const companyObject = {
+            name: value,
+            location: value,
+            url: value,
+            date: value,
+            takeaway: value,
+            status: value
+        }
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({companyObject}),
+        }).then(resp => resp.json())
+    }
 }

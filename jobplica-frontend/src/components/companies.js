@@ -28,7 +28,7 @@ class Companies {
             editDiv.className = "edit"
             editDiv.setAttribute('id', company.id)
             editDiv.innerHTML = 'Edit'
-            editDiv.addEventListener('click', this.editCompany.bind(this))
+            editDiv.addEventListener('click', this.updateCompany.bind(this))
             div.appendChild(editDiv)
 
             let a = document.createElement('a')
@@ -99,20 +99,17 @@ class Companies {
         })
     }
 
-    editCompany(e) {
-        console.log(e.target)
-
-        let selectedId = e.target.id
-
-        let editContainer = document.querySelector('#edit-' + selectedId)
-
+    updateCompany(e) {
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target
+
             edit.contentEditable = true
             edit.addEventListener('keydown', function(e) {
                 if (event.key == "Enter") {
-                    console.log("update")
                     edit.contentEditable = false
+                    const newValue = edit.innerHTML
+
+                    savedThis.adapter.updateCompany(newValue, selectedId)
                 }
             })
         })
