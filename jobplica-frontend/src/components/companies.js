@@ -118,18 +118,25 @@ class Companies {
         displayUrl.style.overflow = 'hidden'
 
         let editButton = document.querySelector(`#edit-${selectedId}`)
-        editButton.style.visibility = "hidden"
+        editButton.style.display = "none"
 
         let deleteButton = document.querySelector(`#delete-${selectedId}`)
         deleteButton.style.visibility = "visible"
         deleteButton.addEventListener('click', this.deleteCompany.bind(this))
 
-        // After clicking on edit button, web is now listening to a dblclick. 
+        // Exits out of edit
 
-        editContainer.addEventListener('dblclick', function(e) {
-            let edit = e.target
+        window.addEventListener('dblclick', function(e) {   
+            if (editContainer.contains(e.target)){
+                let edit = e.target
 
-            edit.contentEditable = true
+                // if edit button = none then contenteditable is true
+                if (editButton.style.display === "none") {
+                    edit.contentEditable = true
+
+                }
+                // end
+                
             edit.addEventListener('keydown', function(e) {
                 if (event.key == "Enter") {
                     const newValue = edit.innerHTML
@@ -154,7 +161,14 @@ class Companies {
                     edit.contentEditable = false
                 }
             })
-        })
+            } else{
+                editButton.style.display = null
+                editButton.style.visibility = "visible"
+                deleteButton.style.display = "none"
+                e.target.contentEditable = false
+                displayUrl.style.display = "none"
+            }
+          });
     }
 
     deleteCompany(e) {
