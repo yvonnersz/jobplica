@@ -2,7 +2,6 @@ class Companies {
     constructor() {
         this.companies = []
         this.adapter = new CompaniesAdapter()
-        // this.bindEventh1steners()
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
     }
@@ -13,6 +12,7 @@ class Companies {
                 companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.render()
+                this.filterStatus()
             })
     }
 
@@ -264,5 +264,39 @@ class Companies {
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
         companyCard.className = "approved-card"
+    }
+
+    filterStatus() {
+        let companies = this.companies
+    
+        document.querySelector('#status-dropdown').addEventListener('change', function(e) {
+
+            let companyContainer = document.querySelector('.company')
+            let companyCards = document.querySelectorAll('.company-card')
+            
+            for (let companyCard of companyCards) {
+                companyCard.style.display = "none"
+            }
+            
+            let statusPick = document.querySelector('#status-dropdown').value
+
+            for (let companyCard of companyCards) {
+                let companyId = companyCard.id.split('-')[1]
+                let companyResponse = companyCard.querySelector(`ul li:nth-child(4)`).innerText
+
+                if (companyResponse == statusPick) {
+                    companyCard.style.display = null
+                    companyCard.style.visibility = "visible"
+                } else if (statusPick == "All") {
+                    for (let companyCard of companyCards) {
+                        companyCard.style.display = null
+                        companyCard.style.visibility = "visible"
+                    }
+                }
+            }
+
+
+
+        })
     }
 }
