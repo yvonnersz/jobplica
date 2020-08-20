@@ -62,7 +62,6 @@ class Companies {
 
             let statusLi = document.createElement('li')
             ul.appendChild(statusLi).innerHTML = company.status
-
             let companyInfo = div.appendChild(ul)
 
             let responseButton = document. createElement("button");
@@ -79,6 +78,13 @@ class Companies {
 
 
             companiesContainer.appendChild(div)
+
+            // Changes background color depending on status.
+            if (company.status == "Approved") {
+                div.style.backgroundColor = "green"
+            } else if (company.status == "Rejected") {
+                div.style.backgroundColor = "red"
+            }
         }
     }
 
