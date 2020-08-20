@@ -61,3 +61,11 @@
     overflow: hidden;
     background-color: red;
   }
+
+  .approved-card {
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    overflow: hidden;
+    background-color: green;
+  }

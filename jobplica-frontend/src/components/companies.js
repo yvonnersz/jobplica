@@ -66,6 +66,8 @@ class Companies {
 
             let responseButton = document. createElement("button");
             responseButton.innerHTML = "Response"
+            responseButton.setAttribute('id', 'approved-' + company.id)
+            responseButton.addEventListener('click', this.responseResponse.bind(this))
             div.appendChild(responseButton)
 
             let rejectedButton = document. createElement("button");
@@ -230,5 +232,36 @@ class Companies {
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
         companyCard.className = "rejected-card"
+    }
+
+    responseResponse(e) {
+        e.preventDefault
+        
+        let savedThis = this
+        let selectedId = e.target.id.split('-')[1]
+
+        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
+        let companyUrl = document.querySelector(`#container-${selectedId} a`).href
+        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
+        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
+        let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
+        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+
+        let newCompanyObject = {
+            name: companyName,
+            location: companyLocation,
+            url: companyUrl,
+            date_applied: companyDate,
+            takeaway: companyTakeaway,
+            status: "Approved"
+        }
+
+        savedThis.adapter.approvedStatusUpdate(newCompanyObject, selectedId)
+
+        // Change company card's response to "Approved"
+        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Approved"
+
+        let companyCard = document.querySelector(`#container-${selectedId}`)
+        companyCard.className = "approved-card"
     }
 }
