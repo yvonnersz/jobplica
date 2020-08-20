@@ -70,6 +70,8 @@ class Companies {
 
             let rejectedButton = document. createElement("button");
             rejectedButton.innerHTML = "Rejected"
+            rejectedButton.setAttribute('id', 'rejected-' + company.id)
+            rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
             div.appendChild(rejectedButton)
 
 
@@ -197,5 +199,31 @@ class Companies {
         let cards = document.querySelector('.company')
         let card = document.querySelector(`#container-${selectedId}`)
         cards.removeChild(card)
+    }
+
+    rejectedResponse(e) {
+        e.preventDefault
+        
+        let savedThis = this
+        let selectedId = e.target.id.split('-')[1]
+
+        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
+        let companyUrl = document.querySelector(`#container-${selectedId} a`).href
+        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
+        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
+        let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
+        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+
+        let newCompanyObject = {
+            name: companyName,
+            location: companyLocation,
+            url: companyUrl,
+            date_applied: companyDate,
+            takeaway: companyTakeaway,
+            status: "Rejected"
+        }
+
+        savedThis.adapter.rejectedStatusUpdate(newCompanyObject, selectedId)
+        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Rejected"
     }
 }

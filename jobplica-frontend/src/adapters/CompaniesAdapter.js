@@ -47,4 +47,16 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
+    rejectedStatusUpdate(newCompanyObject, id) {
+        const company = newCompanyObject
+
+        return fetch(`${this.baseUrl}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({company}),
+        }).then(resp => resp.json())
+    }
+
 }
