@@ -80,11 +80,11 @@ class Companies {
             companiesContainer.appendChild(div)
 
             // Changes background color depending on status.
-            if (company.status == "Approved") {
-                div.style.backgroundColor = "green"
-            } else if (company.status == "Rejected") {
-                div.style.backgroundColor = "red"
-            }
+            // if (company.status == "Approved") {
+            //     div.style.backgroundColor = "green"
+            // } else if (company.status == "Rejected") {
+            //     div.style.backgroundColor = "red"
+            // }
         }
     }
 
