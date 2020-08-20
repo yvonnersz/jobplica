@@ -35,7 +35,7 @@ class Companies {
             deleteButton.className = "delete"
             deleteButton.setAttribute('id', 'delete-' + company.id)
             deleteButton.innerHTML = "Delete"
-            deleteButton.style.visibility = "hidden"
+            deleteButton.style.display = "none"
             div.appendChild(deleteButton)
 
             let a = document.createElement('a')
@@ -121,6 +121,7 @@ class Companies {
         editButton.style.display = "none"
 
         let deleteButton = document.querySelector(`#delete-${selectedId}`)
+        deleteButton.style.display = null
         deleteButton.style.visibility = "visible"
         deleteButton.addEventListener('click', this.deleteCompany.bind(this))
 
