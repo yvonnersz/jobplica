@@ -13,6 +13,7 @@ class Companies {
             }).then (() => {
                 this.render()
                 this.filterStatus()
+                this.statistics()
             })
     }
 
@@ -304,5 +305,54 @@ class Companies {
 
 
         })
+    }
+
+    statistics() {
+        console.log(this.companies.length)
+
+        let tr = document.createElement('tr')
+
+        let tdDay = document.createElement('td')
+        tdDay.innerHTML = "day"
+        tr.appendChild(tdDay)
+
+        let tdWeek = document.createElement('td')
+        tdWeek.innerHTML = "week"
+        tr.appendChild(tdWeek)
+
+
+        let tdMonth = document.createElement('td')
+        tdMonth.innerHTML = "month"
+        tr.appendChild(tdMonth)
+
+        let tdTotalApplies = document.createElement('td')
+        tdTotalApplies.innerHTML = this.companies.length
+        tr.appendChild(tdTotalApplies)
+
+
+        let tdTotalRejects = document.createElement('td')
+        let rejectedArray = []
+        for (let company of this.companies) {
+            if (company.status == "Rejected") {
+                rejectedArray.push(company)
+            }
+        }
+        tdTotalRejects.innerHTML = rejectedArray.length
+        tr.appendChild(tdTotalRejects)
+
+
+        let tdTotalApprovals = document.createElement('td')
+        let approvedArray = []
+        for (let company of this.companies) {
+            if (company.status == "Approved") {
+                approvedArray.push(company)
+            }
+        }
+        tdTotalApprovals.innerHTML = approvedArray.length
+        tr.appendChild(tdTotalApprovals)
+
+        let tableData = document.querySelector('tbody')
+        tableData.appendChild(tr)
+
     }
 }
