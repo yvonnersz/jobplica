@@ -224,6 +224,11 @@ class Companies {
         }
 
         savedThis.adapter.rejectedStatusUpdate(newCompanyObject, selectedId)
+
+        // Change company card's response to "Rejected"
         document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Rejected"
+
+        let companyCard = document.querySelector(`#container-${selectedId}`)
+        companyCard.className = "rejected-card"
     }
 }
