@@ -68,10 +68,6 @@ class Companies {
             responseButton.innerHTML = "Response"
             div.appendChild(responseButton)
 
-            let noReplyButton = document. createElement("button");
-            noReplyButton.innerHTML = "No Reply"
-            div.appendChild(noReplyButton)
-
             let rejectedButton = document. createElement("button");
             rejectedButton.innerHTML = "Rejected"
             div.appendChild(rejectedButton)
@@ -127,6 +123,8 @@ class Companies {
         let deleteButton = document.querySelector(`#delete-${selectedId}`)
         deleteButton.style.visibility = "visible"
         deleteButton.addEventListener('click', this.deleteCompany.bind(this))
+
+        // After clicking on edit button, web is now listening to a dblclick. 
 
         editContainer.addEventListener('dblclick', function(e) {
             let edit = e.target
