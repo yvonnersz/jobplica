@@ -43,12 +43,12 @@ class Companies {
             a.href = `${company.url}`
             div.appendChild(a)
 
+            let ul = document.createElement('ul')
+
             let companyUrl = document.createElement('li')
             companyUrl.setAttribute('id', 'url-' + company.id)
             companyUrl.style.display = "none"
-            div.appendChild(companyUrl).innerHTML = company.url
-
-            let ul = document.createElement('ul')
+            ul.appendChild(companyUrl).innerHTML = company.url
 
             let locationLi = document.createElement('li')
             ul.appendChild(locationLi).innerHTML = company.location
