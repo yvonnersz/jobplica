@@ -43,6 +43,11 @@ class Companies {
             a.href = `${company.url}`
             div.appendChild(a)
 
+            let companyUrl = document.createElement('li')
+            companyUrl.setAttribute('id', 'url-' + company.id)
+            companyUrl.style.display = "none"
+            div.appendChild(companyUrl).innerHTML = company.url
+
             let ul = document.createElement('ul')
 
             let locationLi = document.createElement('li')
@@ -110,6 +115,11 @@ class Companies {
         let savedThis = this
         let selectedId = e.target.id.split('-')[1]
         let editContainer = document.querySelector(`#container-${selectedId}`)
+
+        let displayUrl = document.querySelector(`li#url-${selectedId}`)
+        displayUrl.style.display = null
+        displayUrl.style.visibility = "visible"
+        displayUrl.style.overflow = 'hidden'
 
         let editButton = document.querySelector(`#edit-${selectedId}`)
         editButton.style.visibility = "hidden"

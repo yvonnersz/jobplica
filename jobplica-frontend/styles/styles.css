@@ -10,6 +10,7 @@
     border: 1px solid black;
     text-align: center;
     padding-bottom: 20px;
+    overflow: hidden;
   }
 
   .company-card a {
