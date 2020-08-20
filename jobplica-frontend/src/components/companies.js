@@ -20,6 +20,7 @@ class Companies {
         let companiesContainer = document.querySelector('.company')
 
         for (const company of this.companies) {
+
             let div = document.createElement('div')
             div.setAttribute('id', 'container-' + company.id)
             div.className = "company-card"
