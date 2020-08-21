@@ -105,3 +105,7 @@
     z-index: -1;
     height: 120px;
   }
+
+  .statistics {
+    display: none;
+  }

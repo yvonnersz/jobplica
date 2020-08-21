@@ -364,5 +364,27 @@ class Companies {
         let tableData = document.querySelector('tbody')
         tableData.appendChild(tr)
 
+        // FOLLOWING SECTION IS FOR PIE CHART
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Status', 'Number of Companies'],
+            ['Approved', approvedArray.length],
+            ['Rejected', rejectedArray.length],
+            ['No Response', noResponseArray.length]
+        ]);
+        
+            // Optional; add a title and set the width and height of the chart
+            var options = {'title':'My Average Day', 'width':550, 'height':400};
+        
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.querySelector('.statistics'));
+            chart.draw(data, options);
+        }
+
     }
 }
