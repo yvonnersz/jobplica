@@ -86,22 +86,22 @@
   .logo h1{
     text-align: center;
     font-size: 75px;
-    font-family: 'Schoolbell', cursive;
+    font-family: 'Permanent Marker', cursive;
     letter-spacing: 15px;
     margin-top: 10px;
   }
 
   .logo h2 {
     font-size: 15px;
-    font-family: 'Schoolbell', cursive;
+    font-family: 'Alegreya Sans SC', sans-serif;
     margin-top: -70px;
-    padding-left: 740px;
+    padding-left: 700px;
   }
 
   .logo img {
     position: absolute;
     margin-top: -15px;
-    padding-left: 230px;
+    padding-left: 190px;
     z-index: -1;
     height: 120px;
   }
