@@ -14,21 +14,13 @@
 <body>    
     <div class="container">
 
-        Login?<br>
-
-        <b>Statistics</b><br>
-        <table>
-            <tr>
-                <th>Avg. Applies per Day</th>
-                <th>Avg. Applies per Week</th>
-                <th>Avg. Applies per Month</th>
-                <th>Total Applies</th>
-                <th>Total Rejected</th>
-                <th>Total Accepted</th>
-                <th>Total No Response</th>
-            </tr>
-        </table>
-
+        <div class="select-file">
+            Load a File<br>
+            Load Button<br>
+            Save a File<br>
+            Save Button<br>
+        </div>
+       
         <b>Add a Company</b><br>
         <form id="new-company">
             <input type="text" name="company-name" placeholder="Please enter company name." id="new-company-name"/><br>
@@ -53,7 +45,9 @@
               <option value="Approved">Approved</option>
               <option value="Rejected">Rejected</option>
               <option value="No Response">No Response</option>
-            </select>
+            </select><br>
+
+            Filter by Day/Week/Month
         </div>
     </div>    
 
@@ -64,6 +58,18 @@
     </div>
 
     <div class="statistics">
+        <b>Statistics</b><br>
+        <table>
+            <tr>
+                <th>Avg. Applies per Day</th>
+                <th>Avg. Applies per Week</th>
+                <th>Avg. Applies per Month</th>
+                <th>Total Applies</th>
+                <th>Total Rejected</th>
+                <th>Total Accepted</th>
+                <th>Total No Response</th>
+            </tr>
+        </table>
     </div>
 
 
