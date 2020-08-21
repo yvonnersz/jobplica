@@ -78,3 +78,30 @@
   th, td { 
     display: block; 
   }
+
+  .logo {
+    margin: 30px;
+  }
+
+  .logo h1{
+    text-align: center;
+    font-size: 75px;
+    font-family: 'Schoolbell', cursive;
+    letter-spacing: 15px;
+    margin-top: 10px;
+  }
+
+  .logo h2 {
+    font-size: 15px;
+    font-family: 'Schoolbell', cursive;
+    margin-top: -70px;
+    padding-left: 740px;
+  }
+
+  .logo img {
+    position: absolute;
+    margin-top: -15px;
+    padding-left: 230px;
+    z-index: -1;
+    height: 120px;
+  }
