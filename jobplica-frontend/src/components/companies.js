@@ -308,8 +308,6 @@ class Companies {
     }
 
     statistics() {
-        console.log(this.companies.length)
-
         let tr = document.createElement('tr')
 
         let tdDay = document.createElement('td')
@@ -351,8 +349,19 @@ class Companies {
         tdTotalApprovals.innerHTML = approvedArray.length
         tr.appendChild(tdTotalApprovals)
 
+        // No Response
+
+        let tdTotalNoResponse = document.createElement('td')
+        let noResponseArray = []
+        for (let company of this.companies) {
+            if (company.status == "No Response") {
+                noResponseArray.push(company)
+            }
+        }
+        tdTotalNoResponse.innerHTML = noResponseArray.length
+        tr.appendChild(tdTotalNoResponse)
+
         let tableData = document.querySelector('tbody')
         tableData.appendChild(tr)
-
     }
 }
