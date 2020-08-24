@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_140444) do
     t.string "location"
     t.string "url"
     t.datetime "date_applied"
-    t.string "status"
+    t.string "status", default: "Awaiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

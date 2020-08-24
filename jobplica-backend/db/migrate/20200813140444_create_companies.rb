@@ -5,7 +5,7 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
       t.string :location
       t.string :url
       t.timestamp :date_applied
-      t.string :status
+      t.string :status, default: 'Awaiting Response'
 
       t.timestamps
     end

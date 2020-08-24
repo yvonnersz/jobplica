@@ -94,7 +94,6 @@ class Companies {
         this.newCompanyLocation = document.getElementById('new-company-location')
         this.newCompanyUrl = document.getElementById('new-company-url')
         this.newCompanyDate = document.getElementById('new-company-date')
-        this.newCompanyTakeaway = document.getElementById('new-company-takeaway')
         this.newCompanyStatus = document.getElementById('new-company-status')
     }
 
@@ -106,8 +105,6 @@ class Companies {
             location: this.newCompanyLocation.value,
             url: this.newCompanyUrl.value,
             date_applied: this.newCompanyDate.value,
-            takeaway: this.newCompanyTakeaway.value,
-            status: this.newCompanyStatus.value
         }
 
         this.adapter.createCompany(companyObject).then(company => {

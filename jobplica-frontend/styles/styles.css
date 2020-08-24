@@ -109,3 +109,9 @@
   .statistics {
     display: none;
   }
+
+  .navigation {
+    text-align: center;
+    font-family: 'Cambo', serif;
+    font-size: 20px;
+  }

@@ -33,6 +33,6 @@ class Api::V1::CompaniesController < ApplicationController
     private
 
     def company_params
-        params.require(:company).permit(:name, :location, :url, :date_applied, :takeaway, :status)
+        params.require(:company).permit(:name, :location, :url, :date_applied, :status)
     end
 end
