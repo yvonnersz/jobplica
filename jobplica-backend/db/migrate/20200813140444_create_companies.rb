@@ -5,7 +5,6 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
       t.string :location
       t.string :url
       t.timestamp :date_applied
-      t.string :takeaway
       t.string :status
 
       t.timestamps

@@ -58,9 +58,6 @@ class Companies {
             let dateLi = document.createElement('li')
             ul.appendChild(dateLi).innerHTML = company.renderDate()
 
-            let takeawayLi = document.createElement('li')
-            ul.appendChild(takeawayLi).innerHTML = company.takeaway
-
             let statusLi = document.createElement('li')
             ul.appendChild(statusLi).innerHTML = company.status
             let companyInfo = div.appendChild(ul)
