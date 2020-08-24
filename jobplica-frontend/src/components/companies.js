@@ -4,6 +4,7 @@ class Companies {
         this.adapter = new CompaniesAdapter()
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
+        this.bindStatistics()
     }
 
     fetchAndLoadCompanies() {
@@ -446,12 +447,27 @@ class Companies {
         ]);
         
             // Optional; add a title and set the width and height of the chart
-            var options = {'title':'My Average Day', 'width':300, 'height':300};
+            var options = {'title':null, 'width':400, 'height':400, 'backgroundColor': 'transparent', legend: 'none'};
         
             // Display the chart inside the <div> element with id="piechart"
-            var chart = new google.visualization.PieChart(document.querySelector('.statistics-side'));
+            var chart = new google.visualization.PieChart(document.querySelector('.graph'));
             chart.draw(data, options);
         }
+
+    }
+
+    bindStatistics() {
+        let companyCards = document.querySelector('.company')
+        let statisticsContainer = document.querySelector('.statistics')
+        let statisticsButton = document.querySelector('.statistics-click')
+
+        statisticsContainer.style.display = "none"
+
+        statisticsButton.addEventListener('click', function(e) {
+            companyCards.style.display = "none"
+            statisticsContainer.style.display = null
+            statisticsButton.innerHTML = "View Cards"
+        })
 
     }
 }

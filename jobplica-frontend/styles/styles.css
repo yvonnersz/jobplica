@@ -28,10 +28,6 @@ body {
     display: block; 
   }
 
-  .statistics {
-    display: none;
-  }
-
   .navigation {
     text-align: center;
     font-family: 'Cambo', serif;
@@ -207,4 +203,15 @@ body {
     height: 30px;
     margin: 1px;
     margin-top: 10px;
+  }
+
+  /* Graph */
+
+  .table {
+    display: inline-block;
+  }
+
+  .graph {
+    display: inline-block;
+    float: right;
   }
