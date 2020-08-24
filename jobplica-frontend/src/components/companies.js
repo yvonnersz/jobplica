@@ -29,9 +29,15 @@ class Companies {
             let editDiv = document.createElement('button')
             editDiv.className = "edit"
             editDiv.setAttribute('id', 'edit-' + company.id)
-            editDiv.innerHTML = 'Edit'
+            editDiv.innerHTML = '...'
             editDiv.addEventListener('focus', this.updateCompany.bind(this))
             div.appendChild(editDiv)
+
+            // let editImg = document.createElement('img')
+            // editImg.className = "edit"
+            // editImg.src = "data:image/png;base64,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"
+            // editImg.addEventListener('click', this.updateCompany.bind(this))
+            // div.appendChild(editImg)
 
             let deleteButton = document.createElement('button')
             deleteButton.className = "delete"
