@@ -1,3 +1,7 @@
+body {
+  background-color: #EBF5FB;
+ }
+  
   .company {
     width: 75%;
     float: right;
@@ -124,6 +128,9 @@
     text-align: center;
     border: 1px solid black;
     padding: 15px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: -3px 3px 8px #888888;
   }
 
   .new-company h2 {
@@ -147,6 +154,9 @@
     text-align: center;
     border: 1px solid black;
     padding: 15px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: -3px 3px 8px #888888;
   }
 
   .filter h2 {
@@ -160,4 +170,18 @@
     width: 265px;
     padding: 5px;
     margin: 1px;
+  }
+
+  /* Statistics Bar CSS */
+
+  .statistics-click {
+    border: 1px solid black;
+    position:  absolute;
+    font-family: 'Notable', sans-serif;
+    text-align: center;
+    padding: 17.5px;
+    bottom: 385px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: -3px 3px 8px #888888;
   }

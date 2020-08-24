@@ -302,61 +302,61 @@ class Companies {
     }
 
     statistics() {
-        // let tr = document.createElement('tr')
+        let tr = document.createElement('tr')
 
-        // let tdDay = document.createElement('td')
-        // tdDay.innerHTML = "day"
-        // tr.appendChild(tdDay)
+        let tdDay = document.createElement('td')
+        tdDay.innerHTML = "day"
+        tr.appendChild(tdDay)
 
-        // let tdWeek = document.createElement('td')
-        // tdWeek.innerHTML = "week"
-        // tr.appendChild(tdWeek)
-
-
-        // let tdMonth = document.createElement('td')
-        // tdMonth.innerHTML = "month"
-        // tr.appendChild(tdMonth)
-
-        // let tdTotalApplies = document.createElement('td')
-        // tdTotalApplies.innerHTML = this.companies.length
-        // tr.appendChild(tdTotalApplies)
+        let tdWeek = document.createElement('td')
+        tdWeek.innerHTML = "week"
+        tr.appendChild(tdWeek)
 
 
-        // let tdTotalRejects = document.createElement('td')
-        // let rejectedArray = []
-        // for (let company of this.companies) {
-        //     if (company.status == "Rejected") {
-        //         rejectedArray.push(company)
-        //     }
-        // }
-        // tdTotalRejects.innerHTML = rejectedArray.length
-        // tr.appendChild(tdTotalRejects)
+        let tdMonth = document.createElement('td')
+        tdMonth.innerHTML = "month"
+        tr.appendChild(tdMonth)
+
+        let tdTotalApplies = document.createElement('td')
+        tdTotalApplies.innerHTML = this.companies.length
+        tr.appendChild(tdTotalApplies)
 
 
-        // let tdTotalApprovals = document.createElement('td')
-        // let approvedArray = []
-        // for (let company of this.companies) {
-        //     if (company.status == "Approved") {
-        //         approvedArray.push(company)
-        //     }
-        // }
-        // tdTotalApprovals.innerHTML = approvedArray.length
-        // tr.appendChild(tdTotalApprovals)
+        let tdTotalRejects = document.createElement('td')
+        let rejectedArray = []
+        for (let company of this.companies) {
+            if (company.status == "Rejected") {
+                rejectedArray.push(company)
+            }
+        }
+        tdTotalRejects.innerHTML = rejectedArray.length
+        tr.appendChild(tdTotalRejects)
 
-        // // No Response
 
-        // let tdTotalNoResponse = document.createElement('td')
-        // let noResponseArray = []
-        // for (let company of this.companies) {
-        //     if (company.status == "No Response") {
-        //         noResponseArray.push(company)
-        //     }
-        // }
-        // tdTotalNoResponse.innerHTML = noResponseArray.length
-        // tr.appendChild(tdTotalNoResponse)
+        let tdTotalApprovals = document.createElement('td')
+        let approvedArray = []
+        for (let company of this.companies) {
+            if (company.status == "Approved") {
+                approvedArray.push(company)
+            }
+        }
+        tdTotalApprovals.innerHTML = approvedArray.length
+        tr.appendChild(tdTotalApprovals)
 
-        // let tableData = document.querySelector('tbody')
-        // tableData.appendChild(tr)
+        // No Response
+
+        let tdTotalNoResponse = document.createElement('td')
+        let noResponseArray = []
+        for (let company of this.companies) {
+            if (company.status == "No Response") {
+                noResponseArray.push(company)
+            }
+        }
+        tdTotalNoResponse.innerHTML = noResponseArray.length
+        tr.appendChild(tdTotalNoResponse)
+
+        let tableData = document.querySelector('tbody')
+        tableData.appendChild(tr)
 
         // FOLLOWING SECTION IS FOR PIE CHART
         // Load google charts
@@ -373,10 +373,10 @@ class Companies {
         ]);
         
             // Optional; add a title and set the width and height of the chart
-            var options = {'title':'My Average Day', 'width':550, 'height':400};
+            var options = {'title':'My Average Day', 'width':300, 'height':300};
         
             // Display the chart inside the <div> element with id="piechart"
-            var chart = new google.visualization.PieChart(document.querySelector('.statistics'));
+            var chart = new google.visualization.PieChart(document.querySelector('.statistics-side'));
             chart.draw(data, options);
         }
 
