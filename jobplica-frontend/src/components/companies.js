@@ -11,13 +11,13 @@ class Companies {
             .then(companies => { 
                 companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
-                this.render()
+                this.renderAll()
                 this.filterStatus()
                 this.statistics()
             })
     }
 
-    render() {
+    renderAll() {
         let companiesContainer = document.querySelector('.company')
 
         for (const company of this.companies) {
@@ -86,6 +86,66 @@ class Companies {
         }
     }
 
+    render(company) {
+        let companiesContainer = document.querySelector('.company')
+
+        let div = document.createElement('div')
+        div.setAttribute('id', 'container-' + company.id)
+        div.className = "company-card"
+
+        let editDiv = document.createElement('button')
+        editDiv.className = "edit"
+        editDiv.setAttribute('id', 'edit-' + company.id)
+        editDiv.innerHTML = '...'
+        editDiv.addEventListener('focus', this.updateCompany.bind(this))
+        div.appendChild(editDiv)
+
+        let deleteButton = document.createElement('button')
+        deleteButton.className = "delete"
+        deleteButton.setAttribute('id', 'delete-' + company.id)
+        deleteButton.innerHTML = "Delete"
+        deleteButton.style.display = "none"
+        div.appendChild(deleteButton)
+
+        let a = document.createElement('a')
+        a.text = company.name
+        a.href = `${company.url}`
+        div.appendChild(a)
+
+        let ul = document.createElement('ul')
+
+        let companyUrl = document.createElement('li')
+        companyUrl.setAttribute('id', 'url-' + company.id)
+        companyUrl.style.display = "none"
+        ul.appendChild(companyUrl).innerHTML = company.url
+
+        let locationLi = document.createElement('li')
+        ul.appendChild(locationLi).innerHTML = company.location
+
+        let dateLi = document.createElement('li')
+        let date = new Date(company.date_applied)
+        let fullDate = date.toDateString()
+        ul.appendChild(dateLi).innerHTML = fullDate
+
+        let statusLi = document.createElement('li')
+        ul.appendChild(statusLi).innerHTML = company.status
+        let companyInfo = div.appendChild(ul)
+
+        let responseButton = document. createElement("button");
+        responseButton.innerHTML = "Response"
+        responseButton.setAttribute('id', 'approved-' + company.id)
+        responseButton.addEventListener('click', this.responseResponse.bind(this))
+        div.appendChild(responseButton)
+
+        let rejectedButton = document. createElement("button");
+        rejectedButton.innerHTML = "Rejected"
+        rejectedButton.setAttribute('id', 'rejected-' + company.id)
+        rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
+        div.appendChild(rejectedButton)
+
+        companiesContainer.appendChild(div)
+    }
+
     bindingAndEventListener() {
         this.companyForm = document.getElementById('new-company')
         this.companyForm.addEventListener('submit', this.createCompany.bind(this))
@@ -109,7 +169,20 @@ class Companies {
 
         this.adapter.createCompany(companyObject).then(company => {
             this.companies.push(new Company(company))
-            this.render()
+            this.render(company);
+
+            // Clear form values
+            let newCompanyName = document.getElementById('new-company-name')
+            let newCompanyLocation = document.getElementById('new-company-location')
+            let newCompanyUrl = document.getElementById('new-company-url')
+            let newCompanyDate = document.getElementById('new-company-date')
+            let newCompanyStatus = document.getElementById('new-company-status')
+
+            newCompanyName.value = null
+            newCompanyLocation.value = null
+            newCompanyUrl.value = null
+            newCompanyDate.value = null
+            newCompanyStatus.value = null
         })
     }
 
