@@ -345,7 +345,7 @@ class Companies {
     
         document.querySelector('#status-dropdown').addEventListener('change', function(e) {
 
-            let companyContainer = document.querySelector('.company')
+            // let companyContainer = document.querySelector('.content')
             let companyCards = document.querySelectorAll('.company-card')
             
             for (let companyCard of companyCards) {
