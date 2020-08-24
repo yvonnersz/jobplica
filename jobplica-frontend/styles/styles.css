@@ -3,27 +3,6 @@ body {
   overflow-x: hidden;
  }
   
-  
-
-
-
-  button {
-    display: inline-block;
-    width: 30%;
-    height: 30px;
-    margin: 1px;
-    margin-top: 10px;
-  }
-
-
-  .delete {
-    position: relative;
-    height: 35px;
-    width: 35px;
-    float: left;
-    margin: 1px;
-  }
-
   .rejected-card {
     border: 1px solid black;
     text-align: center;
@@ -205,4 +184,23 @@ body {
     border: none;
     opacity: 50%;
     border-radius: 50%;
+  }
+
+  .delete {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin: 5px;
+    border: none;
+    opacity: 50%;
+    border-radius: 50%;
+  }
+
+  button {
+    display: inline-block;
+    width: 40%;
+    height: 30px;
+    margin: 1px;
+    margin-top: 10px;
   }
