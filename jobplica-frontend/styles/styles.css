@@ -1,5 +1,6 @@
 body {
   background-color: #EBF5FB;
+  overflow-x: hidden;
  }
   
   .company {
@@ -81,19 +82,9 @@ body {
     display: block; 
   }
 
-  .logo {
-    margin: auto;
-  }
 
-  .logo h1{
-    text-align: center;
-    font-size: 75px;
-    font-family: 'Permanent Marker', cursive;
-    letter-spacing: 15px;
-    margin-top: 10px;
-  }
 
-  .logo h2 {
+  /* .logo h2 {
     font-size: 15px;
     font-family: 'Alegreya Sans SC', sans-serif;
     margin-top: -70px;
@@ -106,7 +97,7 @@ body {
     padding-left: 190px;
     z-index: -1;
     height: 120px;
-  }
+  } */
 
   .statistics {
     display: none;
@@ -121,13 +112,13 @@ body {
   /* Add A Company CSS */
 
   .new-company {
-    position: absolute;
+    position: fixed;
     bottom: 40px;
     text-align: center;
     border: 1px solid black;
     padding: 15px;
     border-radius: 25px;
-    background-color: white;
+    background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -147,13 +138,13 @@ body {
 /* Filter CSS */
 
   .filter {
-    position:  absolute;
+    position:  fixed;
     bottom: 280px;
     text-align: center;
     border: 1px solid black;
     padding: 15px;
     border-radius: 25px;
-    background-color: white;
+    background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -174,20 +165,40 @@ body {
 
   .statistics-click {
     border: 1px solid black;
-    position:  absolute;
+    position:  fixed;
     font-family: 'Notable', sans-serif;
     text-align: center;
     padding: 17.5px;
     bottom: 415px;
     border-radius: 25px;
-    background-color: white;
+    background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
   
   /* Content CSS */
 
   .content {
-    width: 75%;
-    float: right;
-    background-color: white;
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    width: 890px;
+    background-color: #F5F5F5;
+    padding: 20px;
+    box-shadow: -3px 3px 8px #888888;
+    border-radius: 25px;
+    border: 1px solid black;
+
+  }
+
+  /* Logo  */
+
+  .logo {
+  }
+
+  .logo h1{
+    margin: 5px;
+    text-align: center;
+    font-size: 75px;
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 15px;
   }

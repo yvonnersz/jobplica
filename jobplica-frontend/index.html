@@ -16,58 +16,41 @@
 </head>
 
 <body>    
-    <div class="container">
-    </div>
+    <div class="side-navigation">
+        <div class="statistics-click">
+            <h2>View Statistics</h2>
+        </div>
     
-    <div class="statistics-click">
-        <h2>View Statistics</h2>
+        <div class="filter">
+            <label for="select-status"><h2>Filter By</h2></label><br>
+            <select id="status-dropdown" name="select-status">
+                <option value="" disabled selected>by Status</option>
+                <option value="All"></option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="No Response">No Response</option>
+            </select><br>
+    
+            <select id="status-dropdown" name="select-status">
+                <option value="" disabled selected>by Day</option>
+                <option value="All"></option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="No Response">No Response</option>
+              </select><br>
+        </div>
+    
+         <div class="new-company">
+            <h2>Add a Company</h2>
+            <form id="new-company">
+                <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name"/><br>
+                <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location"/><br>
+                <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url"/><br>
+                <input type="date" name="company-date" id="new-company-date"/><br>
+                <input type="submit" />
+            </form>
+        </div>
     </div>
-
-    <div class="statistics">
-        <h2>Statistics</h2><br>
-        <table>
-            <tr>
-                <th>Avg. Applies per Day</th>
-                <th>Avg. Applies per Week</th>
-                <th>Avg. Applies per Month</th>
-            </tr>
-        </table>
-    </div>
-
-    <div class="filter">
-        <label for="select-status"><h2>Filter By</h2></label><br>
-        <select id="status-dropdown" name="select-status">
-            <option value="" disabled selected>by Status</option>
-            <option value="All"></option>
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
-            <option value="No Response">No Response</option>
-        </select><br>
-
-        <select id="status-dropdown" name="select-status">
-            <option value="" disabled selected>by Day</option>
-            <option value="All"></option>
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
-            <option value="No Response">No Response</option>
-          </select><br>
-    </div>
-
-     <div class="new-company">
-        <h2>Add a Company</h2>
-        <form id="new-company">
-            <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name"/><br>
-
-            <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location"/><br>
-
-            <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url"/><br>
-
-            <input type="date" name="company-date" id="new-company-date"/><br>
-
-            <input type="submit" />
-        </form>
-    </div>
-
 
     <div class = "content">
         <div class="logo">
@@ -77,6 +60,17 @@
         </div>
     
         <div class="company">
+        </div>
+
+        <div class="statistics">
+            <h2>Statistics</h2><br>
+            <table>
+                <tr>
+                    <th>Avg. Applies per Day</th>
+                    <th>Avg. Applies per Week</th>
+                    <th>Avg. Applies per Month</th>
+                </tr>
+            </table>
         </div>
     </div>
   
