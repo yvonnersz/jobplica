@@ -3,24 +3,7 @@ body {
   overflow-x: hidden;
  }
   
-  .company {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-  }
-
-  .company-card {
-    border: 1px solid black;
-    text-align: center;
-    padding-bottom: 20px;
-    overflow: hidden;
-  }
-
-  .company-card a {
-    font-size: 35px;
-    text-decoration: none;
-    margin-left: -45px;
-  }
+  
 
   ul {
     padding:0;
@@ -53,10 +36,6 @@ body {
     margin: 1px;
   }
 
-  .container {
-    float: left;
-  }
-
   .rejected-card {
     border: 1px solid black;
     text-align: center;
@@ -81,23 +60,6 @@ body {
   th, td { 
     display: block; 
   }
-
-
-
-  /* .logo h2 {
-    font-size: 15px;
-    font-family: 'Alegreya Sans SC', sans-serif;
-    margin-top: -70px;
-    padding-left: 700px;
-  }
-
-  .logo img {
-    position: absolute;
-    margin-top: -15px;
-    padding-left: 190px;
-    z-index: -1;
-    height: 120px;
-  } */
 
   .statistics {
     display: none;
@@ -181,13 +143,14 @@ body {
     position: absolute;
     top: 55px;
     right: 10px;
+    height: 440px;
     width: 890px;
     background-color: #F5F5F5;
     padding: 20px;
     box-shadow: -3px 3px 8px #888888;
     border-radius: 25px;
     border: 1px solid black;
-
+    overflow: auto;
   }
 
   /* Logo  */
@@ -195,10 +158,38 @@ body {
   .logo {
   }
 
-  .logo h1{
+  .logo h1 {
     margin: 5px;
     text-align: center;
     font-size: 75px;
     font-family: 'Permanent Marker', cursive;
     letter-spacing: 15px;
+  }
+
+  /* Cards */
+
+  .company {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+
+  .company-card {
+    border: 1px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    overflow: hidden;
+    border-radius: 1000px;
+    border: 1px solid black;
+    background-color: white;
+  }
+
+  .company-card a {
+    font-size: 35px;
+    text-decoration: none;
+    margin-left: -45px;
+  }
+
+  ::-webkit-scrollbar { 
+    background-color: transparent; 
   }
