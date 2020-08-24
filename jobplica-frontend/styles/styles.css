@@ -172,7 +172,11 @@ body {
     margin-left: -30px;
     text-align: center;
     width: 300px;
-    list-style:none;
+    list-style: none;
+  }
+
+  .company-card li {
+    padding: 1px;
   }
 
   .edit {
