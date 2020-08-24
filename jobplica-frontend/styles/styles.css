@@ -115,3 +115,49 @@
     font-family: 'Cambo', serif;
     font-size: 20px;
   }
+
+  /* Add A Company CSS */
+
+  .new-company {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 15px;
+  }
+
+  .new-company h2 {
+    text-align: center;
+    margin: 3px;
+    font-family: 'Notable', sans-serif;
+  }
+
+  .new-company input {
+    width: 250px;
+    text-align: center;
+    padding: 5px;
+    margin: 1px;
+  }
+
+/* Filter CSS */
+
+  .filter {
+    position:  absolute;
+    bottom: 250px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 15px;
+  }
+
+  .filter h2 {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: -15px;
+    font-family: 'Notable', sans-serif;
+  }
+
+  #status-dropdown {
+    width: 265px;
+    padding: 5px;
+    margin: 1px;
+  }

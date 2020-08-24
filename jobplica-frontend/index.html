@@ -9,41 +9,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cambo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
+
 
 
 </head>
 
 <body>    
     <div class="container">
-        <div container="filter">
-            <label for="select-status">Filter by Status</label><br>
-            <select id="status-dropdown" name="select-status">
-              <option value="All"></option>
-              <option value="Approved">Approved</option>
-              <option value="Rejected">Rejected</option>
-              <option value="No Response">No Response</option>
-            </select><br>
-
-            Filter by Day/Week/Month
-        </div>
+        
        
-        <div class="new-company-form">
-            <b>Add a Company</b><br>
-            <form id="new-company">
-                <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name"/><br>
-    
-                <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location"/><br>
-    
-                <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url"/><br>
-    
-                <input type="date" name="company-date" id="new-company-date"/><br>
-    
-                <input type="submit" />
-            </form>
-        </div>
+       
        
         
     </div>    
+
+    <div class="filter">
+        <label for="select-status"><h2>Filter</h2></label><br>
+        <select id="status-dropdown" name="select-status">
+            <option value="" disabled selected>by Status</option>
+            <option value="All"></option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+            <option value="No Response">No Response</option>
+        </select><br>
+
+        <select id="status-dropdown" name="select-status">
+            <option value="" disabled selected>by Day</option>
+            <option value="All"></option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+            <option value="No Response">No Response</option>
+          </select><br>
+    </div>
+
+     <div class="new-company">
+        <h2>Add a Company</h2>
+        <form id="new-company">
+            <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name"/><br>
+
+            <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location"/><br>
+
+            <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url"/><br>
+
+            <input type="date" name="company-date" id="new-company-date"/><br>
+
+            <input type="submit" />
+        </form>
+    </div>
 
     <div class="logo">
         <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcReAhJ_aihQhz1WaYT_SLxDSKsylhoNVOpEIg&usqp=CAU"> -->
