@@ -2,22 +2,6 @@ body {
   background-color: #EBF5FB;
   overflow-x: hidden;
  }
-  
-  .rejected-card {
-    border: 1px solid black;
-    text-align: center;
-    padding-bottom: 20px;
-    overflow: hidden;
-    background-color: red;
-  }
-
-  .approved-card {
-    border: 1px solid black;
-    text-align: center;
-    padding-bottom: 20px;
-    overflow: hidden;
-    background-color: green;
-  }
 
   tr { 
     display: block; 
@@ -193,6 +177,80 @@ body {
   .company-card li {
     padding: 1px;
   }
+
+  /* Approved Cards */
+
+  .approved-card {
+    border: 0.5px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    overflow: hidden;
+    background-color: #239B56;
+  }
+
+  .approved-card a, a:visited {
+    font-size: 35px;
+    text-decoration: none;
+    font-family: 'Architects Daughter', cursive;
+    color: black;
+    margin-left: -20px;
+  }
+
+  .approved-card a:hover {
+    background-color:  #99ccff;
+    transition: 3s;
+    opacity: 35%;
+  }
+
+  .approved-card ul {
+    padding:0;
+    margin-left: -30px;
+    text-align: center;
+    width: 300px;
+    list-style: none;
+  }
+
+  .approved-card li {
+    padding: 1px;
+  }
+
+  /* Rejected Cards */
+
+  .rejected-card {
+    border: 0.5px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    overflow: hidden;
+    background-color: #E74C3C;
+  }
+
+  .rejected-card a, a:visited {
+    font-size: 35px;
+    text-decoration: none;
+    font-family: 'Architects Daughter', cursive;
+    color: black;
+    margin-left: -20px;
+  }
+
+  .rejected-card a:hover {
+    background-color:  #99ccff;
+    transition: 3s;
+    opacity: 35%;
+  }
+
+  .rejected-card ul {
+    padding:0;
+    margin-left: -30px;
+    text-align: center;
+    width: 300px;
+    list-style: none;
+  }
+
+  .rejected-card li {
+    padding: 1px;
+  }
+
+  /* Edit? */
 
   .edit {
     position: relative;

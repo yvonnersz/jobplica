@@ -292,17 +292,9 @@ class Companies {
         let savedThis = this
         let selectedId = e.target.id.split('-')[1]
 
-        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-        let companyUrl = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
         let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
 
         let newCompanyObject = {
-            name: companyName,
-            location: companyLocation,
-            url: companyUrl,
-            date_applied: companyDate,
             status: "Rejected"
         }
 
@@ -321,17 +313,9 @@ class Companies {
         let savedThis = this
         let selectedId = e.target.id.split('-')[1]
 
-        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-        let companyUrl =document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
         let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
 
         let newCompanyObject = {
-            name: companyName,
-            location: companyLocation,
-            url: companyUrl,
-            date_applied: companyDate,
             status: "Approved"
         }
 
