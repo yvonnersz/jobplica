@@ -127,7 +127,15 @@ class Companies {
         let dateLi = document.createElement('li')
         let date = new Date(company.date_applied)
         let fullDate = date.toDateString()
-        ul.appendChild(dateLi).innerHTML = fullDate
+
+        let dateArray = fullDate.split(' ')
+        let month = dateArray[1]
+        let day = parseInt(dateArray[2]) + 1
+        let year = dateArray[3]
+
+        let modifiedDate = month + " " + day + " " + year
+
+        ul.appendChild(dateLi).innerHTML = modifiedDate
 
         let statusLi = document.createElement('li')
         ul.appendChild(statusLi).innerHTML = company.status
