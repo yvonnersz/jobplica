@@ -387,6 +387,7 @@ class Companies {
 
             let today = new Date();
             let thisMonth = today.getMonth() + 1 // 8
+            let lastMonth = today.getMonth() - 1 // 7
             let datePick = document.querySelector('#date-dropdown').value
 
             for (let companyCard of companyCards) {
@@ -400,6 +401,14 @@ class Companies {
                         companyCard.style.display = null
                         companyCard.visibility = "visible"
                     }
+                } else if (datePick == "Last Month") {
+                    if (companyNewMonth == lastMonth) {
+                        companyCard.style.display = null
+                        companyCard.visibility = "visible"
+                    }
+                } else if (datePick == "All") {
+                        companyCard.style.display = null
+                        companyCard.visibility = "visible"
                 }
             }
         })
