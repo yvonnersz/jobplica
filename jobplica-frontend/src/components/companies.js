@@ -178,13 +178,11 @@ class Companies {
             let newCompanyLocation = document.getElementById('new-company-location')
             let newCompanyUrl = document.getElementById('new-company-url')
             let newCompanyDate = document.getElementById('new-company-date')
-            let newCompanyStatus = document.getElementById('new-company-status')
 
             newCompanyName.value = null
             newCompanyLocation.value = null
             newCompanyUrl.value = null
             newCompanyDate.value = null
-            newCompanyStatus.value = null
         })
     }
 
