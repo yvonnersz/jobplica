@@ -26,7 +26,6 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    border-radius: 25px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
@@ -52,7 +51,6 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    border-radius: 25px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
@@ -85,7 +83,6 @@ body {
     text-align: center;
     padding: 17.5px;
     bottom: 415px;
-    border-radius: 25px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
@@ -98,7 +95,6 @@ body {
     padding: 17.5px;
     width: 262px;
     bottom: 415px;
-    border-radius: 25px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
