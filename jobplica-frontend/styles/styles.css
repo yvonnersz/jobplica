@@ -12,17 +12,11 @@ body {
     display: block; 
   }
 
-  .navigation {
-    text-align: center;
-    font-family: 'Cambo', serif;
-    font-size: 20px;
-  }
-
   /* Add A Company CSS */
 
   .new-company {
     position: fixed;
-    bottom: 40px;
+    bottom: 10px;
     text-align: center;
     border: 1px solid black;
     padding: 15px;
@@ -33,7 +27,8 @@ body {
   .new-company h2 {
     text-align: center;
     margin: 3px;
-    font-family: 'Notable', sans-serif;
+    font-family: 'Amatic SC', cursive;
+    font-size: 40px;
   }
 
   .new-company input {
@@ -47,7 +42,7 @@ body {
 
   .filter {
     position:  fixed;
-    bottom: 280px;
+    bottom: 270px;
     text-align: center;
     border: 1px solid black;
     padding: 15px;
@@ -58,8 +53,9 @@ body {
   .filter h2 {
     text-align: center;
     margin-top: 0px;
+    font-size: 50px;
     margin-bottom: -15px;
-    font-family: 'Notable', sans-serif;
+    font-family: 'Amatic SC', cursive;
   }
 
   #status-dropdown {
@@ -79,24 +75,29 @@ body {
   .statistics-click {
     border: 1px solid black;
     position:  fixed;
-    font-family: 'Notable', sans-serif;
+    font-family: 'Amatic SC', cursive;
     text-align: center;
-    padding: 17.5px;
-    bottom: 415px;
+    padding-left: 17.5px;
+    padding-right: 17.5px;
+    width: 262px;
+    bottom: 437px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
+    font-size: 30px;
   }
 
   .cards-click {
     border: 1px solid black;
     position:  fixed;
-    font-family: 'Notable', sans-serif;
+    font-family: 'Amatic SC', cursive;
     text-align: center;
-    padding: 17.5px;
+    padding-left: 17.5px;
+    padding-right: 17.5px;
     width: 262px;
-    bottom: 415px;
+    bottom: 437px;
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
+    font-size: 30px;
   }
   
   /* Content CSS */
