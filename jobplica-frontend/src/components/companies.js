@@ -5,6 +5,7 @@ class Companies {
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
         this.bindStatistics()
+        this.bindCardsButton()
     }
 
     fetchAndLoadCompanies() {
@@ -458,6 +459,13 @@ class Companies {
             statisticsContainer.style.display = null
             statisticsButton.style.display = "none"
             cardsButton.style.display = null
+
+            cardsButton.addEventListener('click', function(e) {
+                companyCards.style.display = null
+                statisticsContainer.style.display = "none"
+                statisticsButton.style.display = null
+                cardsButton.style.display = "none"
+            })
         })
 
     }
