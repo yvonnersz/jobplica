@@ -99,6 +99,19 @@ body {
     background-color: #F5F5F5;
     box-shadow: -3px 3px 8px #888888;
   }
+
+  .cards-click {
+    border: 1px solid black;
+    position:  fixed;
+    font-family: 'Notable', sans-serif;
+    text-align: center;
+    padding: 17.5px;
+    width: 265px;
+    bottom: 415px;
+    border-radius: 25px;
+    background-color: #F5F5F5;
+    box-shadow: -3px 3px 8px #888888;
+  }
   
   /* Content CSS */
 

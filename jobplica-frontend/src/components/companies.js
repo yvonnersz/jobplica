@@ -391,11 +391,6 @@ class Companies {
         tdMonth.innerHTML = "month"
         tr.appendChild(tdMonth)
 
-        let tdTotalApplies = document.createElement('td')
-        tdTotalApplies.innerHTML = this.companies.length
-        tr.appendChild(tdTotalApplies)
-
-
         let tdTotalRejects = document.createElement('td')
         let rejectedArray = []
         for (let company of this.companies) {
@@ -403,9 +398,6 @@ class Companies {
                 rejectedArray.push(company)
             }
         }
-        tdTotalRejects.innerHTML = rejectedArray.length
-        tr.appendChild(tdTotalRejects)
-
 
         let tdTotalApprovals = document.createElement('td')
         let approvedArray = []
@@ -414,8 +406,6 @@ class Companies {
                 approvedArray.push(company)
             }
         }
-        tdTotalApprovals.innerHTML = approvedArray.length
-        tr.appendChild(tdTotalApprovals)
 
         // No Response
 
@@ -426,8 +416,6 @@ class Companies {
                 noResponseArray.push(company)
             }
         }
-        tdTotalNoResponse.innerHTML = noResponseArray.length
-        tr.appendChild(tdTotalNoResponse)
 
         let tableData = document.querySelector('tbody')
         tableData.appendChild(tr)
@@ -460,13 +448,16 @@ class Companies {
         let companyCards = document.querySelector('.company')
         let statisticsContainer = document.querySelector('.statistics')
         let statisticsButton = document.querySelector('.statistics-click')
+        let cardsButton = document.querySelector('.cards-click')
 
         statisticsContainer.style.display = "none"
+        cardsButton.style.display = "none"
 
         statisticsButton.addEventListener('click', function(e) {
             companyCards.style.display = "none"
             statisticsContainer.style.display = null
-            statisticsButton.innerHTML = "View Cards"
+            statisticsButton.style.display = "none"
+            cardsButton.style.display = null
         })
 
     }
