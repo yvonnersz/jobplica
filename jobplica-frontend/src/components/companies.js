@@ -222,19 +222,20 @@ class Companies {
                     const newValue = edit.innerHTML
 
                     let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-                    let companyUrl = document.querySelector(`#container-${selectedId} a`).href
+                    let companyUrl =  document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
                     let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
                     let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
                     let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
 
                     let newCompanyObject = {
                         name: companyName,
-                        location: companyLocation,
                         url: companyUrl,
+                        location: companyLocation,
                         date_applied: companyDate,
                         status: companyResponse
                     }
 
+                    document.querySelector(`#container-${selectedId} a`).href = companyUrl
                     savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
                     edit.contentEditable = false
                 }
