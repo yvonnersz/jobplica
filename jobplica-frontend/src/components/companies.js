@@ -365,10 +365,12 @@ class Companies {
                 if (companyResponse == statusPick) {
                     companyCard.style.display = null
                     companyCard.style.visibility = "visible"
+                    document.querySelector('#status-dropdown').selectedIndex = null
                 } else if (statusPick == "All") {
                     for (let companyCard of companyCards) {
                         companyCard.style.display = null
                         companyCard.style.visibility = "visible"
+                        document.querySelector('#status-dropdown').selectedIndex = null
                     }
                 }
             }
@@ -400,15 +402,18 @@ class Companies {
                     if (companyNewMonth == thisMonth) {
                         companyCard.style.display = null
                         companyCard.visibility = "visible"
+                        document.querySelector('#date-dropdown').selectedIndex = null
                     }
                 } else if (datePick == "Last Month") {
                     if (companyNewMonth == lastMonth) {
                         companyCard.style.display = null
                         companyCard.visibility = "visible"
+                        document.querySelector('#date-dropdown').selectedIndex = null
                     }
                 } else if (datePick == "All") {
                         companyCard.style.display = null
                         companyCard.visibility = "visible"
+                        document.querySelector('#date-dropdown').selectedIndex = null
                 }
             }
         })
