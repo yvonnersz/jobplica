@@ -83,9 +83,9 @@ class Companies {
             // Changes background color depending on status.
 
             if (company.status == "Approved") {
-                div.className = "approved-card"
+                div.style.backgroundColor = "#239B56"
             } else if (company.status == "Rejected") {
-                div.className = "rejected-card"
+                div.style.backgroundColor = "#E74C3C"
             }
         }
     }
@@ -333,17 +333,13 @@ class Companies {
         let companies = this.companies
     
         document.querySelector('#status-dropdown').addEventListener('change', function(e) {
-
-            // let companyContainer = document.querySelector('.content')
-            let companyCards = document.querySelectorAll('.company')
+            
+            let statusPick = document.querySelector('#status-dropdown').value
+            let companyCards = document.querySelectorAll('.company-card')
             
             for (let companyCard of companyCards) {
                 companyCard.style.display = "none"
-            }
-            
-            let statusPick = document.querySelector('#status-dropdown').value
-
-            for (let companyCard of companyCards) {
+                
                 let companyId = companyCard.id.split('-')[1]
                 let companyResponse = companyCard.querySelector(`ul li:nth-child(4)`).innerText
 
@@ -358,7 +354,7 @@ class Companies {
                         document.querySelector('#status-dropdown').selectedIndex = null
                     }
                 }
-            }
+             }
         })
     }
 
