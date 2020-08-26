@@ -474,28 +474,5 @@ class Companies {
             })
         })
 
-        // FOLLOWING SECTION IS FOR PIE CHART
-        // Load google charts
-        
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        
-        // Draw the chart and set the chart values
-
-        function drawChart() {
-            let data = google.visualization.arrayToDataTable([
-            ['Status', 'Number of Companies'],
-            ['Approved', acceptedArray.length],
-            ['Rejected', rejectedArray.length],
-            ['No Response', awaitingArray.length]
-        ]);
-        
-            // Optional; add a title and set the width and height of the chart
-            let options = {'title':null, display:'block', 'backgroundColor': 'transparent', legend: 'none'};
-        
-            // Display the chart inside the <div> element with id="piechart"
-            let chart = new google.visualization.PieChart(document.querySelector('.graph'));
-            chart.draw(data, options);
-        }
     }
 }
