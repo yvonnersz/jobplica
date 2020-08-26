@@ -155,7 +155,7 @@ class Companies {
         rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
         div.appendChild(rejectedButton)
 
-        companiesContainer.appendChild(div)
+        companiesContainer.prepend(div)
     }
 
     bindingAndEventListener() {
@@ -324,7 +324,7 @@ class Companies {
         savedThis.adapter.approvedStatusUpdate(newCompanyObject, selectedId)
 
         // Change company card's response to "Approved"
-        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Approved"
+        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Accepted"
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
         companyCard.style.backgroundColor = "#239B56"
