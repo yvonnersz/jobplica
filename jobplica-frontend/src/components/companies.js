@@ -5,7 +5,7 @@ class Companies {
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
         this.bindStatistics()
-        this.bindCardsButton()
+        this.bindCards()
     }
 
     fetchAndLoadCompanies() {
@@ -15,7 +15,6 @@ class Companies {
             }).then (() => {
                 this.renderAll()
                 this.filterStatus()
-                this.statistics()
                 this.filterDate()
             })
     }
@@ -82,15 +81,15 @@ class Companies {
 
             // Changes background color depending on status.
 
-            if (company.status == "Accepted") {
-                div.style.backgroundColor = "#239B56"
-                rejectedButton.style.display = "none"
-                responseButton.style.display = "none"
-            } else if (company.status == "Rejected") {
-                div.style.backgroundColor = "#E74C3C"
-                rejectedButton.style.display = "none"
-                responseButton.style.display = "none"
-            }
+            // if (company.status == "Accepted") {
+            //     div.style.backgroundColor = "#239B56"
+            //     rejectedButton.style.display = "none"
+            //     responseButton.style.display = "none"
+            // } else if (company.status == "Rejected") {
+            //     div.style.backgroundColor = "#E74C3C"
+            //     rejectedButton.style.display = "none"
+            //     responseButton.style.display = "none"
+            // }
         }
     }
 
@@ -313,11 +312,11 @@ class Companies {
 
         // Buttons will disappear
 
-        let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        let rejectButton = document.querySelector(`#rejected-${selectedId}`)
+        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
+        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
 
-        acceptButton.style.display = "none"
-        rejectButton.style.display = "none"
+        // acceptButton.style.display = "none"
+        // rejectButton.style.display = "none"
     }
 
     responseResponse(e) {
@@ -343,11 +342,11 @@ class Companies {
         
         // Buttons will disappear
 
-        let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        let rejectButton = document.querySelector(`#rejected-${selectedId}`)
+        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
+        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
 
-        acceptButton.style.display = "none"
-        rejectButton.style.display = "none"
+        // acceptButton.style.display = "none"
+        // rejectButton.style.display = "none"
     }
 
     filterStatus() {
@@ -421,76 +420,9 @@ class Companies {
         })
     }
 
-    statistics() {
-        let tr = document.createElement('tr')
-
-        let tdDay = document.createElement('td')
-        tdDay.innerHTML = "day"
-        tr.appendChild(tdDay)
-
-        let tdWeek = document.createElement('td')
-        tdWeek.innerHTML = "week"
-        tr.appendChild(tdWeek)
-
-
-        let tdMonth = document.createElement('td')
-        tdMonth.innerHTML = "month"
-        tr.appendChild(tdMonth)
-
-        let tdTotalRejects = document.createElement('td')
-        let rejectedArray = []
-        for (let company of this.companies) {
-            if (company.status == "Rejected") {
-                rejectedArray.push(company)
-            }
-        }
-
-        let tdTotalApprovals = document.createElement('td')
-        let approvedArray = []
-        for (let company of this.companies) {
-            if (company.status == "Approved") {
-                approvedArray.push(company)
-            }
-        }
-
-        // No Response
-
-        let tdTotalNoResponse = document.createElement('td')
-        let noResponseArray = []
-        for (let company of this.companies) {
-            if (company.status == "No Response") {
-                noResponseArray.push(company)
-            }
-        }
-
-        let tableData = document.querySelector('tbody')
-        tableData.appendChild(tr)
-
-        // FOLLOWING SECTION IS FOR PIE CHART
-        // Load google charts
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        
-        // Draw the chart and set the chart values
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Status', 'Number of Companies'],
-            ['Approved', approvedArray.length],
-            ['Rejected', rejectedArray.length],
-            ['No Response', noResponseArray.length]
-        ]);
-        
-            // Optional; add a title and set the width and height of the chart
-            var options = {'title':null, 'width':400, 'height':400, 'backgroundColor': 'transparent', legend: 'none'};
-        
-            // Display the chart inside the <div> element with id="piechart"
-            var chart = new google.visualization.PieChart(document.querySelector('.graph'));
-            chart.draw(data, options);
-        }
-
-    }
-
     bindStatistics() {
+        let companies = this
+
         let companyCards = document.querySelector('.company')
         let statisticsContainer = document.querySelector('.statistics')
         let statisticsButton = document.querySelector('.statistics-click')
@@ -505,13 +437,65 @@ class Companies {
             statisticsButton.style.display = "none"
             cardsButton.style.display = null
 
-            cardsButton.addEventListener('click', function(e) {
-                companyCards.style.display = null
-                statisticsContainer.style.display = "none"
-                statisticsButton.style.display = null
-                cardsButton.style.display = "none"
+            companies.statistics()
+        })
+    }
+
+    bindCards() {
+
+        let companyCards = document.querySelector('.company')
+        let statisticsContainer = document.querySelector('.statistics')
+        let statisticsButton = document.querySelector('.statistics-click')
+        let cardsButton = document.querySelector('.cards-click')
+
+        cardsButton.addEventListener('click', function(e) {
+            companyCards.style.display = null
+            statisticsContainer.style.display = "none"
+            statisticsButton.style.display = null
+            cardsButton.style.display = "none"
+        })
+    }
+
+    statistics() {
+        let acceptedArray = []
+        let rejectedArray = []
+        let awaitingArray = []
+
+        this.adapter.getCompanies()
+        .then(companies => {
+            companies.forEach(company => {
+                if (company.status == "Accepted") {
+                    acceptedArray.push(company)
+                } else if (company.status == "Rejected") {
+                    rejectedArray.push(company)
+                } else {
+                    awaitingArray.push(company)
+                }
             })
         })
 
+        // FOLLOWING SECTION IS FOR PIE CHART
+        // Load google charts
+        
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+
+        function drawChart() {
+            let data = google.visualization.arrayToDataTable([
+            ['Status', 'Number of Companies'],
+            ['Approved', acceptedArray.length],
+            ['Rejected', rejectedArray.length],
+            ['No Response', awaitingArray.length]
+        ]);
+        
+            // Optional; add a title and set the width and height of the chart
+            let options = {'title':null, display:'block', 'backgroundColor': 'transparent', legend: 'none'};
+        
+            // Display the chart inside the <div> element with id="piechart"
+            let chart = new google.visualization.PieChart(document.querySelector('.graph'));
+            chart.draw(data, options);
+        }
     }
 }
