@@ -474,5 +474,22 @@ class Companies {
             })
         })
 
+        let tr = document.querySelector('#total-input')
+
+        let tdAccepted = document.createElement('td')
+        tdAccepted.innerHTML = acceptedArray.length
+        tr.appendChild(tdAccepted)
+
+        let tdRejected = document.createElement('td')
+        tdRejected.innerHTML = rejectedArray.length
+        tr.appendChild(tdRejected)
+
+        let tdAwaiting = document.createElement('td')
+        tdAwaiting.innerHTML = awaitingArray.length
+        tr.appendChild(tdAwaiting)
+
+        let tdTotal = document.createElement('td')
+        tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
+        tr.appendChild(tdTotal)
     }
 }
