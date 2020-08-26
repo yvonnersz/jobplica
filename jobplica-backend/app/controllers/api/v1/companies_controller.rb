@@ -5,23 +5,23 @@ class Api::V1::CompaniesController < ApplicationController
 
     def index
         companies = Company.all
-        render json: companies
+        render json: companies, include: :comments
     end
 
     def show
         company = Company.find(params[:id])
-        render json: company
+        render json: companies, include: :comments
     end
 
     def create
         company = Company.create(company_params)
-        render json: company
+        render json: companies, include: :comments
     end
 
     def update
         company = Company.find(params[:id])
         company.update(company_params)
-        render json: company
+        render json: companies, include: :comments
     end
 
     def destroy
