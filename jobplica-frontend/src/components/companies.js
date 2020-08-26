@@ -318,7 +318,7 @@ class Companies {
         let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
 
         let newCompanyObject = {
-            status: "Approved"
+            status: "Accepted"
         }
 
         savedThis.adapter.approvedStatusUpdate(newCompanyObject, selectedId)
