@@ -305,7 +305,8 @@ class Companies {
         document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Rejected"
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
-        companyCard.className = "rejected-card"
+        companyCard.style.backgroundColor = "#E74C3C"
+
     }
 
     responseResponse(e) {
@@ -326,7 +327,7 @@ class Companies {
         document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Approved"
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
-        companyCard.className = "approved-card"
+        companyCard.style.backgroundColor = "#239B56"
     }
 
     filterStatus() {
@@ -339,7 +340,7 @@ class Companies {
             
             for (let companyCard of companyCards) {
                 companyCard.style.display = "none"
-                
+
                 let companyId = companyCard.id.split('-')[1]
                 let companyResponse = companyCard.querySelector(`ul li:nth-child(4)`).innerText
 
