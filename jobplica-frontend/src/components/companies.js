@@ -64,18 +64,29 @@ class Companies {
             ul.appendChild(statusLi).innerHTML = company.status
             let companyInfo = div.appendChild(ul)
 
-            let responseButton = document. createElement("button");
+            let responseButton = document.createElement("button");
             responseButton.innerHTML = "Response"
             responseButton.setAttribute('id', 'approved-' + company.id)
             responseButton.addEventListener('click', this.responseResponse.bind(this))
             div.appendChild(responseButton)
 
-            let rejectedButton = document. createElement("button");
+            let rejectedButton = document.createElement("button");
             rejectedButton.innerHTML = "Rejected"
             rejectedButton.setAttribute('id', 'rejected-' + company.id)
             rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
             div.appendChild(rejectedButton)
 
+            let commentButton = document.createElement('button')
+            commentButton.innerHTML = "Leave a Comment"
+            commentButton.setAttribute('id', 'comment-' + company.id)
+            // commentButton.addEventListener('click', this.leaveComment.bind(this))
+            div.appendChild(commentButton)
+
+            let viewCommentButton = document.createElement('button')
+            viewCommentButton.innerHTML = "View Comments"
+            viewCommentButton.setAttribute('id', 'view-comment-' + company.id)
+            // viewCommentButton.addEventListener('click', this.viewComment.bind(this))
+            div.appendChild(viewCommentButton)
 
             companiesContainer.appendChild(div)
 
