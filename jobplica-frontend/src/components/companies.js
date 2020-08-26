@@ -84,8 +84,12 @@ class Companies {
 
             if (company.status == "Accepted") {
                 div.style.backgroundColor = "#239B56"
+                rejectedButton.style.display = "none"
+                responseButton.style.display = "none"
             } else if (company.status == "Rejected") {
                 div.style.backgroundColor = "#E74C3C"
+                rejectedButton.style.display = "none"
+                responseButton.style.display = "none"
             }
         }
     }
@@ -307,6 +311,13 @@ class Companies {
         let companyCard = document.querySelector(`#container-${selectedId}`)
         companyCard.style.backgroundColor = "#E74C3C"
 
+        // Buttons will disappear
+
+        let acceptButton = document.querySelector(`#approved-${selectedId}`)
+        let rejectButton = document.querySelector(`#rejected-${selectedId}`)
+
+        acceptButton.style.display = "none"
+        rejectButton.style.display = "none"
     }
 
     responseResponse(e) {
@@ -328,6 +339,15 @@ class Companies {
 
         let companyCard = document.querySelector(`#container-${selectedId}`)
         companyCard.style.backgroundColor = "#239B56"
+
+        
+        // Buttons will disappear
+
+        let acceptButton = document.querySelector(`#approved-${selectedId}`)
+        let rejectButton = document.querySelector(`#rejected-${selectedId}`)
+
+        acceptButton.style.display = "none"
+        rejectButton.style.display = "none"
     }
 
     filterStatus() {
