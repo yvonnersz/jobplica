@@ -82,7 +82,7 @@ class Companies {
 
             // Changes background color depending on status.
 
-            if (company.status == "Approved") {
+            if (company.status == "Accepted") {
                 div.style.backgroundColor = "#239B56"
             } else if (company.status == "Rejected") {
                 div.style.backgroundColor = "#E74C3C"
