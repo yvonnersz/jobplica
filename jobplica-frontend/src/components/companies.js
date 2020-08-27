@@ -66,6 +66,7 @@ class Companies {
             let companyInfo = div.appendChild(ulCompanyInfo)
 
             let ulComments = document.createElement('ul')
+            ulComments.className = 'comments'
 
             for (let comment of company.comments) {
                 let commentLi = document.createElement('li')
@@ -539,8 +540,11 @@ class Companies {
             // Up until this point, comments are created into the database. Next step:
             // Upon comment submission, append comment to company-card.
 
-
-
+            let ulComment = companyCard.querySelector(`ul.comments`)
+            let li = document.createElement('li')
+            li.innerHTML = commentValue
+            
+            ulComment.appendChild(li)
 
             // The input disappears.
             companyCard.removeChild(form)
