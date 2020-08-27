@@ -10,18 +10,18 @@ class Api::V1::CompaniesController < ApplicationController
 
     def show
         company = Company.find(params[:id])
-        render json: companies, include: :comments
+        render json: company, include: :comments
     end
 
     def create
         company = Company.create(company_params)
-        render json: companies, include: :comments
+        render json: company, include: :comments
     end
 
     def update
         company = Company.find(params[:id])
         company.update(company_params)
-        render json: companies, include: :comments
+        render json: company, include: :comments
     end
 
     def destroy
@@ -33,6 +33,6 @@ class Api::V1::CompaniesController < ApplicationController
     private
 
     def company_params
-        params.require(:company).permit(:name, :location, :url, :date_applied, :status)
+        params.require(:company).permit(:name, :location, :url, :date_applied, :status, comments: [])
     end
 end

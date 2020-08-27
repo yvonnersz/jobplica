@@ -1,4 +1,5 @@
 class Company {
+    // This below builds out the attributes so that you can access them.
     constructor(company) {
         this.id = company.id;
         this.name  = company.name;
@@ -6,6 +7,7 @@ class Company {
         this.url = company.url;
         this.date_applied = company.date_applied;
         this.status = company.status;
+        this.comments = company.comments;
     }
 
     renderDate() {

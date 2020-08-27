@@ -64,6 +64,11 @@ class Companies {
             ul.appendChild(statusLi).innerHTML = company.status
             let companyInfo = div.appendChild(ul)
 
+            for (let comment of company.comments) {
+                let commentLi = document.createElement('li')
+                ul.appendChild(commentLi).innerHTML = comment.content
+            }
+
             let responseButton = document.createElement("button");
             responseButton.innerHTML = "Response"
             responseButton.setAttribute('id', 'approved-' + company.id)
@@ -79,14 +84,8 @@ class Companies {
             let commentButton = document.createElement('button')
             commentButton.innerHTML = "Leave a Comment"
             commentButton.setAttribute('id', 'comment-' + company.id)
-            // commentButton.addEventListener('click', this.leaveComment.bind(this))
+            commentButton.addEventListener('click', this.leaveComment.bind(this))
             div.appendChild(commentButton)
-
-            let viewCommentButton = document.createElement('button')
-            viewCommentButton.innerHTML = "View Comments"
-            viewCommentButton.setAttribute('id', 'view-comment-' + company.id)
-            // viewCommentButton.addEventListener('click', this.viewComment.bind(this))
-            div.appendChild(viewCommentButton)
 
             companiesContainer.appendChild(div)
 
@@ -502,5 +501,17 @@ class Companies {
         let tdTotal = document.createElement('td')
         tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
         tr.appendChild(tdTotal)
+    }
+
+    leaveComment(e) {
+        let form = document.createElement('input')
+        let selectedId = e.target.id.split('-')[1]
+
+        let companyCard = document.querySelector(`#container-${selectedId}`)
+        let commentSubmit = document.createElement('input')
+        commentSubmit.setAttribute('type', 'submit')
+
+        companyCard.appendChild(form)
+        companyCard.appendChild(commentSubmit)
     }
 }
