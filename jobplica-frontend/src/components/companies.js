@@ -253,6 +253,8 @@ class Companies {
                 if (event.key == "Enter") {
                     const newValue = edit.innerHTML
 
+                    // Company Object
+
                     let companyName = document.querySelector(`#container-${selectedId} a`).innerText
                     let companyUrl =  document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
                     let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
@@ -266,6 +268,8 @@ class Companies {
                         date_applied: companyDate,
                         status: companyResponse
                     }
+
+                    // Comments Object
 
                     document.querySelector(`#container-${selectedId} a`).href = companyUrl
                     savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
@@ -515,12 +519,17 @@ class Companies {
     leaveComment(e) {
         let selectedId = e.target.id.split('-')[1]
         let companies = this
-        console.log(companies)
 
         let form = document.createElement('input')
         let companyCard = document.querySelector(`#container-${selectedId}`)
         let commentSubmit = document.createElement('input')
         commentSubmit.setAttribute('type', 'submit')
+
+                
+        // Leave comment button disappears
+        let commentButton = document.querySelector(`button#comment-${selectedId}`)
+        companyCard.removeChild(commentButton)
+        //
 
         let exitSubmit = document.createElement('input')
         exitSubmit.setAttribute('type', 'submit')
@@ -534,6 +543,8 @@ class Companies {
             companyCard.removeChild(form)
             companyCard.removeChild(commentSubmit)
             companyCard.removeChild(exitSubmit)
+            companyCard.appendChild(commentButton)
+
         })
 
         commentSubmit.addEventListener('click', function() {            
@@ -557,10 +568,13 @@ class Companies {
             
             ulComment.appendChild(li)
 
+
             // The input disappears.
             companyCard.removeChild(form)
             companyCard.removeChild(commentSubmit)
             companyCard.removeChild(exitSubmit)
+            companyCard.appendChild(commentButton)
+
         })
 
     }
