@@ -565,33 +565,40 @@ class Companies {
 
             //Good up to this point. Now I have to CREATE the comment (link it to the database)
 
-            companies.adapterComments.createComment(commentObject)
+            companies.adapterComments.createComment(commentObject).then(comment => {
+
+                let ulComment = companyCard.querySelector(`ul.comments`)
+                let li = document.createElement('li')
+                li.setAttribute('id', 'comment-' + comment.id)
+                li.innerHTML = commentValue
+    
+                let deleteButton = document.createElement('button')
+                deleteButton.setAttribute('id', comment.id)
+                deleteButton.innerHTML = "Delete"
+                deleteButton.className = 'delete-comment-button'
+                li.appendChild(deleteButton)
+                deleteButton.addEventListener('click', companies.deleteComment.bind(companies))
+                
+                ulComment.appendChild(li)
+    
+    
+                // The input disappears.
+                companyCard.removeChild(form)
+                companyCard.removeChild(commentSubmit)
+                companyCard.removeChild(exitSubmit)
+                companyCard.appendChild(commentButton)
+            })
 
             // Up until this point, comments are created into the database. Next step:
             // Upon comment submission, append comment to company-card.
-
-            let ulComment = companyCard.querySelector(`ul.comments`)
-            let li = document.createElement('li')
-            li.innerHTML = commentValue
-
-            let deleteButton = document.createElement('button')
-            deleteButton.innerHTML = "Delete"
-            li.appendChild(deleteButton)
-            deleteButton.addEventListener('click', this.deleteComment.bind(this))
-            
-            ulComment.appendChild(li)
-
-
-            // The input disappears.
-            companyCard.removeChild(form)
-            companyCard.removeChild(commentSubmit)
-            companyCard.removeChild(exitSubmit)
-            companyCard.appendChild(commentButton)
 
         })
     }
 
     deleteComment(e) {
+        console.log(e.target)
+        console.log(this)
+
         let commentId = e.target.id
         let companies = this
 
