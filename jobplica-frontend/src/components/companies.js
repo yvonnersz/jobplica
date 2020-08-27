@@ -83,6 +83,7 @@ class Companies {
 
             let commentButton = document.createElement('button')
             commentButton.innerHTML = "Leave a Comment"
+            commentButton.className = "comment"
             commentButton.setAttribute('id', 'comment-' + company.id)
             commentButton.addEventListener('click', this.leaveComment.bind(this))
             div.appendChild(commentButton)
@@ -504,14 +505,27 @@ class Companies {
     }
 
     leaveComment(e) {
-        let form = document.createElement('input')
         let selectedId = e.target.id.split('-')[1]
+        let companies = this.companies
 
+        let form = document.createElement('input')
         let companyCard = document.querySelector(`#container-${selectedId}`)
         let commentSubmit = document.createElement('input')
         commentSubmit.setAttribute('type', 'submit')
 
         companyCard.appendChild(form)
         companyCard.appendChild(commentSubmit)
+
+        commentSubmit.addEventListener('click', function() {
+            let commentValue = document.querySelector(`#container-${selectedId} input`).value
+
+            let commentObject = {
+                content: commentValue,
+                company_id: selectedId
+            }
+
+            //Good up to this point. Now I have to CREATE the comment (link it to the database)
+        })
+
     }
 }
