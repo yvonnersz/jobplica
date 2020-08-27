@@ -43,10 +43,14 @@ class Companies {
             deleteButton.style.display = "none"
             div.appendChild(deleteButton)
 
+            let divInfo = document.createElement('div')
+            divInfo.className = "company-info"
+            divInfo.setAttribute('id', 'company-info-' + company.id)
+
             let a = document.createElement('a')
             a.text = company.name
             a.href = `${company.url}`
-            div.appendChild(a)
+            divInfo.appendChild(a)
 
             let ulCompanyInfo = document.createElement('ul')
 
@@ -63,7 +67,13 @@ class Companies {
 
             let statusLi = document.createElement('li')
             ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
-            let companyInfo = div.appendChild(ulCompanyInfo)
+            let companyInfo = divInfo.appendChild(ulCompanyInfo)
+
+            div.appendChild(divInfo)
+
+            let divComments = document.createElement('div')
+            divComments.className = 'company-comments'
+            divComments.setAttribute('id', 'company-comments-' + company.id)
 
             let ulComments = document.createElement('ul')
             ulComments.className = 'comments'
@@ -81,7 +91,8 @@ class Companies {
                 commentLi.appendChild(deleteButton)
             }
 
-            div.appendChild(ulComments)
+            divComments.appendChild(ulComments)
+            div.appendChild(divComments)
 
             let responseButton = document.createElement("button");
             responseButton.innerHTML = "Response"
@@ -229,7 +240,7 @@ class Companies {
     updateCompany(e) {
         let savedThis = this
         let selectedId = e.target.id.split('-')[1]
-        let editContainer = document.querySelector(`#container-${selectedId}`)
+        let editContainer = document.querySelector(`#company-info-${selectedId}`)
 
         let displayUrl = document.querySelector(`li#url-${selectedId}`)
         displayUrl.style.display = null
@@ -243,6 +254,7 @@ class Companies {
         deleteButton.style.display = null
         deleteButton.style.visibility = "visible"
         deleteButton.addEventListener('click', this.deleteCompany.bind(this))
+        
 
         // Exits out of edit
 
@@ -253,7 +265,6 @@ class Companies {
                 // if edit button = none then contenteditable is true
                 if (editButton.style.display === "none") {
                     edit.contentEditable = true
-
                 }
                 // end
                 
