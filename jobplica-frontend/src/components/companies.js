@@ -2,6 +2,7 @@ class Companies {
     constructor() {
         this.companies = []
         this.adapter = new CompaniesAdapter()
+        this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
         this.bindStatistics()
@@ -509,6 +510,7 @@ class Companies {
     leaveComment(e) {
         let selectedId = e.target.id.split('-')[1]
         let companies = this
+        console.log(companies)
 
         let form = document.createElement('input')
         let companyCard = document.querySelector(`#container-${selectedId}`)
@@ -528,11 +530,17 @@ class Companies {
 
             //Good up to this point. Now I have to CREATE the comment (link it to the database)
 
-            companies.adapter.createComment(commentObject).then(comment => {
-                companies.comments.push(new Comment(comment))
-            })
+            companies.adapterComments.createComment(commentObject)
 
-            //
+            // Up until this point, comments are created into the database. Next step:
+            // Upon comment submission, append comment to company-card.
+
+
+
+            
+            // The input disappears.
+            companyCard.removeChild(form)
+            companyCard.removeChild(commentSubmit)
         })
 
     }
