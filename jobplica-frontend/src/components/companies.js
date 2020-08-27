@@ -48,27 +48,31 @@ class Companies {
             a.href = `${company.url}`
             div.appendChild(a)
 
-            let ul = document.createElement('ul')
+            let ulCompanyInfo = document.createElement('ul')
 
             let companyUrl = document.createElement('li')
             companyUrl.setAttribute('id', 'url-' + company.id)
             companyUrl.style.display = "none"
-            ul.appendChild(companyUrl).innerHTML = company.url
+            ulCompanyInfo.appendChild(companyUrl).innerHTML = company.url
 
             let locationLi = document.createElement('li')
-            ul.appendChild(locationLi).innerHTML = company.location
+            ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
 
             let dateLi = document.createElement('li')
-            ul.appendChild(dateLi).innerHTML = company.renderDate()
+            ulCompanyInfo.appendChild(dateLi).innerHTML = company.renderDate()
 
             let statusLi = document.createElement('li')
-            ul.appendChild(statusLi).innerHTML = company.status
-            let companyInfo = div.appendChild(ul)
+            ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
+            let companyInfo = div.appendChild(ulCompanyInfo)
+
+            let ulComments = document.createElement('ul')
 
             for (let comment of company.comments) {
                 let commentLi = document.createElement('li')
-                ul.appendChild(commentLi).innerHTML = comment.content
+                ulComments.appendChild(commentLi).innerHTML = comment.content
             }
+
+            div.appendChild(ulComments)
 
             let responseButton = document.createElement("button");
             responseButton.innerHTML = "Response"
@@ -537,7 +541,7 @@ class Companies {
 
 
 
-            
+
             // The input disappears.
             companyCard.removeChild(form)
             companyCard.removeChild(commentSubmit)
