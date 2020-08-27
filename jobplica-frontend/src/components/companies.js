@@ -71,6 +71,11 @@ class Companies {
             for (let comment of company.comments) {
                 let commentLi = document.createElement('li')
                 ulComments.appendChild(commentLi).innerHTML = comment.content
+
+                let deleteButton = document.createElement('button')
+                deleteButton.innerHTML = "Delete"
+                deleteButton.className = 'delete-comment-button'
+                commentLi.appendChild(deleteButton)
             }
 
             div.appendChild(ulComments)
@@ -565,6 +570,10 @@ class Companies {
             let ulComment = companyCard.querySelector(`ul.comments`)
             let li = document.createElement('li')
             li.innerHTML = commentValue
+
+            let deleteButton = document.createElement('button')
+            deleteButton.innerHTML = "Delete"
+            li.appendChild(deleteButton)
             
             ulComment.appendChild(li)
 

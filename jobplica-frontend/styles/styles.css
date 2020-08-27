@@ -217,3 +217,9 @@ body {
     display: inline-block;
     float: right;
   }
+
+  .delete-comment-button {
+    width: 20%;
+    height: 10%;
+    left: 15px;
+  }
