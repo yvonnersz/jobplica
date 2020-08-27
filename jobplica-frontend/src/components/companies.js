@@ -522,8 +522,19 @@ class Companies {
         let commentSubmit = document.createElement('input')
         commentSubmit.setAttribute('type', 'submit')
 
+        let exitSubmit = document.createElement('input')
+        exitSubmit.setAttribute('type', 'submit')
+        exitSubmit.value = "Exit"
+
         companyCard.appendChild(form)
         companyCard.appendChild(commentSubmit)
+        companyCard.appendChild(exitSubmit)
+
+        exitSubmit.addEventListener('click', function() {
+            companyCard.removeChild(form)
+            companyCard.removeChild(commentSubmit)
+            companyCard.removeChild(exitSubmit)
+        })
 
         commentSubmit.addEventListener('click', function() {            
             let commentValue = document.querySelector(`#container-${selectedId} input`).value
@@ -549,6 +560,7 @@ class Companies {
             // The input disappears.
             companyCard.removeChild(form)
             companyCard.removeChild(commentSubmit)
+            companyCard.removeChild(exitSubmit)
         })
 
     }
