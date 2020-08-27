@@ -186,6 +186,8 @@ class Companies {
     createCompany(e) {
         e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
 
+        console.log(this)
+
         const companyObject = {
             name: this.newCompanyName.value,
             location: this.newCompanyLocation.value,
@@ -506,7 +508,7 @@ class Companies {
 
     leaveComment(e) {
         let selectedId = e.target.id.split('-')[1]
-        let companies = this.companies
+        let companies = this
 
         let form = document.createElement('input')
         let companyCard = document.querySelector(`#container-${selectedId}`)
@@ -516,7 +518,7 @@ class Companies {
         companyCard.appendChild(form)
         companyCard.appendChild(commentSubmit)
 
-        commentSubmit.addEventListener('click', function() {
+        commentSubmit.addEventListener('click', function() {            
             let commentValue = document.querySelector(`#container-${selectedId} input`).value
 
             let commentObject = {
@@ -525,6 +527,12 @@ class Companies {
             }
 
             //Good up to this point. Now I have to CREATE the comment (link it to the database)
+
+            companies.adapter.createComment(commentObject).then(comment => {
+                companies.comments.push(new Comment(comment))
+            })
+
+            //
         })
 
     }

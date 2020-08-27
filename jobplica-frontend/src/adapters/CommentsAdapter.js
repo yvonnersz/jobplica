@@ -1,4 +1,4 @@
-class CompaniesAdapter {
+class CommentsAdapter {
     constructor() {
         this.baseUrl = 'http://localhost:3000/api/v1/comments'
     }
