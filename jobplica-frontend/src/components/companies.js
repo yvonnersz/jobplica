@@ -70,11 +70,14 @@ class Companies {
 
             for (let comment of company.comments) {
                 let commentLi = document.createElement('li')
+                commentLi.setAttribute('id', 'comment-' + comment.id)
                 ulComments.appendChild(commentLi).innerHTML = comment.content
 
                 let deleteButton = document.createElement('button')
                 deleteButton.innerHTML = "Delete"
+                deleteButton.setAttribute('id', comment.id)
                 deleteButton.className = 'delete-comment-button'
+                deleteButton.addEventListener('click', this.deleteComment.bind(this))
                 commentLi.appendChild(deleteButton)
             }
 
@@ -574,6 +577,7 @@ class Companies {
             let deleteButton = document.createElement('button')
             deleteButton.innerHTML = "Delete"
             li.appendChild(deleteButton)
+            deleteButton.addEventListener('click', this.deleteComment.bind(this))
             
             ulComment.appendChild(li)
 
@@ -585,6 +589,25 @@ class Companies {
             companyCard.appendChild(commentButton)
 
         })
+    }
 
+    deleteComment(e) {
+        let commentId = e.target.id
+        let companies = this
+
+        let commentValue = document.querySelector(`.comments #comment-${commentId}`).innerText.split('D')[0]
+
+        let commentObject = {
+            content: commentValue,
+            company_id: commentId
+        }
+
+        companies.adapterComments.deleteComment(commentObject, commentId)
+
+        // Remove comment from DOM
+        
+        let commentLi = document.querySelector(`#comment-${commentId}`)
+
+        commentLi.parentNode.removeChild(commentLi)
     }
 }
