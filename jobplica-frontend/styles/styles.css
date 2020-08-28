@@ -32,7 +32,7 @@ body {
   }
 
   .new-company input {
-    width: 250px;
+    width: 251px;
     text-align: center;
     padding: 5px;
     margin: 1px;
@@ -105,27 +105,8 @@ body {
   .content {
     position: absolute;
     right: 10px;
-    width: 910px;
-    height: 518px;
-    background-color: #F5F5F5;
-    padding: 20px;
-    box-shadow: -3px 3px 8px #888888;
-    border: 0.5px solid black;
+    width: 950px;
   }
-
-  /* .content {
-    position: absolute;
-    top: 55px;
-    right: 10px;
-    height: 440px;
-    width: 890px;
-    background-color: #F5F5F5;
-    padding: 20px;
-    box-shadow: -3px 3px 8px #888888;
-    border-radius: 25px;
-    border: 1px solid black;
-    overflow: auto;
-  } */
 
   /* Cards */
 
@@ -141,6 +122,8 @@ body {
     padding-bottom: 20px;
     overflow: hidden;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: -3px 3px 8px #888888;
   }
 
   .company-card a, a:visited {
