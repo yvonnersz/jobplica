@@ -3,6 +3,10 @@ body {
   overflow-x: hidden;
  }
 
+::-webkit-scrollbar { 
+  background-color: transparent; 
+}
+
   tr { 
     display: block; 
     float: left; 
@@ -103,7 +107,7 @@ body {
   /* Content CSS */
 
   .content {
-    position: absolute;
+    float: right;
     right: 10px;
     width: 950px;
   }
@@ -140,21 +144,27 @@ body {
     opacity: 35%;
   }
 
-  ::-webkit-scrollbar { 
-    background-color: transparent; 
+  .company-card ul {
+    list-style: none;
+    padding: 0;
   }
 
-  .company-card ul {
+  .comments li {
+    padding: 5px;
+    overflow-wrap: break-word;
+  }
+
+  /* .company-card ul {
     padding:0;
     margin-left: -30px;
     text-align: center;
     width: 300px;
     list-style: none;
-  }
+  } */
 
-  .company-card li {
+  /* .company-card li {
     padding: 1px;
-  }
+  } */
 
   /* Edit? */
 
@@ -202,5 +212,5 @@ body {
   .delete-comment-button {
     width: 20%;
     height: 10%;
-    left: 15px;
+    overflow: hidden;
   }
