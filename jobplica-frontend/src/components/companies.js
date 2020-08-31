@@ -17,48 +17,45 @@ class Companies {
                 companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.renderAll()
-
             })
     }
 
     renderAll() {
-        let companiesContainer = document.querySelector('.company')
+        let companiesContainer = document.querySelector('.company-cards')
 
         for (const company of this.companies) {
 
-            let div = document.createElement('div')
-            div.setAttribute('id', 'container-' + company.id)
-            div.className = "company-card"
+            // The elements below will be nested under CompanyInfoDiv.
 
-            let editDiv = document.createElement('button')
-            editDiv.className = "edit"
-            editDiv.setAttribute('id', 'edit-' + company.id)
-            editDiv.innerHTML = '...'
-            editDiv.addEventListener('focus', this.updateCompany.bind(this))
-            div.appendChild(editDiv)
+            let cardDiv = document.createElement('div')
+            cardDiv.setAttribute('id', 'card-' + company.id)
+            cardDiv.className = "company-card"
+
+            let editButton = document.createElement('button')
+            editButton.className = "edit-company-button"
+            editButton.innerHTML = '...'
+            editButton.addEventListener('focus', this.updateCompany.bind(this))
+            cardDiv.appendChild(editButton)
 
             let deleteButton = document.createElement('button')
-            deleteButton.className = "delete"
-            deleteButton.setAttribute('id', 'delete-' + company.id)
+            deleteButton.className = "delete-company-button"
             deleteButton.innerHTML = "Delete"
             deleteButton.style.display = "none"
-            div.appendChild(deleteButton)
+            cardDiv.appendChild(deleteButton)
 
-            let divInfo = document.createElement('div')
-            divInfo.className = "company-info"
-            divInfo.setAttribute('id', 'company-info-' + company.id)
+            let companyInfoDiv = document.createElement('div')
+            companyInfoDiv.className = "company-info"
 
-            let a = document.createElement('a')
-            a.text = company.name
-            a.href = `${company.url}`
-            divInfo.appendChild(a)
+            let companyLink = document.createElement('a')
+            companyLink.text = company.name
+            companyLink.href = company.url
+            companyInfoDiv.appendChild(companyLink)
 
             let ulCompanyInfo = document.createElement('ul')
 
-            let companyUrl = document.createElement('li')
-            companyUrl.setAttribute('id', 'url-' + company.id)
-            companyUrl.style.display = "none"
-            ulCompanyInfo.appendChild(companyUrl).innerHTML = company.url
+            let companyUrlLi = document.createElement('li')
+            companyUrlLi.style.display = "none"
+            ulCompanyInfo.appendChild(companyUrlLi).innerHTML = company.url
 
             let locationLi = document.createElement('li')
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
@@ -68,16 +65,18 @@ class Companies {
 
             let statusLi = document.createElement('li')
             ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
-            let companyInfo = divInfo.appendChild(ulCompanyInfo)
 
-            div.appendChild(divInfo)
+            companyInfoDiv.appendChild(ulCompanyInfo)
+            cardDiv.appendChild(companyInfoDiv)
+
+            // End of CompanyInfoDiv
+
+            // Below will be nested under commentDiv
 
             let divComments = document.createElement('div')
             divComments.className = 'company-comments'
-            divComments.setAttribute('id', 'company-comments-' + company.id)
 
             let ulComments = document.createElement('ul')
-            ulComments.className = 'comments'
 
             for (let comment of company.comments) {
                 let commentLi = document.createElement('li')
@@ -85,36 +84,40 @@ class Companies {
                 ulComments.appendChild(commentLi).innerHTML = comment.content
 
                 let deleteButton = document.createElement('button')
-                deleteButton.innerHTML = "Delete"
-                deleteButton.setAttribute('id', comment.id)
+                deleteButton.innerHTML = "x"
+                deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
                 deleteButton.className = 'delete-comment-button'
                 deleteButton.addEventListener('click', this.deleteComment.bind(this))
                 commentLi.appendChild(deleteButton)
             }
 
             divComments.appendChild(ulComments)
-            div.appendChild(divComments)
+            cardDiv.appendChild(divComments)
 
-            let responseButton = document.createElement("button");
-            responseButton.innerHTML = "Response"
-            responseButton.setAttribute('id', 'approved-' + company.id)
-            responseButton.addEventListener('click', this.responseResponse.bind(this))
-            div.appendChild(responseButton)
+            // Status Update
 
-            let rejectedButton = document.createElement("button");
-            rejectedButton.innerHTML = "Rejected"
-            rejectedButton.setAttribute('id', 'rejected-' + company.id)
-            rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
-            div.appendChild(rejectedButton)
+            let acceptButton = document.createElement("button");
+            acceptButton.innerHTML = "Accepted"
+            acceptButton.setAttribute('id', 'accept-company-' + company.id)
+            acceptButton.className = 'response-button'
+            acceptButton.addEventListener('click', this.responseResponse.bind(this))
+            cardDiv.appendChild(acceptButton)
+
+            let rejectButton = document.createElement("button");
+            rejectButton.innerHTML = "Rejected"
+            rejectButton.setAttribute('id', 'reject-company-' + company.id)
+            rejectButton.className = 'response-button'
+            rejectButton.addEventListener('click', this.rejectedResponse.bind(this))
+            cardDiv.appendChild(rejectButton)
 
             let commentButton = document.createElement('button')
             commentButton.innerHTML = "Leave a Comment"
-            commentButton.className = "comment"
+            commentButton.className = 'comment-button'
             commentButton.setAttribute('id', 'comment-' + company.id)
             commentButton.addEventListener('click', this.leaveComment.bind(this))
-            div.appendChild(commentButton)
+            cardDiv.appendChild(commentButton)
 
-            companiesContainer.appendChild(div)
+            companiesContainer.appendChild(cardDiv)
 
             // Changes background color depending on status.
 
