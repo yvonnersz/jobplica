@@ -25,23 +25,34 @@ class Companies {
 
         for (const company of this.companies) {
 
-            // The elements below will be nested under CompanyInfoDiv.
+            // Create company card div.
 
             let cardDiv = document.createElement('div')
             cardDiv.setAttribute('id', 'card-' + company.id)
             cardDiv.className = "company-card"
 
+            // Create edit buttons for company card.
+
+            let editCardDiv = document.createElement('div')
+            editCardDiv.className = 'company-edit'
+
             let editButton = document.createElement('button')
             editButton.className = "edit-company-button"
+            editButton.setAttribute('id', 'edit-company-' + company.id)
             editButton.innerHTML = '...'
             editButton.addEventListener('focus', this.updateCompany.bind(this))
-            cardDiv.appendChild(editButton)
+            editCardDiv.appendChild(editButton)
 
             let deleteButton = document.createElement('button')
             deleteButton.className = "delete-company-button"
+            deleteButton.setAttribute('id', 'delete-company-' + company.id)
             deleteButton.innerHTML = "Delete"
             deleteButton.style.display = "none"
-            cardDiv.appendChild(deleteButton)
+            editCardDiv.appendChild(deleteButton)
+
+            cardDiv.appendChild(editCardDiv)
+
+            // Appending company info to card.
 
             let companyInfoDiv = document.createElement('div')
             companyInfoDiv.className = "company-info"
@@ -69,9 +80,7 @@ class Companies {
             companyInfoDiv.appendChild(ulCompanyInfo)
             cardDiv.appendChild(companyInfoDiv)
 
-            // End of CompanyInfoDiv
-
-            // Below will be nested under commentDiv
+            // Appending comments to the company card.
 
             let divComments = document.createElement('div')
             divComments.className = 'company-comments'
@@ -94,29 +103,33 @@ class Companies {
             divComments.appendChild(ulComments)
             cardDiv.appendChild(divComments)
 
-            // Status Update
+            // Appending buttons to update company card.
+
+            let updateCompanyDiv = document.createElement('div')
+            updateCompanyDiv.className = 'company-update'
 
             let acceptButton = document.createElement("button");
             acceptButton.innerHTML = "Accepted"
             acceptButton.setAttribute('id', 'accept-company-' + company.id)
             acceptButton.className = 'response-button'
             acceptButton.addEventListener('click', this.responseResponse.bind(this))
-            cardDiv.appendChild(acceptButton)
+            updateCompanyDiv.appendChild(acceptButton)
 
             let rejectButton = document.createElement("button");
             rejectButton.innerHTML = "Rejected"
             rejectButton.setAttribute('id', 'reject-company-' + company.id)
             rejectButton.className = 'response-button'
             rejectButton.addEventListener('click', this.rejectedResponse.bind(this))
-            cardDiv.appendChild(rejectButton)
+            updateCompanyDiv.appendChild(rejectButton)
 
             let commentButton = document.createElement('button')
             commentButton.innerHTML = "Leave a Comment"
             commentButton.className = 'comment-button'
             commentButton.setAttribute('id', 'comment-' + company.id)
             commentButton.addEventListener('click', this.leaveComment.bind(this))
-            cardDiv.appendChild(commentButton)
+            updateCompanyDiv.appendChild(commentButton)
 
+            cardDiv.appendChild(updateCompanyDiv)
             companiesContainer.appendChild(cardDiv)
 
             // Changes background color depending on status.
