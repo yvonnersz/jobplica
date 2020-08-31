@@ -1,22 +1,23 @@
 class Companies {
     constructor() {
         this.companies = []
-        this.adapter = new CompaniesAdapter()
+        this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
         this.bindingAndEventListener()
         this.bindStatistics()
         this.bindCards()
+        this.filterStatus()
+        this.filterDate()
     }
 
     fetchAndLoadCompanies() {
-        this.adapter.getCompanies()
+        this.adapterCompanies.getCompanies()
             .then(companies => { 
                 companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
                 this.renderAll()
-                this.filterStatus()
-                this.filterDate()
+
             })
     }
 

@@ -149,6 +149,12 @@ body {
     padding: 0;
   }
 
+  .comments ul {
+    border: 1px solid black;
+    width: 50%;
+    text-align: center;
+  }
+
   .comments li {
     padding: 5px;
     overflow-wrap: break-word;
