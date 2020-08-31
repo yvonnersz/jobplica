@@ -146,74 +146,6 @@ class Companies {
         }
     }
 
-    render(company) {
-        let companiesContainer = document.querySelector('.company')
-
-        let div = document.createElement('div')
-        div.setAttribute('id', 'container-' + company.id)
-        div.className = "company-card"
-
-        let editDiv = document.createElement('button')
-        editDiv.className = "edit"
-        editDiv.setAttribute('id', 'edit-' + company.id)
-        editDiv.innerHTML = '...'
-        editDiv.addEventListener('focus', this.updateCompany.bind(this))
-        div.appendChild(editDiv)
-
-        let deleteButton = document.createElement('button')
-        deleteButton.className = "delete"
-        deleteButton.setAttribute('id', 'delete-' + company.id)
-        deleteButton.innerHTML = "Delete"
-        deleteButton.style.display = "none"
-        div.appendChild(deleteButton)
-
-        let a = document.createElement('a')
-        a.text = company.name
-        a.href = `${company.url}`
-        div.appendChild(a)
-
-        let ul = document.createElement('ul')
-
-        let companyUrl = document.createElement('li')
-        companyUrl.setAttribute('id', 'url-' + company.id)
-        companyUrl.style.display = "none"
-        ul.appendChild(companyUrl).innerHTML = company.url
-
-        let locationLi = document.createElement('li')
-        ul.appendChild(locationLi).innerHTML = company.location
-
-        let dateLi = document.createElement('li')
-        let date = new Date(company.date_applied)
-        let fullDate = date.toDateString()
-
-        let dateArray = fullDate.split(' ')
-        let month = dateArray[1]
-        let day = parseInt(dateArray[2]) + 1
-        let year = dateArray[3]
-
-        let modifiedDate = month + " " + day + " " + year
-
-        ul.appendChild(dateLi).innerHTML = modifiedDate
-
-        let statusLi = document.createElement('li')
-        ul.appendChild(statusLi).innerHTML = company.status
-        let companyInfo = div.appendChild(ul)
-
-        let responseButton = document. createElement("button");
-        responseButton.innerHTML = "Response"
-        responseButton.setAttribute('id', 'approved-' + company.id)
-        responseButton.addEventListener('click', this.responseResponse.bind(this))
-        div.appendChild(responseButton)
-
-        let rejectedButton = document. createElement("button");
-        rejectedButton.innerHTML = "Rejected"
-        rejectedButton.setAttribute('id', 'rejected-' + company.id)
-        rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
-        div.appendChild(rejectedButton)
-
-        companiesContainer.prepend(div)
-    }
-
     bindingAndEventListener() {
         this.companyForm = document.getElementById('new-company')
         this.companyForm.addEventListener('submit', this.createCompany.bind(this))
@@ -228,8 +160,6 @@ class Companies {
     createCompany(e) {
         e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
 
-        console.log(this)
-
         const companyObject = {
             name: this.newCompanyName.value,
             location: this.newCompanyLocation.value,
@@ -237,9 +167,14 @@ class Companies {
             date_applied: this.newCompanyDate.value,
         }
 
-        this.adapter.createCompany(companyObject).then(company => {
+        this.adapterCompanies.createCompany(companyObject).then(company => {
             this.companies.push(new Company(company))
-            this.render(company);
+
+            let companyCards = document.querySelectorAll('.company-card')
+
+            companyCards.forEach(companyCard => companyCard.remove())
+
+            this.renderAll(this.companies);
 
             // Clear form values
             let newCompanyName = document.getElementById('new-company-name')
