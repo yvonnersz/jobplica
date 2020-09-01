@@ -462,12 +462,12 @@ class Companies {
         let rejectedArray = []
         let awaitingArray = []
 
-        this.adapter.getCompanies()
+        this.adapterCompanies.getCompanies()
         .then(companies => {
             companies.forEach(company => {
-                if (company.status == "Accepted") {
+                if (company.status === "Accepted") {
                     acceptedArray.push(company)
-                } else if (company.status == "Rejected") {
+                } else if (company.status === "Rejected") {
                     rejectedArray.push(company)
                 } else {
                     awaitingArray.push(company)
@@ -475,23 +475,30 @@ class Companies {
             })
         })
 
-        let tr = document.querySelector('#total-input')
+        let trData = document.createElement('tr')
 
         let tdAccepted = document.createElement('td')
         tdAccepted.innerHTML = acceptedArray.length
-        tr.appendChild(tdAccepted)
+        trData.appendChild(tdAccepted)
 
         let tdRejected = document.createElement('td')
         tdRejected.innerHTML = rejectedArray.length
-        tr.appendChild(tdRejected)
+        trData.appendChild(tdRejected)
 
         let tdAwaiting = document.createElement('td')
         tdAwaiting.innerHTML = awaitingArray.length
-        tr.appendChild(tdAwaiting)
+        trData.appendChild(tdAwaiting)
 
         let tdTotal = document.createElement('td')
         tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
-        tr.appendChild(tdTotal)
+        trData.appendChild(tdTotal)
+
+        let table = document.querySelector('.total table tbody')
+        let tableData = document.querySelector('.total tr:nth-child(2)')
+
+        tableData != null ? tableData.remove():false
+
+        table.appendChild(trData)
     }
 
     leaveComment(e) {
