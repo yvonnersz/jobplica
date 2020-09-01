@@ -34,11 +34,11 @@ class Companies {
             .then(companies => { 
                 companies.forEach(company => this.companies.push(new Company(company)))
             }).then (() => {
-                this.renderAll()
+                this.render()
             })
     }
 
-    renderAll() {
+    render() {
         let companiesContainer = document.querySelector('.company-cards')
 
         for (const company of this.companies) {
@@ -187,7 +187,7 @@ class Companies {
             let companyCards = document.querySelectorAll('.company-card')
             companyCards.forEach(companyCard => companyCard.remove())
 
-            this.renderAll(this.companies);
+            this.render(this.companies);
 
             // Clearing the form values.
             this.newCompanyName.value = null
