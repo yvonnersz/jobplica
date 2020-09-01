@@ -293,24 +293,23 @@ class Companies {
         companyCard.remove()
     }
 
-    rejectedResponse(e) {
-        e.preventDefault
-        
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
+    rejectedResponse(e) {        
+        let companyCards = this
+        let companyId = e.target.id.split('-')[2]
 
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
-
-        let newCompanyObject = {
+        let updateCompanyStatus = {
             status: "Rejected"
         }
 
-        savedThis.adapter.rejectedStatusUpdate(newCompanyObject, selectedId)
+        companyCards.adapterCompanies.rejectedStatusUpdate(updateCompanyStatus, companyId)
 
-        // Change company card's response to "Rejected"
-        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Rejected"
+        // Update company card status to 'Rejected' with associated CSS.
 
-        let companyCard = document.querySelector(`#container-${selectedId}`)
+        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
+        companyStatusValue.innerHTML = 'Rejected'
+
+        let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.style.backgroundColor = "#E74C3C"
 
         // Buttons will disappear
