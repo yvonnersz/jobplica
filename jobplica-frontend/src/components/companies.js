@@ -465,6 +465,7 @@ class Companies {
         this.adapterCompanies.getCompanies()
         .then(companies => {
             companies.forEach(company => {
+                
                 if (company.status === "Accepted") {
                     acceptedArray.push(company)
                 } else if (company.status === "Rejected") {
@@ -472,33 +473,33 @@ class Companies {
                 } else {
                     awaitingArray.push(company)
                 }
+
+                let trData = document.createElement('tr')
+
+                let tdAccepted = document.createElement('td')
+                tdAccepted.innerHTML = acceptedArray.length
+                trData.appendChild(tdAccepted)
+        
+                let tdRejected = document.createElement('td')
+                tdRejected.innerHTML = rejectedArray.length
+                trData.appendChild(tdRejected)
+        
+                let tdAwaiting = document.createElement('td')
+                tdAwaiting.innerHTML = awaitingArray.length
+                trData.appendChild(tdAwaiting)
+        
+                let tdTotal = document.createElement('td')
+                tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
+                trData.appendChild(tdTotal)
+        
+                let table = document.querySelector('.total table tbody')
+                let tableData = document.querySelector('.total tr:nth-child(2)')
+        
+                tableData != null ? tableData.remove():false
+        
+                table.appendChild(trData)
             })
         })
-
-        let trData = document.createElement('tr')
-
-        let tdAccepted = document.createElement('td')
-        tdAccepted.innerHTML = acceptedArray.length
-        trData.appendChild(tdAccepted)
-
-        let tdRejected = document.createElement('td')
-        tdRejected.innerHTML = rejectedArray.length
-        trData.appendChild(tdRejected)
-
-        let tdAwaiting = document.createElement('td')
-        tdAwaiting.innerHTML = awaitingArray.length
-        trData.appendChild(tdAwaiting)
-
-        let tdTotal = document.createElement('td')
-        tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
-        trData.appendChild(tdTotal)
-
-        let table = document.querySelector('.total table tbody')
-        let tableData = document.querySelector('.total tr:nth-child(2)')
-
-        tableData != null ? tableData.remove():false
-
-        table.appendChild(trData)
     }
 
     leaveComment(e) {
