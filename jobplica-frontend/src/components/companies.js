@@ -4,11 +4,29 @@ class Companies {
         this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
-        this.bindingAndEventListener()
+        this.bindEventListeners()
         this.bindStatistics()
         this.bindCards()
         this.filterStatus()
         this.filterDate()
+    }
+
+    bindEventListeners() {
+        this.companyForm = document.getElementById('new-company')
+        this.companyForm.addEventListener('submit', this.createCompany.bind(this))
+        
+        this.newCompanyName = document.getElementById('new-company-name')
+        this.newCompanyLocation = document.getElementById('new-company-location')
+        this.newCompanyUrl = document.getElementById('new-company-url')
+        this.newCompanyDate = document.getElementById('new-company-date')
+        this.newCompanyStatus = document.getElementById('new-company-status')
+
+        // Filter by Status
+        document.querySelector('#status-dropdown').addEventListener('change', this.filterStatus.bind(this))
+
+        // Filter by Date
+        document.querySelector('#date-dropdown').addEventListener('change', this.filterDate.bind(this))
+        
     }
 
     fetchAndLoadCompanies() {
@@ -148,21 +166,6 @@ class Companies {
             //     responseButton.style.display = "none"
             // }
         }
-    }
-
-    bindingAndEventListener() {
-        this.companyForm = document.getElementById('new-company')
-        this.companyForm.addEventListener('submit', this.createCompany.bind(this))
-        
-        this.newCompanyName = document.getElementById('new-company-name')
-        this.newCompanyLocation = document.getElementById('new-company-location')
-        this.newCompanyUrl = document.getElementById('new-company-url')
-        this.newCompanyDate = document.getElementById('new-company-date')
-        this.newCompanyStatus = document.getElementById('new-company-status')
-
-        // Filter by Status
-        document.querySelector('#status-dropdown').addEventListener('change', this.filterStatus.bind(this))
-        
     }
 
     createCompany(e) {
@@ -349,46 +352,43 @@ class Companies {
         }
     }
 
-    filterDate() { // This should be binded to EventListener    
-        document.querySelector('#date-dropdown').addEventListener('change', function(e) {
+    filterDate() {
+        let companyCards = document.querySelectorAll('.company-card')
+        let datePick = document.querySelector('#date-dropdown').value
 
-            let companyCards = document.querySelectorAll('.company-card')
-            let datePick = document.querySelector('#date-dropdown').value
+        for (let companyCard of companyCards) {
+            companyCard.style.display = "none"
+        }
 
-            for (let companyCard of companyCards) {
-                companyCard.style.display = "none"
-            }
+        let today = new Date();
+        let thisMonth = today.getMonth() + 1 // 8
+        let lastMonth = today.getMonth() - 1 // 7
 
-            let today = new Date();
-            let thisMonth = today.getMonth() + 1 // 8
-            let lastMonth = today.getMonth() - 1 // 7
+        for (let companyCard of companyCards) {
+            let companyId = companyCard.id.split('-')[1]
+            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+            let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerHTML
+            let companyNewDate = new Date(companyDateValue) // Fri Aug 07 2020 00:00:00 GMT-0700 (Pacific Daylight Time)
+            let companyNewMonth = companyNewDate.getMonth() + 1 // 8
 
-            for (let companyCard of companyCards) {
-                let companyId = companyCard.id.split('-')[1]
-                let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-                let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerHTML
-                let companyNewDate = new Date(companyDateValue) // Fri Aug 07 2020 00:00:00 GMT-0700 (Pacific Daylight Time)
-                let companyNewMonth = companyNewDate.getMonth() + 1 // 8
-
-                if (datePick === "This Month") {
-                    if (companyNewMonth === thisMonth) {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
-                    }
-                } else if (datePick == "Last Month") {
-                    if (companyNewMonth === lastMonth) {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
-                    }
-                } else if (datePick === "All") {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
+            if (datePick === "This Month") {
+                if (companyNewMonth === thisMonth) {
+                    companyCard.style.display = null
+                    companyCard.visibility = "visible"
+                    document.querySelector('#date-dropdown').selectedIndex = null
                 }
+            } else if (datePick == "Last Month") {
+                if (companyNewMonth === lastMonth) {
+                    companyCard.style.display = null
+                    companyCard.visibility = "visible"
+                    document.querySelector('#date-dropdown').selectedIndex = null
+                }
+            } else if (datePick === "All") {
+                    companyCard.style.display = null
+                    companyCard.visibility = "visible"
+                    document.querySelector('#date-dropdown').selectedIndex = null
             }
-        })
+        }
     }
 
     bindStatistics() {
