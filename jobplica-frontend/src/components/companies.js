@@ -31,6 +31,12 @@ class Companies {
 
         let cardsButton = document.querySelector('.cards-click')
         cardsButton.addEventListener('click', this.bindCards.bind(this))
+
+        // Bind Statistics
+
+        let statisticsButton = document.querySelector('.statistics-click')
+        statisticsButton.addEventListener('click', this.bindStatistics.bind(this))
+
     }
 
     fetchAndLoadCompanies() {
@@ -349,16 +355,14 @@ class Companies {
 
         let statisticsButton = document.querySelector('.statistics-click')
 
-        statisticsButton.addEventListener('click', function(e) {
-            let companyCardsContainer = document.querySelector('.company-cards')
+        let companyCardsContainer = document.querySelector('.company-cards')
 
-            companyCardsContainer.style.display = 'none'
-            statisticsContainer.style.display = null
-            statisticsButton.style.display = 'none'
-            cardsButton.style.display = null
+        companyCardsContainer.style.display = 'none'
+        statisticsContainer.style.display = null
+        statisticsButton.style.display = 'none'
+        cardsButton.style.display = null
 
-            companies.statistics()
-        })
+        companies.statistics()
     }
 
     bindCards() {
@@ -418,7 +422,7 @@ class Companies {
         })
     }
 
-    filterStatus() { // This should just be binded to Event Listener   
+    filterStatus() {
         let statusPick = document.querySelector('#status-dropdown').value
         let companyCards = document.querySelectorAll('.company-card')
 
