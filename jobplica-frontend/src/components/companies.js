@@ -288,6 +288,9 @@ class Companies {
         let companyCards = this
         let companyId = e.target.id.split('-')[2]
 
+        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
+        let companyCard = document.querySelector(`#card-${companyId}`)
 
         let statusPick = e.target.innerHTML
 
@@ -296,33 +299,27 @@ class Companies {
                 status: "Rejected"
             }
 
+            // Communicate with database.
             companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
-        companyStatusValue.innerHTML = 'Rejected'
-
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        companyCard.style.backgroundColor = "#E74C3C"
+            // Manipulate the DOM with JS.
+            companyStatusValue.innerHTML = 'Rejected'
+            companyCard.style.backgroundColor = "#E74C3C"
 
         } else {
             let updateCompanyStatus = {
                 status: "Accepted"
             }
 
+            // Communicate with database.
             companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
-            // Change company card's response to "Accepted"
-    
-            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-            let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
+            // Manipulate the DOM with JS.
             companyStatusValue.innerHTML = 'Accepted'
-    
-            let companyCard = document.querySelector(`#card-${companyId}`)
             companyCard.style.backgroundColor = "#239B56"
         }
 
-            // Buttons will disappear
+        // Buttons will disappear
 
         // let acceptButton = document.querySelector(`#approved-${selectedId}`)
         // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
