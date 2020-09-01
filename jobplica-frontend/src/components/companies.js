@@ -465,7 +465,7 @@ class Companies {
         this.adapterCompanies.getCompanies()
         .then(companies => {
             companies.forEach(company => {
-                
+
                 if (company.status === "Accepted") {
                     acceptedArray.push(company)
                 } else if (company.status === "Rejected") {
@@ -503,19 +503,17 @@ class Companies {
     }
 
     leaveComment(e) {
-        let selectedId = e.target.id.split('-')[1]
-        let companies = this
+        let companyCards = this
+        let companyId = e.target.id.split('-')[1]
 
         let form = document.createElement('input')
-        let companyCard = document.querySelector(`#container-${selectedId}`)
+        let companyCard = document.querySelector(`#card-${companyId}`)
         let commentSubmit = document.createElement('input')
         commentSubmit.setAttribute('type', 'submit')
 
-                
-        // Leave comment button disappears
-        let commentButton = document.querySelector(`button#comment-${selectedId}`)
-        companyCard.removeChild(commentButton)
-        //
+        // Leave comment button disappears.
+        let commentButton = document.querySelector(`#comment-${companyId}`)
+        commentButton.style.display = 'none'
 
         let exitSubmit = document.createElement('input')
         exitSubmit.setAttribute('type', 'submit')
@@ -525,57 +523,48 @@ class Companies {
         companyCard.appendChild(commentSubmit)
         companyCard.appendChild(exitSubmit)
 
+        // If user hits exit, default buttons will display.
         exitSubmit.addEventListener('click', function() {
             companyCard.removeChild(form)
             companyCard.removeChild(commentSubmit)
             companyCard.removeChild(exitSubmit)
-            companyCard.appendChild(commentButton)
-
+            commentButton.style.display = null
         })
 
         commentSubmit.addEventListener('click', function() {            
-            let commentValue = document.querySelector(`#container-${selectedId} input`).value
+            let commentValue = document.querySelector(`#card-${companyId} input`).value
 
             let commentObject = {
                 content: commentValue,
-                company_id: selectedId
+                company_id: companyId
             }
 
-            //Good up to this point. Now I have to CREATE the comment (link it to the database)
+            companyCards.adapterComments.createComment(commentObject).then(comment => {
 
-            companies.adapterComments.createComment(commentObject).then(comment => {
-
-                let ulComment = companyCard.querySelector(`ul.comments`)
-                let li = document.createElement('li')
-                li.setAttribute('id', 'comment-' + comment.id)
-                li.innerHTML = commentValue
+                let ulComment = companyCard.querySelector(`.company-comments ul`)
+                let liComment = document.createElement('li')
+                liComment.setAttribute('id', 'comment-' + comment.id)
+                liComment.innerHTML = commentValue
     
                 let deleteButton = document.createElement('button')
-                deleteButton.setAttribute('id', comment.id)
-                deleteButton.innerHTML = "Delete"
+                deleteButton.setAttribute('id', 'delete-' + comment.id)
+                deleteButton.innerHTML = "x"
                 deleteButton.className = 'delete-comment-button'
-                li.appendChild(deleteButton)
-                deleteButton.addEventListener('click', companies.deleteComment.bind(companies))
+                liComment.appendChild(deleteButton)
+                deleteButton.addEventListener('click', companyCards.deleteComment.bind(companyCards))
                 
-                ulComment.appendChild(li)
-    
-    
+                ulComment.appendChild(liComment)
+
                 // The input disappears.
                 companyCard.removeChild(form)
                 companyCard.removeChild(commentSubmit)
                 companyCard.removeChild(exitSubmit)
-                companyCard.appendChild(commentButton)
+                commentButton.style.display = null
             })
-
-            // Up until this point, comments are created into the database. Next step:
-            // Upon comment submission, append comment to company-card.
-
         })
     }
 
     deleteComment(e) {
-        console.log(e.target)
-        console.log(this)
 
         let commentId = e.target.id
         let companies = this
