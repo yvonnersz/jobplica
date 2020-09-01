@@ -350,11 +350,9 @@ class Companies {
         // rejectButton.style.display = "none"
     }
 
-    filterStatus() {
-        let companies = this.companies
-    
+    filterStatus() { // This should just be binded to Event Listener    
         document.querySelector('#status-dropdown').addEventListener('change', function(e) {
-            
+
             let statusPick = document.querySelector('#status-dropdown').value
             let companyCards = document.querySelectorAll('.company-card')
             
@@ -362,13 +360,14 @@ class Companies {
                 companyCard.style.display = "none"
 
                 let companyId = companyCard.id.split('-')[1]
-                let companyResponse = companyCard.querySelector(`ul li:nth-child(4)`).innerText
+                let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+                let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerHTML
 
-                if (companyResponse == statusPick) {
+                if (companyStatusValue === statusPick) {
                     companyCard.style.display = null
                     companyCard.style.visibility = "visible"
                     document.querySelector('#status-dropdown').selectedIndex = null
-                } else if (statusPick == "All") {
+                } else if (statusPick === "All") {
                     for (let companyCard of companyCards) {
                         companyCard.style.display = null
                         companyCard.style.visibility = "visible"
