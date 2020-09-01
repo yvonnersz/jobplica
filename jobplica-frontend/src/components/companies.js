@@ -134,14 +134,14 @@ class Companies {
             acceptButton.innerHTML = "Accepted"
             acceptButton.setAttribute('id', 'accept-company-' + company.id)
             acceptButton.className = 'response-button'
-            acceptButton.addEventListener('click', this.statusUpdate.bind(this))
+            acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
             updateCompanyDiv.appendChild(acceptButton)
 
             let rejectButton = document.createElement("button");
             rejectButton.innerHTML = "Rejected"
             rejectButton.setAttribute('id', 'reject-company-' + company.id)
             rejectButton.className = 'response-button'
-            rejectButton.addEventListener('click', this.statusUpdate.bind(this))
+            rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
             updateCompanyDiv.appendChild(rejectButton)
 
             let commentButton = document.createElement('button')
@@ -275,18 +275,7 @@ class Companies {
           })
     }
 
-    deleteCompany(e) {
-        let companyId = e.target.id.split('-')[2]
-
-        // Communicate with the database.
-        this.adapterCompanies.deleteCompany(companyId)
-
-        // Use JS to remove card from DOM.
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        companyCard.remove()
-    }
-
-    statusUpdate(e) {
+    updateCompanyStatus(e) {
         let companyId = e.target.id.split('-')[2]
 
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
@@ -325,6 +314,17 @@ class Companies {
         // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
         // acceptButton.style.display = "none"
         // rejectButton.style.display = "none"
+    }
+
+    deleteCompany(e) {
+        let companyId = e.target.id.split('-')[2]
+
+        // Communicate with the database.
+        this.adapterCompanies.deleteCompany(companyId)
+
+        // Use JS to remove card from DOM.
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        companyCard.remove()
     }
 
     filterStatus() { // This should just be binded to Event Listener   
