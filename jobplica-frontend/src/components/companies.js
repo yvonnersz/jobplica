@@ -565,11 +565,10 @@ class Companies {
     }
 
     deleteComment(e) {
-
-        let commentId = e.target.id
         let companies = this
+        let commentId = e.target.id.split('-')[2]
 
-        let commentValue = document.querySelector(`.comments #comment-${commentId}`).innerText.split('D')[0]
+        let commentValue = document.querySelector(`#comment-${commentId}`).innerText.split('x')[0]
 
         let commentObject = {
             content: commentValue,
@@ -579,9 +578,7 @@ class Companies {
         companies.adapterComments.deleteComment(commentObject, commentId)
 
         // Remove comment from DOM
-        
         let commentLi = document.querySelector(`#comment-${commentId}`)
-
         commentLi.parentNode.removeChild(commentLi)
     }
 }
