@@ -159,6 +159,11 @@ class Companies {
         this.newCompanyUrl = document.getElementById('new-company-url')
         this.newCompanyDate = document.getElementById('new-company-date')
         this.newCompanyStatus = document.getElementById('new-company-status')
+
+        // Filter by Status
+
+        document.querySelector('#status-dropdown').addEventListener('change', this.filterStatus.bind(this))
+        
     }
 
     createCompany(e) {
@@ -350,32 +355,29 @@ class Companies {
         // rejectButton.style.display = "none"
     }
 
-    filterStatus() { // This should just be binded to Event Listener    
-        document.querySelector('#status-dropdown').addEventListener('change', function(e) {
+    filterStatus() { // This should just be binded to Event Listener   
+        let statusPick = document.querySelector('#status-dropdown').value
+        let companyCards = document.querySelectorAll('.company-card')
 
-            let statusPick = document.querySelector('#status-dropdown').value
-            let companyCards = document.querySelectorAll('.company-card')
-            
-            for (let companyCard of companyCards) {
-                companyCard.style.display = "none"
+        for (let companyCard of companyCards) {
+            companyCard.style.display = "none"
 
-                let companyId = companyCard.id.split('-')[1]
-                let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-                let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerHTML
+            let companyId = companyCard.id.split('-')[1]
+            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+            let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerHTML
 
-                if (companyStatusValue === statusPick) {
+            if (companyStatusValue === statusPick) {
+                companyCard.style.display = null
+                companyCard.style.visibility = "visible"
+                document.querySelector('#status-dropdown').selectedIndex = null
+            } else if (statusPick === "All") {
+                for (let companyCard of companyCards) {
                     companyCard.style.display = null
                     companyCard.style.visibility = "visible"
                     document.querySelector('#status-dropdown').selectedIndex = null
-                } else if (statusPick === "All") {
-                    for (let companyCard of companyCards) {
-                        companyCard.style.display = null
-                        companyCard.style.visibility = "visible"
-                        document.querySelector('#status-dropdown').selectedIndex = null
-                    }
                 }
-             }
-        })
+            }
+        }
     }
 
     filterDate() { // This should be binded to EventListener    
