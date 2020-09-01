@@ -116,14 +116,14 @@ class Companies {
             acceptButton.innerHTML = "Accepted"
             acceptButton.setAttribute('id', 'accept-company-' + company.id)
             acceptButton.className = 'response-button'
-            acceptButton.addEventListener('click', this.acceptedStatusUpdate.bind(this))
+            acceptButton.addEventListener('click', this.statusUpdate.bind(this))
             updateCompanyDiv.appendChild(acceptButton)
 
             let rejectButton = document.createElement("button");
             rejectButton.innerHTML = "Rejected"
             rejectButton.setAttribute('id', 'reject-company-' + company.id)
             rejectButton.className = 'response-button'
-            rejectButton.addEventListener('click', this.rejectedStatusUpdate.bind(this))
+            rejectButton.addEventListener('click', this.statusUpdate.bind(this))
             updateCompanyDiv.appendChild(rejectButton)
 
             let commentButton = document.createElement('button')
@@ -161,7 +161,6 @@ class Companies {
         this.newCompanyStatus = document.getElementById('new-company-status')
 
         // Filter by Status
-
         document.querySelector('#status-dropdown').addEventListener('change', this.filterStatus.bind(this))
         
     }
@@ -282,19 +281,22 @@ class Companies {
         // Use JS to remove card from DOM.
         let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.remove()
+    
     }
 
-    rejectedStatusUpdate(e) {        
+    statusUpdate(e) {
         let companyCards = this
         let companyId = e.target.id.split('-')[2]
 
-        let updateCompanyStatus = {
-            status: "Rejected"
-        }
 
-        companyCards.adapterCompanies.rejectedStatusUpdate(updateCompanyStatus, companyId)
+        let statusPick = e.target.innerHTML
 
-        // Update company card status to 'Rejected' with associated CSS.
+        if (statusPick === "Rejected") {
+            let updateCompanyStatus = {
+                status: "Rejected"
+            }
+
+            companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
@@ -303,36 +305,24 @@ class Companies {
         let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.style.backgroundColor = "#E74C3C"
 
-        // Buttons will disappear
+        } else {
+            let updateCompanyStatus = {
+                status: "Accepted"
+            }
 
-        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
+            companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
-        // acceptButton.style.display = "none"
-        // rejectButton.style.display = "none"
-    }
-
-    acceptedStatusUpdate(e) {        
-        let companyCards = this
-        let companyId = e.target.id.split('-')[2]
-
-        let updateCompanyStatus = {
-            status: "Accepted"
+            // Change company card's response to "Accepted"
+    
+            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+            let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
+            companyStatusValue.innerHTML = 'Accepted'
+    
+            let companyCard = document.querySelector(`#card-${companyId}`)
+            companyCard.style.backgroundColor = "#239B56"
         }
 
-        companyCards.adapterCompanies.acceptedStatusUpdate(updateCompanyStatus, companyId)
-
-        // Change company card's response to "Accepted"
-
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
-        companyStatusValue.innerHTML = 'Accepted'
-
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        companyCard.style.backgroundColor = "#239B56"
-
-        
-        // Buttons will disappear
+            // Buttons will disappear
 
         // let acceptButton = document.querySelector(`#approved-${selectedId}`)
         // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
