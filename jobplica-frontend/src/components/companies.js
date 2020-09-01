@@ -281,11 +281,9 @@ class Companies {
         // Use JS to remove card from DOM.
         let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.remove()
-    
     }
 
     statusUpdate(e) {
-        let companyCards = this
         let companyId = e.target.id.split('-')[2]
 
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
@@ -300,7 +298,7 @@ class Companies {
             }
 
             // Communicate with database.
-            companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
+            this.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
             // Manipulate the DOM with JS.
             companyStatusValue.innerHTML = 'Rejected'
@@ -312,7 +310,7 @@ class Companies {
             }
 
             // Communicate with database.
-            companyCards.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
+            this.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
 
             // Manipulate the DOM with JS.
             companyStatusValue.innerHTML = 'Accepted'
@@ -320,10 +318,8 @@ class Companies {
         }
 
         // Buttons will disappear
-
         // let acceptButton = document.querySelector(`#approved-${selectedId}`)
         // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
-
         // acceptButton.style.display = "none"
         // rejectButton.style.display = "none"
     }
