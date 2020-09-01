@@ -444,14 +444,13 @@ class Companies {
     }
 
     bindCards() {
-
-        let companyCards = document.querySelector('.company')
+        let companyCardsContainer = document.querySelector('.company-cards')
         let statisticsContainer = document.querySelector('.statistics')
         let statisticsButton = document.querySelector('.statistics-click')
         let cardsButton = document.querySelector('.cards-click')
 
         cardsButton.addEventListener('click', function(e) {
-            companyCards.style.display = null
+            companyCardsContainer.style.display = null
             statisticsContainer.style.display = "none"
             statisticsButton.style.display = null
             cardsButton.style.display = "none"
