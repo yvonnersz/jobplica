@@ -26,7 +26,11 @@ class Companies {
 
         // Filter by Date
         document.querySelector('#date-dropdown').addEventListener('change', this.filterDate.bind(this))
-        
+
+        // Bind company cards 
+
+        let cardsButton = document.querySelector('.cards-click')
+        cardsButton.addEventListener('click', this.bindCards.bind(this))
     }
 
     fetchAndLoadCompanies() {
@@ -356,12 +360,10 @@ class Companies {
         let statisticsButton = document.querySelector('.statistics-click')
         let cardsButton = document.querySelector('.cards-click')
 
-        cardsButton.addEventListener('click', function(e) {
-            companyCardsContainer.style.display = null
-            statisticsContainer.style.display = "none"
-            statisticsButton.style.display = null
-            cardsButton.style.display = "none"
-        })
+        companyCardsContainer.style.display = null
+        statisticsContainer.style.display = "none"
+        statisticsButton.style.display = null
+        cardsButton.style.display = "none"
     }
 
     statistics() {
@@ -408,7 +410,7 @@ class Companies {
             })
         })
     }
-    
+
     filterStatus() { // This should just be binded to Event Listener   
         let statusPick = document.querySelector('#status-dropdown').value
         let companyCards = document.querySelectorAll('.company-card')
