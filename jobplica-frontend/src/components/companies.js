@@ -274,26 +274,11 @@ class Companies {
     }
 
     deleteCompany(e) {
-        let companyCards = this
         let companyId = e.target.id.split('-')[2]
 
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
-        let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
-        let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
-        let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
-        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
+        this.adapterCompanies.deleteCompany(companyId)
 
-        let companyObject = {
-            name: companyNameValue,
-            location: companyUrlValue,
-            url: companyLocationValue,
-            date_applied: companyDateValue,
-            status: companyStatusValue
-        }
-
-        companyCards.adapterCompanies.deleteCompany(companyObject, companyId)
-
+        // Use JS to remove card from DOM.
         let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.remove()
     }

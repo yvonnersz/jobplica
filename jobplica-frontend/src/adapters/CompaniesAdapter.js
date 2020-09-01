@@ -35,15 +35,12 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
-    deleteCompany(newCompanyObject, id) {
-        const company = newCompanyObject
-
+    deleteCompany(id) {
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-            },
-            body: JSON.stringify({company}),
+            }
         }).then(resp => resp.json())
     }
 
