@@ -64,9 +64,13 @@ class Companies {
 
             let ulCompanyInfo = document.createElement('ul')
 
-            let companyUrlLi = document.createElement('li')
-            companyUrlLi.style.display = "none"
-            ulCompanyInfo.appendChild(companyUrlLi).innerHTML = company.url
+            let nameLi = document.createElement('li')
+            nameLi.style.display = 'none'
+            ulCompanyInfo.appendChild(nameLi).innerHTML = company.name
+
+            let urlLi = document.createElement('li')
+            urlLi.style.display = "none"
+            ulCompanyInfo.appendChild(urlLi).innerHTML = company.url
 
             let locationLi = document.createElement('li')
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
@@ -187,71 +191,81 @@ class Companies {
     }
 
     updateCompany(e) {
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
-        let editContainer = document.querySelector(`#company-info-${selectedId}`)
+        let companyCards = this
+        let companyId = e.target.id.split('-')[2]
 
-        let displayUrl = document.querySelector(`li#url-${selectedId}`)
-        displayUrl.style.display = null
-        displayUrl.style.visibility = "visible"
-        displayUrl.style.overflow = 'hidden'
+        // Hides the edit button and displays the delete button.
 
-        let editButton = document.querySelector(`#edit-${selectedId}`)
+        let editButton = document.querySelector(`#edit-company-${companyId}`)
         editButton.style.display = "none"
 
-        let deleteButton = document.querySelector(`#delete-${selectedId}`)
+        let deleteButton = document.querySelector(`#delete-company-${companyId}`)
         deleteButton.style.display = null
         deleteButton.style.visibility = "visible"
         deleteButton.addEventListener('click', this.deleteCompany.bind(this))
-        
 
-        // Exits out of edit
+        // Hides anchor tag and displays the hidden company name and company url.
+
+        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+
+        let companyAnchor = companyInfoDiv.querySelector('a')
+        companyAnchor.style.display = 'none'
+
+        let companyName = companyInfoDiv.querySelector('ul').childNodes[0]
+        companyName.style.display = null
+        companyName.style.visibility = "visible"
+        companyName.style.overflow = 'hidden'
+
+        let companyUrl = companyInfoDiv.querySelector('ul').childNodes[1]
+        companyUrl.style.display = null
+        companyUrl.style.visibility = "visible"
+        companyUrl.style.overflow = 'hidden'
+
+        // addEventListener to exit out of update.
 
         window.addEventListener('dblclick', function(e) {   
-            if (editContainer.contains(e.target)){
-                let edit = e.target
-
-                // if edit button = none then contenteditable is true
-                if (editButton.style.display === "none") {
-                    edit.contentEditable = true
-                }
-                // end
+            if (companyInfoDiv.contains(e.target)) {
                 
-            edit.addEventListener('keydown', function(e) {
-                if (event.key == "Enter") {
-                    const newValue = edit.innerHTML
+                let editInfo = e.target
+                editInfo.contentEditable = true
+                
+                editInfo.addEventListener('keydown', function(e) {
+                    if (e.key == "Enter") {
 
-                    // Company Object
+                        let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
+                        let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
+                        let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
+                        let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
+                        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
 
-                    let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-                    let companyUrl =  document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-                    let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-                    let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
-                    let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+                        let updatedCompanyObject = {
+                            name: companyNameValue,
+                            url: companyUrlValue,
+                            location: companyLocationValue,
+                            date_applied: companyDateValue,
+                            status: companyStatusValue
+                        }
 
-                    let newCompanyObject = {
-                        name: companyName,
-                        url: companyUrl,
-                        location: companyLocation,
-                        date_applied: companyDate,
-                        status: companyResponse
+                        companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId)
+                        editInfo.contentEditable = false
+
+                        // Updates the anchor link.
+                        companyAnchor.href = companyUrlValue
+                        companyAnchor.innerHTML = companyNameValue
                     }
-
-                    // Comments Object
-
-                    document.querySelector(`#container-${selectedId} a`).href = companyUrl
-                    savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
-                    edit.contentEditable = false
-                }
-            })
-            } else{
+                })
+            } else {
+                // Resets all the buttons to default card position.
+                e.target.contentEditable = false
                 editButton.style.display = null
                 editButton.style.visibility = "visible"
                 deleteButton.style.display = "none"
-                e.target.contentEditable = false
-                displayUrl.style.display = "none"
+                companyAnchor.style.display = null
+                companyAnchor.style.visibility = 'visible'
+                companyName.style.display = 'none'
+                companyUrl.style.display = "none"
             }
-          });
+          })
     }
 
     deleteCompany(e) {

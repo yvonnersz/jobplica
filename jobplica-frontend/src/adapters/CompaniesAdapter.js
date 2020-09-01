@@ -23,7 +23,7 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
-    updateCompany(newCompanyObject, value, id) {
+    updateCompany(newCompanyObject, id) {
         const company = newCompanyObject
 
         return fetch(`${this.baseUrl}/${id}`, {
