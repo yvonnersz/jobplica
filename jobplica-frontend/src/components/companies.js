@@ -558,8 +558,8 @@ class Companies {
         // Communicate with the database.
         this.adapterComments.deleteComment(commentId)
 
-        // Remove comment from DOM
+        // Remove comment from DOM.
         let commentLi = document.querySelector(`#comment-${commentId}`)
-        commentLi.parentNode.removeChild(commentLi)
+        commentLi.remove()
     }
 }
