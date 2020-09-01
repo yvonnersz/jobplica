@@ -276,6 +276,7 @@ class Companies {
     deleteCompany(e) {
         let companyId = e.target.id.split('-')[2]
 
+        // Communicate with the database.
         this.adapterCompanies.deleteCompany(companyId)
 
         // Use JS to remove card from DOM.
@@ -534,7 +535,7 @@ class Companies {
                 liComment.innerHTML = commentValue
     
                 let deleteButton = document.createElement('button')
-                deleteButton.setAttribute('id', 'delete-' + comment.id)
+                deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
                 deleteButton.innerHTML = "x"
                 deleteButton.className = 'delete-comment-button'
                 liComment.appendChild(deleteButton)
@@ -552,17 +553,10 @@ class Companies {
     }
 
     deleteComment(e) {
-        let companies = this
         let commentId = e.target.id.split('-')[2]
 
-        let commentValue = document.querySelector(`#comment-${commentId}`).innerText.split('x')[0]
-
-        let commentObject = {
-            content: commentValue,
-            company_id: commentId
-        }
-
-        companies.adapterComments.deleteComment(commentObject, commentId)
+        // Communicate with the database.
+        this.adapterComments.deleteComment(commentId)
 
         // Remove comment from DOM
         let commentLi = document.querySelector(`#comment-${commentId}`)
