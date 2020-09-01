@@ -116,14 +116,14 @@ class Companies {
             acceptButton.innerHTML = "Accepted"
             acceptButton.setAttribute('id', 'accept-company-' + company.id)
             acceptButton.className = 'response-button'
-            acceptButton.addEventListener('click', this.responseResponse.bind(this))
+            acceptButton.addEventListener('click', this.acceptedStatusUpdate.bind(this))
             updateCompanyDiv.appendChild(acceptButton)
 
             let rejectButton = document.createElement("button");
             rejectButton.innerHTML = "Rejected"
             rejectButton.setAttribute('id', 'reject-company-' + company.id)
             rejectButton.className = 'response-button'
-            rejectButton.addEventListener('click', this.rejectedResponse.bind(this))
+            rejectButton.addEventListener('click', this.rejectedStatusUpdate.bind(this))
             updateCompanyDiv.appendChild(rejectButton)
 
             let commentButton = document.createElement('button')
@@ -293,7 +293,7 @@ class Companies {
         companyCard.remove()
     }
 
-    rejectedResponse(e) {        
+    rejectedStatusUpdate(e) {        
         let companyCards = this
         let companyId = e.target.id.split('-')[2]
 
@@ -321,24 +321,23 @@ class Companies {
         // rejectButton.style.display = "none"
     }
 
-    responseResponse(e) {
-        e.preventDefault
-        
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
+    acceptedStatusUpdate(e) {        
+        let companyCards = this
+        let companyId = e.target.id.split('-')[2]
 
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
-
-        let newCompanyObject = {
+        let updateCompanyStatus = {
             status: "Accepted"
         }
 
-        savedThis.adapter.approvedStatusUpdate(newCompanyObject, selectedId)
+        companyCards.adapterCompanies.acceptedStatusUpdate(updateCompanyStatus, companyId)
 
-        // Change company card's response to "Approved"
-        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Accepted"
+        // Change company card's response to "Accepted"
 
-        let companyCard = document.querySelector(`#container-${selectedId}`)
+        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
+        companyStatusValue.innerHTML = 'Accepted'
+
+        let companyCard = document.querySelector(`#card-${companyId}`)
         companyCard.style.backgroundColor = "#239B56"
 
         

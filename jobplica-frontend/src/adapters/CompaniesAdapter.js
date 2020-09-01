@@ -59,7 +59,7 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
-    approvedStatusUpdate(newCompanyObject, id) {
+    acceptedStatusUpdate(newCompanyObject, id) {
         const company = newCompanyObject
 
         return fetch(`${this.baseUrl}/${id}`, {
