@@ -269,30 +269,28 @@ class Companies {
     }
 
     deleteCompany(e) {
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
+        let companyCards = this
+        let companyId = e.target.id.split('-')[2]
 
-        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-        let companyUrl = document.querySelector(`#container-${selectedId} a`).href
-        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-        let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
+        let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
+        let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
+        let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
+        let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
+        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
 
-        let newCompanyObject = {
-            name: companyName,
-            location: companyLocation,
-            url: companyUrl,
-            date_applied: companyDate,
-            takeaway: companyTakeaway,
-            status: companyResponse
+        let companyObject = {
+            name: companyNameValue,
+            location: companyUrlValue,
+            url: companyLocationValue,
+            date_applied: companyDateValue,
+            status: companyStatusValue
         }
 
-        savedThis.adapter.deleteCompany(newCompanyObject, selectedId)
+        companyCards.adapterCompanies.deleteCompany(companyObject, companyId)
 
-        let cards = document.querySelector('.company')
-        let card = document.querySelector(`#container-${selectedId}`)
-        cards.removeChild(card)
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        companyCard.remove()
     }
 
     rejectedResponse(e) {
