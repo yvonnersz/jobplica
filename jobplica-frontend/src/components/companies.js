@@ -423,18 +423,20 @@ class Companies {
     bindStatistics() {
         let companies = this
 
-        let companyCards = document.querySelector('.company')
         let statisticsContainer = document.querySelector('.statistics')
-        let statisticsButton = document.querySelector('.statistics-click')
-        let cardsButton = document.querySelector('.cards-click')
+        statisticsContainer.style.display = 'none'
 
-        statisticsContainer.style.display = "none"
-        cardsButton.style.display = "none"
+        let cardsButton = document.querySelector('.cards-click')
+        cardsButton.style.display = 'none'
+
+        let statisticsButton = document.querySelector('.statistics-click')
 
         statisticsButton.addEventListener('click', function(e) {
-            companyCards.style.display = "none"
+            let companyCardsContainer = document.querySelector('.company-cards')
+
+            companyCardsContainer.style.display = 'none'
             statisticsContainer.style.display = null
-            statisticsButton.style.display = "none"
+            statisticsButton.style.display = 'none'
             cardsButton.style.display = null
 
             companies.statistics()
