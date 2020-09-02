@@ -1,3 +1,5 @@
+let companyCards = document.querySelector('.company-cards')
+
 class Companies {
     constructor() {
         this.companies = []
@@ -5,7 +7,6 @@ class Companies {
         this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
         this.bindEventListeners()
-
     }
 
     bindEventListeners() {
@@ -104,8 +105,8 @@ class Companies {
             let locationLi = document.createElement('li')
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
 
-            // let dateLi = document.createElement('li')
-            // ulCompanyInfo.appendChild(dateLi).innerHTML = company.renderDate()
+            let dateLi = document.createElement('li')
+            ulCompanyInfo.appendChild(dateLi).innerHTML = "date doesnt work"
 
             let statusLi = document.createElement('li')
             ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
@@ -367,16 +368,15 @@ class Companies {
         let statisticsContainer = document.querySelector('.statistics')
         let cardsButton = document.querySelector('.cards-click')
         let statisticsButton = document.querySelector('.statistics-click')
-        let companyCardsContainer = document.querySelector('.company-cards')
 
         if (e.target.innerHTML === "View Statistics") {
-            companyCardsContainer.style.display = 'none'
+            companyCards.style.display = 'none'
             statisticsContainer.style.display = null
             statisticsButton.style.display = 'none'
             cardsButton.style.display = null
             this.statistics()
         } else if (e.target.innerHTML === "View Cards") {
-            companyCardsContainer.style.display = null
+            companyCards.style.display = null
             statisticsContainer.style.display = "none"
             statisticsButton.style.display = null
             cardsButton.style.display = "none"
@@ -493,7 +493,6 @@ class Companies {
     }
 
     leaveComment(e) {
-        let companyCards = this
         let companyId = e.target.id.split('-')[1]
 
         let companyCard = document.querySelector(`#card-${companyId}`)
