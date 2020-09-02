@@ -203,20 +203,3 @@ body {
     margin: 1px;
     margin-top: 10px;
   }
-
-  /* Graph */
-
-  .table {
-    display: inline-block;
-  }
-
-  .graph {
-    display: inline-block;
-    float: right;
-  }
-
-  .delete-comment-button {
-    width: 20%;
-    height: 10%;
-    overflow: hidden;
-  }

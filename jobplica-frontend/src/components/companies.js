@@ -526,6 +526,21 @@ class Companies {
         exitSubmit.style.display = null
     }
 
+    exitSubmit(e) {
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let commentButton = document.querySelector(`#comment-${companyId}`)
+        
+        let commentForm = companyCard.querySelector('input')
+        let commentSubmit = companyCard.querySelector('.submit-comment-button')
+        let exitSubmit = companyCard.querySelector('.exit-comment-button')
+
+        commentForm.style.display = 'none'
+        commentSubmit.style.display = 'none'
+        exitSubmit.style.display = 'none'
+        commentButton.style.display = null
+    }
+
     createComment(e) {
         e.preventDefault;
 
@@ -576,21 +591,6 @@ class Companies {
          exitSubmit.style.display = 'none'
 
 
-    }
-
-    exitSubmit(e) {
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentButton = document.querySelector(`#comment-${companyId}`)
-        
-        let commentForm = companyCard.querySelector('input')
-        let commentSubmit = companyCard.querySelector('.submit-comment-button')
-        let exitSubmit = companyCard.querySelector('.exit-comment-button')
-
-        commentForm.style.display = 'none'
-        commentSubmit.style.display = 'none'
-        exitSubmit.style.display = 'none'
-        commentButton.style.display = null
     }
 
     deleteComment(e) {
