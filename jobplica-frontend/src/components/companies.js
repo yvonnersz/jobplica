@@ -5,8 +5,6 @@ class Companies {
         this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
         this.bindEventListeners()
-        this.bindStatistics()
-        this.bindCards()
 
     }
 
@@ -28,13 +26,17 @@ class Companies {
 
         // Bind company cards 
 
+        let statisticsContainer = document.querySelector('.statistics')
         let cardsButton = document.querySelector('.cards-click')
-        cardsButton.addEventListener('click', this.bindCards.bind(this))
+        statisticsContainer.style.display = 'none'
+        cardsButton.style.display = 'none'
+
+        cardsButton.addEventListener('click', this.showContent.bind(this))
 
         // Bind Statistics
 
         let statisticsButton = document.querySelector('.statistics-click')
-        statisticsButton.addEventListener('click', this.bindStatistics.bind(this))
+        statisticsButton.addEventListener('click', this.showContent.bind(this))
 
     }
 
@@ -362,37 +364,24 @@ class Companies {
         companyCard.remove()
     }
 
-    bindStatistics() {
-        let companies = this
-
+    showContent(e) {
         let statisticsContainer = document.querySelector('.statistics')
-        statisticsContainer.style.display = 'none'
-
         let cardsButton = document.querySelector('.cards-click')
-        cardsButton.style.display = 'none'
-
         let statisticsButton = document.querySelector('.statistics-click')
-
         let companyCardsContainer = document.querySelector('.company-cards')
 
-        companyCardsContainer.style.display = 'none'
-        statisticsContainer.style.display = null
-        statisticsButton.style.display = 'none'
-        cardsButton.style.display = null
-
-        companies.statistics()
-    }
-
-    bindCards() {
-        let companyCardsContainer = document.querySelector('.company-cards')
-        let statisticsContainer = document.querySelector('.statistics')
-        let statisticsButton = document.querySelector('.statistics-click')
-        let cardsButton = document.querySelector('.cards-click')
-
-        companyCardsContainer.style.display = null
-        statisticsContainer.style.display = "none"
-        statisticsButton.style.display = null
-        cardsButton.style.display = "none"
+        if (e.target.innerHTML === "View Statistics") {
+            companyCardsContainer.style.display = 'none'
+            statisticsContainer.style.display = null
+            statisticsButton.style.display = 'none'
+            cardsButton.style.display = null
+            this.statistics()
+        } else if (e.target.innerHTML === "View Cards") {
+            companyCardsContainer.style.display = null
+            statisticsContainer.style.display = "none"
+            statisticsButton.style.display = null
+            cardsButton.style.display = "none"
+        }
     }
 
     statistics() {
