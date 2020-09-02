@@ -7,8 +7,7 @@ class Companies {
         this.bindEventListeners()
         this.bindStatistics()
         this.bindCards()
-        this.filterStatus()
-        this.filterDate()
+
     }
 
     bindEventListeners() {
