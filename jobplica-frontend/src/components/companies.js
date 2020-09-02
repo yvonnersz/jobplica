@@ -217,7 +217,7 @@ class Companies {
             let companyCards = document.querySelectorAll('.company-card')
             companyCards.forEach(companyCard => companyCard.remove())
 
-            this.render(this.companies);
+            this.render(company);
 
             // Clearing the form values.
             this.newCompanyName.value = null
@@ -358,10 +358,9 @@ class Companies {
         })
 
         // Communicate with the database.
-        this.adapterCompanies.deleteCompany(companyId)
-
-        // Use JS to remove card from DOM.
-        companyCard.remove()
+        this.adapterCompanies.deleteCompany(companyId).then(json => {
+            companyCard.remove()
+        })
     }
 
     showContent(e) {
