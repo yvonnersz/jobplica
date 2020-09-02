@@ -42,17 +42,17 @@ class Companies {
 
     fetchAndLoadCompanies() {
         this.adapterCompanies.getCompanies()
-            .then(companies => { 
-                companies.forEach(company => this.companies.push(new Company(company)))
-            }).then (() => {
-                this.render()
+            .then(companies => { this.render(companies)
+                // companies.forEach(company => this.companies.push(new Company(company)))
+            // }).then (() => {
+            //     this.render()
             })
     }
 
-    render() {
+    render(companies) {
         let companiesContainer = document.querySelector('.company-cards')
 
-        for (const company of this.companies) {
+        for (const company of companies) {
 
             // Create company card div.
 
@@ -104,8 +104,8 @@ class Companies {
             let locationLi = document.createElement('li')
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
 
-            let dateLi = document.createElement('li')
-            ulCompanyInfo.appendChild(dateLi).innerHTML = company.renderDate()
+            // let dateLi = document.createElement('li')
+            // ulCompanyInfo.appendChild(dateLi).innerHTML = company.renderDate()
 
             let statusLi = document.createElement('li')
             ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
@@ -214,10 +214,10 @@ class Companies {
             this.companies.push(new Company(company))
 
             // Clearing the old company cards and re-rendering the new cards.
-            let companyCards = document.querySelectorAll('.company-card')
-            companyCards.forEach(companyCard => companyCard.remove())
+            // let companyCards = document.querySelectorAll('.company-card')
+            // companyCards.forEach(companyCard => companyCard.remove())
 
-            this.render(company);
+            this.render(new Array(company));
 
             // Clearing the form values.
             this.newCompanyName.value = null
@@ -358,7 +358,7 @@ class Companies {
         })
 
         // Communicate with the database.
-        this.adapterCompanies.deleteCompany(companyId).then(json => {
+        this.adapterCompanies.deleteCompany(companyId).then(companyObject => {
             companyCard.remove()
         })
     }
