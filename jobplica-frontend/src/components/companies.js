@@ -161,6 +161,25 @@ class Companies {
             commentButton.addEventListener('click', this.leaveComment.bind(this))
             updateCompanyDiv.appendChild(commentButton)
 
+            let commentForm = document.createElement('input')
+            commentForm.style.display = 'none'
+            updateCompanyDiv.appendChild(commentForm)
+
+            let commentSubmitButton = document.createElement('input')
+            commentSubmitButton.setAttribute('type', 'submit')
+            commentSubmitButton.className = 'submit-comment-button'
+            commentSubmitButton.style.display = 'none'
+            commentSubmitButton.addEventListener('click', this.createComment.bind(this))
+            updateCompanyDiv.appendChild(commentSubmitButton)
+
+            let exitSubmit = document.createElement('input')
+            exitSubmit.className = 'exit-comment-button'
+            exitSubmit.setAttribute('type', 'submit')
+            exitSubmit.value = "Exit"
+            exitSubmit.style.display = 'none'
+            exitSubmit.addEventListener('click', this.exitSubmit.bind(this))
+            updateCompanyDiv.appendChild(exitSubmit)
+
             cardDiv.appendChild(updateCompanyDiv)
             companiesContainer.appendChild(cardDiv)
 
@@ -490,66 +509,93 @@ class Companies {
         let companyCards = this
         let companyId = e.target.id.split('-')[1]
 
-        let form = document.createElement('input')
         let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentSubmit = document.createElement('input')
-        commentSubmit.setAttribute('type', 'submit')
 
         // Leave comment button disappears.
         let commentButton = document.querySelector(`#comment-${companyId}`)
         commentButton.style.display = 'none'
 
-        let exitSubmit = document.createElement('input')
-        exitSubmit.setAttribute('type', 'submit')
-        exitSubmit.value = "Exit"
+        // Comment form, submit, and exit button appears.
+        let commentForm = companyCard.querySelector('input')
+        commentForm.style.display = null
 
-        companyCard.appendChild(form)
-        companyCard.appendChild(commentSubmit)
-        companyCard.appendChild(exitSubmit)
+        let commentSubmit = companyCard.querySelector('.submit-comment-button')
+        commentSubmit.style.display = null
 
-        // If user hits exit, default buttons will display.
-        exitSubmit.addEventListener('click', function() {
-            companyCard.removeChild(form)
-            companyCard.removeChild(commentSubmit)
-            companyCard.removeChild(exitSubmit)
-            commentButton.style.display = null
+        let exitSubmit = companyCard.querySelector('.exit-comment-button')
+        exitSubmit.style.display = null
+    }
+
+    createComment(e) {
+        e.preventDefault;
+
+        let savedThis = this
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let commentValue = document.querySelector(`#card-${companyId} input`).value
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        
+        let companyCards = document.querySelectorAll('.company-card')
+
+        let commentObject = {
+            content: commentValue,
+            company_id: companyId
+        }
+
+        this.adapterComments.createComment(commentObject).then(comment => {
+            // this works but its kinda manual. i want to rerender the cards again.
+            let ulComments = companyCard.querySelector('.company-comments ul')
+            
+            let commentLi = document.createElement('li')
+            commentLi.setAttribute('id', 'comment-' + comment.id)
+            ulComments.appendChild(commentLi).innerHTML = comment.content
+
+            let deleteButton = document.createElement('button')
+            deleteButton.innerHTML = "x"
+            deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
+            deleteButton.className = 'delete-comment-button'
+            deleteButton.addEventListener('click', this.deleteComment.bind(this))
+            commentLi.appendChild(deleteButton)
+
+            ulComments.appendChild(commentLi)
+
+            document.querySelector(`#card-${companyId} input`).value = null
         })
 
-        commentSubmit.addEventListener('click', function() {            
-            let commentValue = document.querySelector(`#card-${companyId} input`).value
+         // Leave comment button disappears.
+         let commentButton = document.querySelector(`#comment-${companyId}`)
+         commentButton.style.display = null
+ 
+         // Comment form, submit, and exit button appears.
+         let commentForm = companyCard.querySelector('input')
+         commentForm.style.display = 'none'
+ 
+         let commentSubmit = companyCard.querySelector('.submit-comment-button')
+         commentSubmit.style.display = 'none'
+ 
+         let exitSubmit = companyCard.querySelector('.exit-comment-button')
+         exitSubmit.style.display = 'none'
 
-            let commentObject = {
-                content: commentValue,
-                company_id: companyId
-            }
 
-            companyCards.adapterComments.createComment(commentObject).then(comment => {
+    }
 
-                let ulComment = companyCard.querySelector(`.company-comments ul`)
-                let liComment = document.createElement('li')
-                liComment.setAttribute('id', 'comment-' + comment.id)
-                liComment.innerHTML = commentValue
-    
-                let deleteButton = document.createElement('button')
-                deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
-                deleteButton.innerHTML = "x"
-                deleteButton.className = 'delete-comment-button'
-                liComment.appendChild(deleteButton)
-                deleteButton.addEventListener('click', companyCards.deleteComment.bind(companyCards))
-                
-                ulComment.appendChild(liComment)
+    exitSubmit(e) {
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let commentButton = document.querySelector(`#comment-${companyId}`)
+        
+        let commentForm = companyCard.querySelector('input')
+        let commentSubmit = companyCard.querySelector('.submit-comment-button')
+        let exitSubmit = companyCard.querySelector('.exit-comment-button')
 
-                // The input disappears.
-                companyCard.removeChild(form)
-                companyCard.removeChild(commentSubmit)
-                companyCard.removeChild(exitSubmit)
-                commentButton.style.display = null
-            })
-        })
+        commentForm.style.display = 'none'
+        commentSubmit.style.display = 'none'
+        exitSubmit.style.display = 'none'
+        commentButton.style.display = null
     }
 
     deleteComment(e) {
         let commentId = e.target.id.split('-')[2]
+        console.log(commentId)
 
         // Communicate with the database.
         this.adapterComments.deleteComment(commentId)
