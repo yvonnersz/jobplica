@@ -1,4 +1,4 @@
-let companyCards = document.querySelector('.company-cards')
+let companyCardsContainer = document.querySelector('.company-cards')
 
 class Companies {
     constructor() {
@@ -370,13 +370,13 @@ class Companies {
         let statisticsButton = document.querySelector('.statistics-click')
 
         if (e.target.innerHTML === "View Statistics") {
-            companyCards.style.display = 'none'
+            companyCardsContainer.style.display = 'none'
             statisticsContainer.style.display = null
             statisticsButton.style.display = 'none'
             cardsButton.style.display = null
             this.statistics()
         } else if (e.target.innerHTML === "View Cards") {
-            companyCards.style.display = null
+            companyCardsContainer.style.display = null
             statisticsContainer.style.display = "none"
             statisticsButton.style.display = null
             cardsButton.style.display = "none"
@@ -530,7 +530,6 @@ class Companies {
     createComment(e) {
         e.preventDefault;
 
-        let savedThis = this
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let commentValue = document.querySelector(`#card-${companyId} input`).value
         let companyCard = document.querySelector(`#card-${companyId}`)
@@ -581,13 +580,11 @@ class Companies {
 
     deleteComment(e) {
         let commentId = e.target.id.split('-')[2]
-        console.log(commentId)
 
         // Communicate with the database.
-        this.adapterComments.deleteComment(commentId)
-
-        // Remove comment from DOM.
-        let commentLi = document.querySelector(`#comment-${commentId}`)
-        commentLi.remove()
+        this.adapterComments.deleteComment(commentId).then(comment => {
+            let commentLi = document.querySelector(`#comment-${commentId}`)
+            commentLi.remove()
+        })
     }
 }
