@@ -2,7 +2,6 @@ let companyCardsContainer = document.querySelector('.company-cards')
 
 class Companies {
     constructor() {
-        this.companies = []
         this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
         this.fetchAndLoadCompanies()
@@ -42,12 +41,9 @@ class Companies {
     }
 
     fetchAndLoadCompanies() {
-        this.adapterCompanies.getCompanies()
-            .then(companies => { this.render(companies)
-                // companies.forEach(company => this.companies.push(new Company(company)))
-            // }).then (() => {
-            //     this.render()
-            })
+        this.adapterCompanies.getCompanies().then(companies => { 
+            this.render(companies)
+        })
     }
 
     render(companies) {
