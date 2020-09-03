@@ -298,37 +298,25 @@ class Companies {
 
     updateCompanyStatus(e) {
         let companyId = e.target.id.split('-')[2]
-
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
         let companyCard = document.querySelector(`#card-${companyId}`)
 
         let statusPick = e.target.innerHTML
 
-        if (statusPick === "Rejected") {
-            let updateCompanyStatus = {
-                status: "Rejected"
-            }
-
-            // Communicate with database.
-            this.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
-
-            // Manipulate the DOM with JS.
-            companyStatusValue.innerHTML = 'Rejected'
-            companyCard.style.backgroundColor = "#E74C3C"
-
-        } else {
-            let updateCompanyStatus = {
-                status: "Accepted"
-            }
-
-            // Communicate with database.
-            this.adapterCompanies.updateCompany(updateCompanyStatus, companyId)
-
-            // Manipulate the DOM with JS.
-            companyStatusValue.innerHTML = 'Accepted'
-            companyCard.style.backgroundColor = "#239B56"
+        let updateCompanyStatus = {
+            status: statusPick
         }
+
+        this.adapterCompanies.updateCompany(updateCompanyStatus, companyId).then(company => {
+            if (statusPick === "Rejected") {
+                companyStatusValue.innerHTML = 'Rejected'
+                companyCard.style.backgroundColor = "#E74C3C"
+            } else {
+                companyStatusValue.innerHTML = 'Accepted'
+                companyCard.style.backgroundColor = "#239B56"
+            }
+        })
 
         // Buttons will disappear
         // let acceptButton = document.querySelector(`#approved-${selectedId}`)
