@@ -43,21 +43,19 @@ class Companies {
             cardDiv.setAttribute('id', 'card-' + company.id)
             cardDiv.className = "company-card"
 
-            // Create edit buttons for company card.
+            // Create edit and delete buttons for company card.
 
             let editCardDiv = document.createElement('div')
             editCardDiv.className = 'company-edit'
 
             let editButton = document.createElement('button')
             editButton.className = "edit-company-button"
-            editButton.setAttribute('id', 'edit-company-' + company.id)
             editButton.innerHTML = '...'
             editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
             editCardDiv.appendChild(editButton)
 
             let deleteButton = document.createElement('button')
             deleteButton.className = "delete-company-button"
-            deleteButton.setAttribute('id', 'delete-company-' + company.id)
             deleteButton.innerHTML = "Delete"
             deleteButton.style.display = "none"
             deleteButton.addEventListener('click', this.deleteCompany.bind(this))
@@ -212,9 +210,10 @@ class Companies {
 
     buttonEditCompany(e) {
         let companyCards = this
-        let companyId = e.target.id.split('-')[2]
-        let editButton = document.querySelector(`#edit-company-${companyId}`)
-        let deleteButton = document.querySelector(`#delete-company-${companyId}`)
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let editButton = companyCard.querySelector(`.edit-company-button`)
+        let deleteButton = companyCard.querySelector(`.delete-company-button`)
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyAnchor = companyInfoDiv.querySelector('a')
         let companyName = companyInfoDiv.querySelector('ul').childNodes[0]
@@ -304,7 +303,7 @@ class Companies {
     }
 
     deleteCompany(e) {
-        let companyId = e.target.id.split('-')[2]
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
 
         // Delete company comments.
