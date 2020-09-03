@@ -393,29 +393,20 @@ class Companies {
         })
     }
 
-    filterStatus() {
+    filterByStatus() {
         let statusPick = document.querySelector('#status-dropdown').value
         let companyCards = document.querySelectorAll('.company-card')
 
-        for (let companyCard of companyCards) {
-            companyCard.style.display = "none"
+        companyCards.forEach(companyCard => {
+            let companyStatus = companyCard.querySelector('.company-info ul li:nth-child(5)').innerHTML
 
-            let companyId = companyCard.id.split('-')[1]
-            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-            let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerHTML
-
-            if (companyStatusValue === statusPick) {
+            companyCard.style.display = 'none'
+            
+            if (companyStatus === statusPick || statusPick === "All") {
                 companyCard.style.display = null
-                companyCard.style.visibility = "visible"
                 document.querySelector('#status-dropdown').selectedIndex = null
-            } else if (statusPick === "All") {
-                for (let companyCard of companyCards) {
-                    companyCard.style.display = null
-                    companyCard.style.visibility = "visible"
-                    document.querySelector('#status-dropdown').selectedIndex = null
-                }
-            }
-        }
+            } 
+        })
     }
 
     filterDate() {
