@@ -1,4 +1,6 @@
 let companyCardsContainer = document.querySelector('.company-cards')
+let statisticsContainer = document.querySelector('.statistics')
+
 
 class Companies {
     constructor() {
@@ -12,7 +14,6 @@ class Companies {
         let companyForm = document.getElementById('new-company')
         let filterByStatus = document.querySelector('#status-dropdown')
         let filterByDate = document.querySelector('#date-dropdown')
-        let statisticsContainer = document.querySelector('.statistics')
         let cardsButton = document.querySelector('.cards-click')
         let statisticsButton = document.querySelector('.statistics-click')
 
