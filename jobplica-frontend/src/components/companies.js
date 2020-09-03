@@ -4,7 +4,7 @@ class Companies {
     constructor() {
         this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
-        this.fetchAndLoadCompanies()
+        this.fetchCompanies()
         this.bindEventListeners()
     }
 
@@ -40,7 +40,7 @@ class Companies {
 
     }
 
-    fetchAndLoadCompanies() {
+    fetchCompanies() {
         this.adapterCompanies.getCompanies().then(companies => { 
             this.render(companies)
         })
