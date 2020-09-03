@@ -33,8 +33,6 @@ class Companies {
     }
 
     render(companies) {
-        let companiesContainer = document.querySelector('.company-cards')
-
         for (const company of companies) {
 
             // Create company card div.
@@ -146,7 +144,7 @@ class Companies {
             updateCompanyDiv.appendChild(commentSubmitButton)
             updateCompanyDiv.appendChild(exitSubmit).value = "Exit"
             cardDiv.appendChild(updateCompanyDiv)
-            companiesContainer.appendChild(cardDiv)
+            companyCardsContainer.appendChild(cardDiv)
 
             // Changes background color depending on company status.
 
