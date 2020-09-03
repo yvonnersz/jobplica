@@ -40,27 +40,27 @@ class Companies {
             // Create company card div.
 
             let cardDiv = document.createElement('div')
-            cardDiv.setAttribute('id', 'card-' + company.id)
             cardDiv.className = "company-card"
+            cardDiv.setAttribute('id', 'card-' + company.id)
 
             // Create edit and delete buttons for company card.
 
             let editCardDiv = document.createElement('div')
-            editCardDiv.className = 'company-edit'
-
             let editButton = document.createElement('button')
+            let deleteButton = document.createElement('button')
+
+            editCardDiv.className = 'company-edit'
             editButton.className = "edit-company-button"
             editButton.innerHTML = '...'
-            editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
-            editCardDiv.appendChild(editButton)
-
-            let deleteButton = document.createElement('button')
             deleteButton.className = "delete-company-button"
             deleteButton.innerHTML = "Delete"
-            deleteButton.style.display = "none"
-            deleteButton.addEventListener('click', this.deleteCompany.bind(this))
-            editCardDiv.appendChild(deleteButton)
+            deleteButton.style.display = 'none'
 
+            editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
+            deleteButton.addEventListener('click', this.deleteCompany.bind(this))
+
+            editCardDiv.appendChild(editButton)
+            editCardDiv.appendChild(deleteButton)
             cardDiv.appendChild(editCardDiv)
 
             // Appending company info to card.
