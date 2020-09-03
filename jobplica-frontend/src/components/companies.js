@@ -256,15 +256,13 @@ class Companies {
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyAnchor = companyInfoDiv.querySelector('a')
         let companyCards = this
+        let editInfo = e.target
 
-        if (companyInfoDiv.contains(e.target)) {
-                
-            let editInfo = e.target
+        if (companyInfoDiv.contains(editInfo)) {
             editInfo.contentEditable = true
             
             editInfo.addEventListener('keydown', function(e) {
                 if (e.key == "Enter") {
-
                     let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
                     let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
                     let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
@@ -281,7 +279,6 @@ class Companies {
 
                     companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
                         editInfo.contentEditable = false
-                        // Updates the anchor link.
                         companyAnchor.href = companyUrlValue
                         companyAnchor.innerHTML = companyNameValue
                     })
@@ -295,8 +292,8 @@ class Companies {
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
         let companyCard = document.querySelector(`#card-${companyId}`)
-
         let statusPick = e.target.innerHTML
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
 
         let updateCompanyStatus = {
             status: statusPick
@@ -310,13 +307,9 @@ class Companies {
                 companyStatusValue.innerHTML = 'Accepted'
                 companyCard.style.backgroundColor = "#239B56"
             }
-        })
 
-        // Buttons will disappear
-        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
-        // acceptButton.style.display = "none"
-        // rejectButton.style.display = "none"
+            responseButtons.forEach(responseButton => responseButton.style.display = 'none')
+        })
     }
 
     deleteCompany(e) {
