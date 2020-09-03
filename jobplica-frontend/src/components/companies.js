@@ -472,21 +472,15 @@ class Companies {
 
     leaveComment(e) {
         let companyId = e.target.id.split('-')[1]
-
         let companyCard = document.querySelector(`#card-${companyId}`)
-
-        // Leave comment button disappears.
         let commentButton = document.querySelector(`#comment-${companyId}`)
-        commentButton.style.display = 'none'
-
-        // Comment form, submit, and exit button appears.
         let commentForm = companyCard.querySelector('input')
-        commentForm.style.display = null
-
         let commentSubmit = companyCard.querySelector('.submit-comment-button')
-        commentSubmit.style.display = null
-
         let exitSubmit = companyCard.querySelector('.exit-comment-button')
+
+        commentButton.style.display = 'none'
+        commentForm.style.display = null
+        commentSubmit.style.display = null
         exitSubmit.style.display = null
     }
 
@@ -494,7 +488,6 @@ class Companies {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
         let commentButton = document.querySelector(`#comment-${companyId}`)
-        
         let commentForm = companyCard.querySelector('input')
         let commentSubmit = companyCard.querySelector('.submit-comment-button')
         let exitSubmit = companyCard.querySelector('.exit-comment-button')
