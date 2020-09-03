@@ -17,8 +17,8 @@ class Companies {
         let statisticsButton = document.querySelector('.statistics-click')
 
         companyForm.addEventListener('submit', this.createCompany.bind(this))
-        filterByStatus.addEventListener('change', this.filterByStatus.bind(this))
-        filterByDate.addEventListener('change', this.filterByDate.bind(this))
+        filterByStatus.addEventListener('change', this.filter.bind(this))
+        filterByDate.addEventListener('change', this.filter.bind(this))
         cardsButton.addEventListener('click', this.showContent.bind(this))
         statisticsButton.addEventListener('click', this.showContent.bind(this))
 
@@ -383,36 +383,23 @@ class Companies {
         })
     }
 
-    filterByStatus() {
+    filter() {
+        let companyCards = document.querySelectorAll('.company-card')
         let statusPick = document.querySelector('#status-dropdown').value
-        let companyCards = document.querySelectorAll('.company-card')
-
-        companyCards.forEach(companyCard => {
-            let companyStatus = companyCard.querySelector('.company-info ul li:nth-child(5)').innerHTML
-
-            companyCard.style.display = 'none'
-            
-            if (companyStatus === statusPick || statusPick === "All") {
-                companyCard.style.display = null
-                document.querySelector('#status-dropdown').selectedIndex = null
-            } 
-        })
-    }
-
-    filterByDate() {
-        let companyCards = document.querySelectorAll('.company-card')
         let datePick = document.querySelector('#date-dropdown').value
         let thisMonth = new Date().getMonth() + 1
         let lastMonth = new Date().getMonth() + 1 - 1
 
         companyCards.forEach(companyCard => {
+            let companyStatus = companyCard.querySelector('.company-info ul li:nth-child(5)').innerHTML
             let companyDate = companyCard.querySelector(`.company-info ul li:nth-child(4)`).innerHTML
             let companyMonth = new Date(companyDate).getMonth() + 1
 
             companyCard.style.display = 'none'
-
-            if ((datePick === "This Month" && companyMonth === thisMonth) || (datePick == "Last Month" && companyMonth === lastMonth) || datePick === "All") {
+            
+            if (companyStatus === statusPick || statusPick === "All" || (datePick === "This Month" && companyMonth === thisMonth) || (datePick == "Last Month" && companyMonth === lastMonth) || datePick === "All") {
                 companyCard.style.display = null
+                document.querySelector('#status-dropdown').selectedIndex = null
                 document.querySelector('#date-dropdown').selectedIndex = null
             }
         })
