@@ -63,36 +63,28 @@ class Companies {
             editCardDiv.appendChild(deleteButton)
             cardDiv.appendChild(editCardDiv)
 
-            // Appending company info to card.
+            // Create company info elements such as: name, url, location, date, and status.
 
             let companyInfoDiv = document.createElement('div')
-            companyInfoDiv.className = "company-info"
-
-            let companyLink = document.createElement('a')
-            companyLink.text = company.name
-            companyLink.href = company.url
-            companyInfoDiv.appendChild(companyLink)
-
+            let companyHead = document.createElement('a')
             let ulCompanyInfo = document.createElement('ul')
+            let liName = document.createElement('li')
+            let liUrl = document.createElement('li')
+            let liLocation = document.createElement('li')
+            let liDate = document.createElement('li')
+            let liStatus = document.createElement('li')
 
-            let nameLi = document.createElement('li')
-            nameLi.style.display = 'none'
-            ulCompanyInfo.appendChild(nameLi).innerHTML = company.name
+            companyInfoDiv.className = "company-info"
+            companyHead.href = company.url
+            liName.style.display = 'none'
+            liUrl.style.display = 'none'
 
-            let urlLi = document.createElement('li')
-            urlLi.style.display = "none"
-            ulCompanyInfo.appendChild(urlLi).innerHTML = company.url
-
-            let locationLi = document.createElement('li')
-            ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
-
-            let dateLi = document.createElement('li')
-            let companyObj = new Company(company)
-            ulCompanyInfo.appendChild(dateLi).innerHTML = companyObj.renderDate
-
-            let statusLi = document.createElement('li')
-            ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
-
+            ulCompanyInfo.appendChild(liName).innerHTML = company.name
+            ulCompanyInfo.appendChild(liUrl).innerHTML = company.url
+            ulCompanyInfo.appendChild(liLocation).innerHTML = company.location
+            ulCompanyInfo.appendChild(liDate).innerHTML = new Company(company).renderDate
+            ulCompanyInfo.appendChild(liStatus).innerHTML = company.status
+            companyInfoDiv.appendChild(companyHead).innerHTML = company.name
             companyInfoDiv.appendChild(ulCompanyInfo)
             cardDiv.appendChild(companyInfoDiv)
 
