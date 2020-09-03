@@ -88,25 +88,25 @@ class Companies {
             companyInfoDiv.appendChild(ulCompanyInfo)
             cardDiv.appendChild(companyInfoDiv)
 
-            // Appending comments to the company card.
+            // Create company comments.
 
             let divComments = document.createElement('div')
-            divComments.className = 'company-comments'
-
             let ulComments = document.createElement('ul')
 
-            for (let comment of company.comments) {
+            company.comments.forEach(comment => {
                 let commentLi = document.createElement('li')
-                commentLi.setAttribute('id', 'comment-' + comment.id)
-                ulComments.appendChild(commentLi).innerHTML = comment.content
-
                 let deleteButton = document.createElement('button')
-                deleteButton.innerHTML = "x"
-                deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
+
+                commentLi.setAttribute('id', 'comment-' + comment.id)
                 deleteButton.className = 'delete-comment-button'
+
                 deleteButton.addEventListener('click', this.deleteComment.bind(this))
-                commentLi.appendChild(deleteButton)
-            }
+
+                ulComments.appendChild(commentLi).innerHTML = comment.content
+                commentLi.appendChild(deleteButton).innerHTML = 'x'
+            })
+
+            divComments.className = 'company-comments'
 
             divComments.appendChild(ulComments)
             cardDiv.appendChild(divComments)
@@ -435,7 +435,7 @@ class Companies {
     }
 
     deleteComment(e) {
-        let commentId = e.target.id.split('-')[2]
+        let commentId = e.target.parentNode.id.split('-')[1]
 
         // Communicate with the database.
         this.adapterComments.deleteComment(commentId).then(comment => {
