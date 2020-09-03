@@ -10,9 +10,14 @@ class Company {
         this.comments = company.comments;
     }
 
-    renderDate() {
+    get renderDate() {
         let date = new Date(this.date_applied)
-        let fullDate = date.toDateString()
+        let fullDateSplit = date.toUTCString().split(' ')
+        let day = fullDateSplit[1]
+        let month = fullDateSplit[2]
+        let year = fullDateSplit[3]
+
+        let fullDate = month + " " + day + " " + year
         return fullDate
     }
 }

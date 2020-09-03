@@ -13,7 +13,7 @@ class Companies {
         this.companyForm.addEventListener('submit', this.createCompany.bind(this))
 
         // Filter by Status
-        document.querySelector('#status-dropdown').addEventListener('change', this.filterStatus.bind(this))
+        document.querySelector('#status-dropdown').addEventListener('change', this.filterByStatus.bind(this))
 
         // Filter by Date
         document.querySelector('#date-dropdown').addEventListener('change', this.filterDate.bind(this))
@@ -97,7 +97,8 @@ class Companies {
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
 
             let dateLi = document.createElement('li')
-            ulCompanyInfo.appendChild(dateLi).innerHTML = "date doesnt work"
+            let companyObj = new Company(company)
+            ulCompanyInfo.appendChild(dateLi).innerHTML = companyObj.renderDate
 
             let statusLi = document.createElement('li')
             ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
@@ -412,16 +413,13 @@ class Companies {
     filterDate() {
         let companyCards = document.querySelectorAll('.company-card')
         let datePick = document.querySelector('#date-dropdown').value
-
-        for (let companyCard of companyCards) {
-            companyCard.style.display = "none"
-        }
-
         let today = new Date();
         let thisMonth = today.getMonth() + 1 // 8
         let lastMonth = today.getMonth() - 1 // 7
 
-        for (let companyCard of companyCards) {
+        companyCards.forEach(companyCard => {
+            companyCard.style.display = "none"
+
             let companyId = companyCard.id.split('-')[1]
             let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
             let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerHTML
@@ -445,7 +443,8 @@ class Companies {
                     companyCard.visibility = "visible"
                     document.querySelector('#date-dropdown').selectedIndex = null
             }
-        }
+
+        })
     }
 
     buttonComment(e) {
