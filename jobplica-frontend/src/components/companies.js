@@ -16,7 +16,7 @@ class Companies {
         document.querySelector('#status-dropdown').addEventListener('change', this.filterByStatus.bind(this))
 
         // Filter by Date
-        document.querySelector('#date-dropdown').addEventListener('change', this.filterDate.bind(this))
+        document.querySelector('#date-dropdown').addEventListener('change', this.filterByDate.bind(this))
 
         // Bind company cards 
 
@@ -410,40 +410,22 @@ class Companies {
         })
     }
 
-    filterDate() {
+    filterByDate() {
         let companyCards = document.querySelectorAll('.company-card')
         let datePick = document.querySelector('#date-dropdown').value
-        let today = new Date();
-        let thisMonth = today.getMonth() + 1 // 8
-        let lastMonth = today.getMonth() - 1 // 7
+        let thisMonth = new Date().getMonth() + 1
+        let lastMonth = new Date().getMonth() + 1 - 1
 
         companyCards.forEach(companyCard => {
-            companyCard.style.display = "none"
+            let companyDate = companyCard.querySelector(`.company-info ul li:nth-child(4)`).innerHTML
+            let companyMonth = new Date(companyDate).getMonth() + 1
 
-            let companyId = companyCard.id.split('-')[1]
-            let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-            let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerHTML
-            let companyNewDate = new Date(companyDateValue) // Fri Aug 07 2020 00:00:00 GMT-0700 (Pacific Daylight Time)
-            let companyNewMonth = companyNewDate.getMonth() + 1 // 8
+            companyCard.style.display = 'none'
 
-            if (datePick === "This Month") {
-                if (companyNewMonth === thisMonth) {
-                    companyCard.style.display = null
-                    companyCard.visibility = "visible"
-                    document.querySelector('#date-dropdown').selectedIndex = null
-                }
-            } else if (datePick == "Last Month") {
-                if (companyNewMonth === lastMonth) {
-                    companyCard.style.display = null
-                    companyCard.visibility = "visible"
-                    document.querySelector('#date-dropdown').selectedIndex = null
-                }
-            } else if (datePick === "All") {
-                    companyCard.style.display = null
-                    companyCard.visibility = "visible"
-                    document.querySelector('#date-dropdown').selectedIndex = null
+            if ((datePick === "This Month" && companyMonth === thisMonth) || (datePick == "Last Month" && companyMonth === lastMonth) || datePick === "All") {
+                companyCard.style.display = null
+                document.querySelector('#date-dropdown').selectedIndex = null
             }
-
         })
     }
 
