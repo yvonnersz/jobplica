@@ -111,51 +111,40 @@ class Companies {
             divComments.appendChild(ulComments)
             cardDiv.appendChild(divComments)
 
-            // Appending buttons to update company card.
+            // Create status update and leave comment buttons.
 
             let updateCompanyDiv = document.createElement('div')
-            updateCompanyDiv.className = 'company-update'
-
             let acceptButton = document.createElement("button");
-            acceptButton.innerHTML = "Accepted"
-            acceptButton.setAttribute('id', 'accept-company-' + company.id)
-            acceptButton.className = 'response-button'
-            acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
-            updateCompanyDiv.appendChild(acceptButton)
-
             let rejectButton = document.createElement("button");
-            rejectButton.innerHTML = "Rejected"
-            rejectButton.setAttribute('id', 'reject-company-' + company.id)
-            rejectButton.className = 'response-button'
-            rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
-            updateCompanyDiv.appendChild(rejectButton)
-
             let commentButton = document.createElement('button')
-            commentButton.innerHTML = "Leave a Comment"
-            commentButton.className = 'comment-button'
-            commentButton.setAttribute('id', 'comment-' + company.id)
-            commentButton.addEventListener('click', this.buttonComment.bind(this))
-            updateCompanyDiv.appendChild(commentButton)
-
             let commentForm = document.createElement('input')
-            commentForm.style.display = 'none'
-            updateCompanyDiv.appendChild(commentForm)
-
             let commentSubmitButton = document.createElement('input')
+            let exitSubmit = document.createElement('input')
+
+            updateCompanyDiv.className = 'company-update'
+            acceptButton.className = 'response-button'
+            rejectButton.className = 'response-button'
+            commentButton.className = 'comment-button'
+            commentForm.style.display = 'none'
             commentSubmitButton.setAttribute('type', 'submit')
             commentSubmitButton.className = 'submit-comment-button'
             commentSubmitButton.style.display = 'none'
-            commentSubmitButton.addEventListener('click', this.createComment.bind(this))
-            updateCompanyDiv.appendChild(commentSubmitButton)
-
-            let exitSubmit = document.createElement('input')
             exitSubmit.className = 'exit-comment-button'
             exitSubmit.setAttribute('type', 'submit')
-            exitSubmit.value = "Exit"
             exitSubmit.style.display = 'none'
-            exitSubmit.addEventListener('click', this.buttonComment.bind(this))
-            updateCompanyDiv.appendChild(exitSubmit)
 
+            acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            commentButton.addEventListener('click', this.buttonComment.bind(this))
+            commentSubmitButton.addEventListener('click', this.createComment.bind(this))
+            exitSubmit.addEventListener('click', this.buttonComment.bind(this))
+
+            updateCompanyDiv.appendChild(acceptButton).innerHTML = "Accepted"
+            updateCompanyDiv.appendChild(rejectButton).innerHTML = "Rejected"
+            updateCompanyDiv.appendChild(commentButton).innerHTML = "Leave a Comment"
+            updateCompanyDiv.appendChild(commentForm)
+            updateCompanyDiv.appendChild(commentSubmitButton)
+            updateCompanyDiv.appendChild(exitSubmit).value = "Exit"
             cardDiv.appendChild(updateCompanyDiv)
             companiesContainer.appendChild(cardDiv)
 
@@ -270,7 +259,7 @@ class Companies {
     }
 
     updateCompanyStatus(e) {
-        let companyId = e.target.id.split('-')[2]
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
         let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
         let companyCard = document.querySelector(`#card-${companyId}`)
@@ -399,7 +388,7 @@ class Companies {
     buttonComment(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentButton = document.querySelector(`#comment-${companyId}`)
+        let commentButton = companyCard.querySelector(`.comment-button`)
         let commentForm = companyCard.querySelector('input')
         let commentSubmit = companyCard.querySelector('.submit-comment-button')
         let exitSubmit = companyCard.querySelector('.exit-comment-button')
