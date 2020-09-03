@@ -148,17 +148,15 @@ class Companies {
             cardDiv.appendChild(updateCompanyDiv)
             companiesContainer.appendChild(cardDiv)
 
-            // Changes background color depending on status.
+            // Changes background color depending on company status.
 
-            // if (company.status == "Accepted") {
-            //     div.style.backgroundColor = "#239B56"
-            //     rejectedButton.style.display = "none"
-            //     responseButton.style.display = "none"
-            // } else if (company.status == "Rejected") {
-            //     div.style.backgroundColor = "#E74C3C"
-            //     rejectedButton.style.display = "none"
-            //     responseButton.style.display = "none"
-            // }
+            if (company.status == "Accepted" || company.status == "Rejected") {
+                rejectButton.style.display = "none"
+                acceptButton.style.display = "none"
+
+                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#239B56":false
+                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#E74C3C":false
+            }
         }
     }
 
