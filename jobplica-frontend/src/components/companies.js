@@ -259,33 +259,31 @@ class Companies {
         let companyCards = this
         let editInfo = e.target
 
-        if (companyInfoDiv.contains(editInfo)) {
-            editInfo.contentEditable = true
-            
-            editInfo.addEventListener('keydown', function(e) {
-                if (e.key == "Enter") {
-                    let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
-                    let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
-                    let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
-                    let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
-                    let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
-            
-                    let updatedCompanyObject = {
-                        name: companyNameValue,
-                        url: companyUrlValue,
-                        location: companyLocationValue,
-                        date_applied: companyDateValue,
-                        status: companyStatusValue
-                    }
+        editInfo.contentEditable = true
 
-                    companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
-                        editInfo.contentEditable = false
-                        companyAnchor.href = companyUrlValue
-                        companyAnchor.innerHTML = companyNameValue
-                    })
+        editInfo.addEventListener('keydown', function(e) {
+            if (e.key == "Enter") {
+                let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
+                let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
+                let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
+                let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
+                let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
+
+                let updatedCompanyObject = {
+                    name: companyNameValue,
+                    url: companyUrlValue,
+                    location: companyLocationValue,
+                    date_applied: companyDateValue,
+                    status: companyStatusValue
                 }
-            })
-        }
+
+                companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
+                    editInfo.contentEditable = false
+                    companyAnchor.href = companyUrlValue
+                    companyAnchor.innerHTML = companyNameValue
+                })
+            }
+        })
     }
 
     updateCompanyStatus(e) {
@@ -350,47 +348,46 @@ class Companies {
     }
 
     statistics() {
-        let acceptedArray = []
-        let rejectedArray = []
-        let awaitingArray = []
+        let acceptedCompanies = new Array
+        let rejectedCompanies = new Array
+        let awaitingCompanies = new Array
+        let companyCards = document.querySelectorAll('.company-card')
 
-        this.adapterCompanies.getCompanies()
-        .then(companies => {
-            companies.forEach(company => {
+        companyCards.forEach(companyCard => {
+            let companyStatusValue = companyCard.querySelector('ul').childNodes[4].innerText
+            let trData = document.createElement('tr')
+            let tdAccepted = document.createElement('td')
+            let tdRejected = document.createElement('td')
+            let tdAwaiting = document.createElement('td')
+            let tdTotal = document.createElement('td')
+            let table = document.querySelector('.total table tbody')
+            let tableData = document.querySelector('.total tr:nth-child(2)')
 
-                if (company.status === "Accepted") {
-                    acceptedArray.push(company)
-                } else if (company.status === "Rejected") {
-                    rejectedArray.push(company)
-                } else {
-                    awaitingArray.push(company)
-                }
+            switch (companyStatusValue) {
+                case "Accepted":
+                    acceptedCompanies.push(companyCard)
+                    break;
+                case "Rejected":
+                    rejectedCompanies.push(companyCard)
+                    break;
+                case "Awaiting Response":
+                    awaitingCompanies.push(companyCard)
+                    break;
+            }
 
-                let trData = document.createElement('tr')
+            tdAccepted.innerHTML = acceptedCompanies.length
+            tdRejected.innerHTML = rejectedCompanies.length
+            tdAwaiting.innerHTML = awaitingCompanies.length
+            tdTotal.innerHTML = acceptedCompanies.length + rejectedCompanies.length + awaitingCompanies.length
 
-                let tdAccepted = document.createElement('td')
-                tdAccepted.innerHTML = acceptedArray.length
-                trData.appendChild(tdAccepted)
-        
-                let tdRejected = document.createElement('td')
-                tdRejected.innerHTML = rejectedArray.length
-                trData.appendChild(tdRejected)
-        
-                let tdAwaiting = document.createElement('td')
-                tdAwaiting.innerHTML = awaitingArray.length
-                trData.appendChild(tdAwaiting)
-        
-                let tdTotal = document.createElement('td')
-                tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
-                trData.appendChild(tdTotal)
-        
-                let table = document.querySelector('.total table tbody')
-                let tableData = document.querySelector('.total tr:nth-child(2)')
-        
-                tableData != null ? tableData.remove():false
-        
-                table.appendChild(trData)
-            })
+            trData.appendChild(tdAccepted)
+            trData.appendChild(tdRejected)
+            trData.appendChild(tdAwaiting)
+            trData.appendChild(tdTotal)
+    
+            tableData != null ? tableData.remove():false
+    
+            table.appendChild(trData)
         })
     }
 
