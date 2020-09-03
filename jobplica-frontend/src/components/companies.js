@@ -451,13 +451,10 @@ class Companies {
     }
 
     createComment(e) {
-        e.preventDefault;
-
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let commentValue = document.querySelector(`#card-${companyId} input`).value
         let companyCard = document.querySelector(`#card-${companyId}`)
-        
-        let companyCards = document.querySelectorAll('.company-card')
+        let commentValue = companyCard.querySelector(`input`).value
+        let companyCards = document.querySelectorAll(`.company-card`)
 
         let commentObject = {
             content: commentValue,
@@ -465,40 +462,9 @@ class Companies {
         }
 
         this.adapterComments.createComment(commentObject).then(comment => {
-            // this works but its kinda manual. i want to rerender the cards again.
-            let ulComments = companyCard.querySelector('.company-comments ul')
-            
-            let commentLi = document.createElement('li')
-            commentLi.setAttribute('id', 'comment-' + comment.id)
-            ulComments.appendChild(commentLi).innerHTML = comment.content
-
-            let deleteButton = document.createElement('button')
-            deleteButton.innerHTML = "x"
-            deleteButton.setAttribute('id', 'delete-comment-' + comment.id)
-            deleteButton.className = 'delete-comment-button'
-            deleteButton.addEventListener('click', this.deleteComment.bind(this))
-            commentLi.appendChild(deleteButton)
-
-            ulComments.appendChild(commentLi)
-
-            document.querySelector(`#card-${companyId} input`).value = null
+            companyCards.forEach(companyCard => { companyCard.remove() })
+            this.fetchCompanies()
         })
-
-         // Leave comment button disappears.
-         let commentButton = document.querySelector(`#comment-${companyId}`)
-         commentButton.style.display = null
- 
-         // Comment form, submit, and exit button appears.
-         let commentForm = companyCard.querySelector('input')
-         commentForm.style.display = 'none'
- 
-         let commentSubmit = companyCard.querySelector('.submit-comment-button')
-         commentSubmit.style.display = 'none'
- 
-         let exitSubmit = companyCard.querySelector('.exit-comment-button')
-         exitSubmit.style.display = 'none'
-
-
     }
 
     deleteComment(e) {
