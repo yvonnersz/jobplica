@@ -1,4 +1,7 @@
-let companyCardsContainer = document.querySelector('.company-cards')
+const companyCardsContainer = document.querySelector('.company-cards')
+const statisticsContainer = document.querySelector('.statistics')
+const cardsButton = document.querySelector('.cards-click')
+const statisticsButton = document.querySelector('.statistics-click')
 
 class Companies {
     constructor() {
@@ -12,9 +15,6 @@ class Companies {
         let companyForm = document.getElementById('new-company')
         let filterByStatus = document.querySelector('#status-dropdown')
         let filterByDate = document.querySelector('#date-dropdown')
-        let statisticsContainer = document.querySelector('.statistics')
-        let cardsButton = document.querySelector('.cards-click')
-        let statisticsButton = document.querySelector('.statistics-click')
 
         companyForm.addEventListener('submit', this.createCompany.bind(this))
         filterByStatus.addEventListener('change', this.filter.bind(this))
@@ -33,8 +33,6 @@ class Companies {
     }
 
     render(companies) {
-        let companiesContainer = document.querySelector('.company-cards')
-
         for (const company of companies) {
 
             // Create company card div.
@@ -146,7 +144,7 @@ class Companies {
             updateCompanyDiv.appendChild(commentSubmitButton)
             updateCompanyDiv.appendChild(exitSubmit).value = "Exit"
             cardDiv.appendChild(updateCompanyDiv)
-            companiesContainer.appendChild(cardDiv)
+            companyCardsContainer.appendChild(cardDiv)
 
             // Changes background color depending on company status.
 
@@ -299,10 +297,6 @@ class Companies {
     }
 
     showContent(e) {
-        let statisticsContainer = document.querySelector('.statistics')
-        let cardsButton = document.querySelector('.cards-click')
-        let statisticsButton = document.querySelector('.statistics-click')
-
         if (e.target.innerHTML === "View Statistics") {
             companyCardsContainer.style.display = 'none'
             statisticsContainer.style.display = null
