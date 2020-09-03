@@ -255,7 +255,6 @@ class Companies {
         let companyAnchor = companyInfoDiv.querySelector('a')
         let companyCards = this
 
-
         if (companyInfoDiv.contains(e.target)) {
                 
             let editInfo = e.target
@@ -269,7 +268,7 @@ class Companies {
                     let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
                     let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
                     let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
-
+            
                     let updatedCompanyObject = {
                         name: companyNameValue,
                         url: companyUrlValue,
@@ -278,12 +277,12 @@ class Companies {
                         status: companyStatusValue
                     }
 
-                    companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId)
-                    editInfo.contentEditable = false
-
-                    // Updates the anchor link.
-                    companyAnchor.href = companyUrlValue
-                    companyAnchor.innerHTML = companyNameValue
+                    companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
+                        editInfo.contentEditable = false
+                        // Updates the anchor link.
+                        companyAnchor.href = companyUrlValue
+                        companyAnchor.innerHTML = companyNameValue
+                    })
                 }
             })
         }
