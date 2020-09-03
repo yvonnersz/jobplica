@@ -156,7 +156,7 @@ class Companies {
             commentButton.innerHTML = "Leave a Comment"
             commentButton.className = 'comment-button'
             commentButton.setAttribute('id', 'comment-' + company.id)
-            commentButton.addEventListener('click', this.leaveComment.bind(this))
+            commentButton.addEventListener('click', this.buttonComment.bind(this))
             updateCompanyDiv.appendChild(commentButton)
 
             let commentForm = document.createElement('input')
@@ -175,7 +175,7 @@ class Companies {
             exitSubmit.setAttribute('type', 'submit')
             exitSubmit.value = "Exit"
             exitSubmit.style.display = 'none'
-            exitSubmit.addEventListener('click', this.exitSubmit.bind(this))
+            exitSubmit.addEventListener('click', this.buttonComment.bind(this))
             updateCompanyDiv.appendChild(exitSubmit)
 
             cardDiv.appendChild(updateCompanyDiv)
@@ -470,21 +470,7 @@ class Companies {
         }
     }
 
-    leaveComment(e) {
-        let companyId = e.target.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentButton = document.querySelector(`#comment-${companyId}`)
-        let commentForm = companyCard.querySelector('input')
-        let commentSubmit = companyCard.querySelector('.submit-comment-button')
-        let exitSubmit = companyCard.querySelector('.exit-comment-button')
-
-        commentButton.style.display = 'none'
-        commentForm.style.display = null
-        commentSubmit.style.display = null
-        exitSubmit.style.display = null
-    }
-
-    exitSubmit(e) {
+    buttonComment(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
         let commentButton = document.querySelector(`#comment-${companyId}`)
@@ -492,10 +478,17 @@ class Companies {
         let commentSubmit = companyCard.querySelector('.submit-comment-button')
         let exitSubmit = companyCard.querySelector('.exit-comment-button')
 
-        commentForm.style.display = 'none'
-        commentSubmit.style.display = 'none'
-        exitSubmit.style.display = 'none'
-        commentButton.style.display = null
+        if (e.target.innerHTML === "Leave a Comment") {
+            commentButton.style.display = 'none'
+            commentForm.style.display = null
+            commentSubmit.style.display = null
+            exitSubmit.style.display = null
+        } else {
+            commentForm.style.display = 'none'
+            commentSubmit.style.display = 'none'
+            exitSubmit.style.display = 'none'
+            commentButton.style.display = null
+        }
     }
 
     createComment(e) {
