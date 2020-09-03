@@ -304,7 +304,7 @@ class Companies {
             if (statusPick === "Rejected") {
                 companyStatusValue.innerHTML = 'Rejected'
                 companyCard.style.backgroundColor = "#E74C3C"
-            } else {
+            } else if (statusPick === "Accepted") {
                 companyStatusValue.innerHTML = 'Accepted'
                 companyCard.style.backgroundColor = "#239B56"
             }
