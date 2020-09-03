@@ -1,6 +1,6 @@
 let companyCardsContainer = document.querySelector('.company-cards')
 let statisticsContainer = document.querySelector('.statistics')
-
+let statisticsButton = document.querySelector('.statistics-click')
 
 class Companies {
     constructor() {
@@ -15,7 +15,6 @@ class Companies {
         let filterByStatus = document.querySelector('#status-dropdown')
         let filterByDate = document.querySelector('#date-dropdown')
         let cardsButton = document.querySelector('.cards-click')
-        let statisticsButton = document.querySelector('.statistics-click')
 
         companyForm.addEventListener('submit', this.createCompany.bind(this))
         filterByStatus.addEventListener('change', this.filter.bind(this))
@@ -298,9 +297,7 @@ class Companies {
     }
 
     showContent(e) {
-        let statisticsContainer = document.querySelector('.statistics')
         let cardsButton = document.querySelector('.cards-click')
-        let statisticsButton = document.querySelector('.statistics-click')
 
         if (e.target.innerHTML === "View Statistics") {
             companyCardsContainer.style.display = 'none'
