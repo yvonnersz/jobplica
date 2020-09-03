@@ -9,29 +9,21 @@ class Companies {
     }
 
     bindEventListeners() {
-        this.companyForm = document.getElementById('new-company')
-        this.companyForm.addEventListener('submit', this.createCompany.bind(this))
-
-        // Filter by Status
-        document.querySelector('#status-dropdown').addEventListener('change', this.filterByStatus.bind(this))
-
-        // Filter by Date
-        document.querySelector('#date-dropdown').addEventListener('change', this.filterByDate.bind(this))
-
-        // Bind company cards 
-
+        let companyForm = document.getElementById('new-company')
+        let filterByStatus = document.querySelector('#status-dropdown')
+        let filterByDate = document.querySelector('#date-dropdown')
         let statisticsContainer = document.querySelector('.statistics')
         let cardsButton = document.querySelector('.cards-click')
-        statisticsContainer.style.display = 'none'
-        cardsButton.style.display = 'none'
-
-        cardsButton.addEventListener('click', this.showContent.bind(this))
-
-        // Bind Statistics
-
         let statisticsButton = document.querySelector('.statistics-click')
+
+        companyForm.addEventListener('submit', this.createCompany.bind(this))
+        filterByStatus.addEventListener('change', this.filterByStatus.bind(this))
+        filterByDate.addEventListener('change', this.filterByDate.bind(this))
+        cardsButton.addEventListener('click', this.showContent.bind(this))
         statisticsButton.addEventListener('click', this.showContent.bind(this))
 
+        statisticsContainer.style.display = 'none'
+        cardsButton.style.display = 'none'
     }
 
     fetchCompanies() {
