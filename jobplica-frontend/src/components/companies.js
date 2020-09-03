@@ -208,12 +208,6 @@ class Companies {
         }
 
         this.adapterCompanies.createCompany(newCompanyObject).then(company => {
-            this.companies.push(new Company(company))
-
-            // Clearing the old company cards and re-rendering the new cards.
-            // let companyCards = document.querySelectorAll('.company-card')
-            // companyCards.forEach(companyCard => companyCard.remove())
-
             this.render(new Array(company));
 
             // Clearing the form values.
