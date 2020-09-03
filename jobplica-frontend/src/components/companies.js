@@ -233,12 +233,14 @@ class Companies {
         companyName.style.display = null
         companyUrl.style.display = null
 
-        // addEventListener to exit out of update.
+        // The code below does the following:
+        // User will be able to edit content if content is double-clicked within card.
+        // Else the edit buttons will default to default card position.
+
         window.addEventListener('dblclick', function(e) {   
             if (companyInfoDiv.contains(e.target)) {
                 companyCards.updateCompany(e)
             } else {
-              // Resets all the buttons to default card position.
               e.target.contentEditable = false
               editButton.style.display = null
               deleteButton.style.display = "none"
@@ -246,7 +248,7 @@ class Companies {
               companyName.style.display = 'none'
               companyUrl.style.display = "none"
             }
-          })
+        })
     }
 
     updateCompany(e) {
