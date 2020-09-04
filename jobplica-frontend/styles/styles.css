@@ -115,12 +115,14 @@ body {
   /* Cards */
 
   .company-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .company-card {
+    margin: 5px;
+    width: 225px;
     border: 0.5px solid black;
     text-align: center;
     padding-bottom: 20px;
