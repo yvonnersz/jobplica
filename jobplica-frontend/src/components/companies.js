@@ -355,7 +355,7 @@ class Companies {
     }
 
     filter() {
-        let companyCards = document.querySelectorAll('.company-card')
+        const companyCards = document.querySelectorAll('.company-card')
         let statusPick = document.querySelector('#status-dropdown').value
         let datePick = document.querySelector('#date-dropdown').value
         let thisMonth = new Date().getMonth() + 1
@@ -399,7 +399,7 @@ class Companies {
 
     createComment(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCards = document.querySelectorAll(`.company-card`)
+        const companyCards = document.querySelectorAll(`.company-card`)
         let companyCard = document.querySelector(`#card-${companyId}`)
         let commentValue = companyCard.querySelector(`input`).value
 
