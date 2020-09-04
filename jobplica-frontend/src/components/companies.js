@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 const companyCardsContainer = document.querySelector('.company-cards')
 const statisticsContainer = document.querySelector('.statistics')
 const cardsButton = document.querySelector('.cards-click')
 const statisticsButton = document.querySelector('.statistics-click')
-=======
-let companyCardsContainer = document.querySelector('.company-cards')
-let statisticsContainer = document.querySelector('.statistics')
-let statisticsButton = document.querySelector('.statistics-click')
->>>>>>> 8912f0ba63fcc873641e49353e77c70861014caf
+const filterByStatus = document.querySelector('#status-dropdown')
+const filterByDate = document.querySelector('#date-dropdown')
+const companyForm = document.getElementById('new-company')
+
 
 class Companies {
     constructor() {
@@ -18,14 +16,6 @@ class Companies {
     }
 
     bindEventListeners() {
-        let companyForm = document.getElementById('new-company')
-        let filterByStatus = document.querySelector('#status-dropdown')
-        let filterByDate = document.querySelector('#date-dropdown')
-<<<<<<< HEAD
-=======
-        let cardsButton = document.querySelector('.cards-click')
->>>>>>> 8912f0ba63fcc873641e49353e77c70861014caf
-
         companyForm.addEventListener('submit', this.createCompany.bind(this))
         filterByStatus.addEventListener('change', this.filter.bind(this))
         filterByDate.addEventListener('change', this.filter.bind(this))
@@ -307,11 +297,6 @@ class Companies {
     }
 
     showContent(e) {
-<<<<<<< HEAD
-=======
-        let cardsButton = document.querySelector('.cards-click')
-
->>>>>>> 8912f0ba63fcc873641e49353e77c70861014caf
         if (e.target.innerHTML === "View Statistics") {
             companyCardsContainer.style.display = 'none'
             statisticsContainer.style.display = null
