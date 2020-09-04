@@ -149,8 +149,9 @@ class Companies {
             // Changes background color depending on company status.
 
             if (company.status == "Accepted" || company.status == "Rejected") {
-                rejectButton.style.display = "none"
-                acceptButton.style.display = "none"
+                rejectButton.style.display = 'none'
+                acceptButton.style.display = 'none'
+                commentButton.style.display = 'none'
                 // cardDiv.style.opacity = 0.50;
 
                 company.status === "Accepted" ? cardDiv.style.backgroundColor = "#77A867":false
@@ -231,8 +232,14 @@ class Companies {
               companyStatus.style.display = null
               companyDate.style.display = null
               companyComments.forEach(companyComment => companyComment.style.display = null)
-              companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
-              commentButton.style.display = null
+
+              if (companyStatus.innerHTML === "Awaiting Response") {
+                companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
+                commentButton.style.display = null
+              } else {
+                companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
+                commentButton.style.display = 'none'
+              }
             }
         })
     }
