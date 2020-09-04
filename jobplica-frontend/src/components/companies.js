@@ -391,6 +391,7 @@ class Companies {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
         const commentButton = companyCard.querySelector(`.comment-button`)
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
         const commentForm = companyCard.querySelector('input')
         const commentSubmit = companyCard.querySelector('.submit-comment-button')
         const commentExit = companyCard.querySelector('.exit-comment-button')
@@ -408,7 +409,7 @@ class Companies {
             commentForm.style.display = 'none'
             commentSubmit.style.display = 'none'
             commentExit.style.display = 'none'
-            responseButtons.forEach(responseButton => {responseButton.style.display = null})
+            responseButtons.forEach(responseButton => { companyStatus === "Awaiting Response" ? responseButton.style.display = null:false })
         }
     }
 

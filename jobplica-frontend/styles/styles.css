@@ -223,6 +223,7 @@ body {
   }
 
   .comment-button {
+    vertical-align: bottom;
     width: 202px;
     height: 25px;
     margin: 1px;
