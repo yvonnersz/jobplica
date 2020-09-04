@@ -399,9 +399,9 @@ class Companies {
 
     createComment(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCards = document.querySelectorAll(`.company-card`)
         let companyCard = document.querySelector(`#card-${companyId}`)
         let commentValue = companyCard.querySelector(`input`).value
-        let companyCards = document.querySelectorAll(`.company-card`)
 
         let commentObject = {
             content: commentValue,
