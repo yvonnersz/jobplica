@@ -289,10 +289,10 @@ class Companies {
 
         this.adapterCompanies.updateCompany(updateCompanyStatus, companyId).then(company => {
             if (statusPick === "Rejected") {
-                companyCard.style.backgroundColor = "#E74C3C"
+                companyCard.style.backgroundColor = "#AE4747"
                 companyStatus.innerHTML = 'Rejected'
             } else if (statusPick === "Accepted") {
-                companyCard.style.backgroundColor = "#239B56"
+                companyCard.style.backgroundColor = "#77A867"
                 companyStatus.innerHTML = 'Accepted'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
