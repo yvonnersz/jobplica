@@ -379,10 +379,10 @@ class Companies {
     buttonComment(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentButton = companyCard.querySelector(`.comment-button`)
-        let commentForm = companyCard.querySelector('input')
-        let commentSubmit = companyCard.querySelector('.submit-comment-button')
-        let commentExit = companyCard.querySelector('.exit-comment-button')
+        const commentButton = companyCard.querySelector(`.comment-button`)
+        const commentForm = companyCard.querySelector('input')
+        const commentSubmit = companyCard.querySelector('.submit-comment-button')
+        const commentExit = companyCard.querySelector('.exit-comment-button')
 
         if (e.target.innerHTML === "Leave a Comment") {
             commentButton.style.display = 'none'
