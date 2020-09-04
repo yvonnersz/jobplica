@@ -382,18 +382,18 @@ class Companies {
         let commentButton = companyCard.querySelector(`.comment-button`)
         let commentForm = companyCard.querySelector('input')
         let commentSubmit = companyCard.querySelector('.submit-comment-button')
-        let exitSubmit = companyCard.querySelector('.exit-comment-button')
+        let commentExit = companyCard.querySelector('.exit-comment-button')
 
         if (e.target.innerHTML === "Leave a Comment") {
             commentButton.style.display = 'none'
             commentForm.style.display = null
             commentSubmit.style.display = null
-            exitSubmit.style.display = null
+            commentExit.style.display = null
         } else {
+            commentButton.style.display = null
             commentForm.style.display = 'none'
             commentSubmit.style.display = 'none'
-            exitSubmit.style.display = 'none'
-            commentButton.style.display = null
+            commentExit.style.display = 'none'
         }
     }
 
