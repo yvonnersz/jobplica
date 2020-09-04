@@ -6,7 +6,6 @@ const filterByStatus = document.querySelector('#status-dropdown')
 const filterByDate = document.querySelector('#date-dropdown')
 const companyForm = document.getElementById('new-company')
 
-
 class Companies {
     constructor() {
         this.adapterCompanies = new CompaniesAdapter()
@@ -151,6 +150,7 @@ class Companies {
             if (company.status == "Accepted" || company.status == "Rejected") {
                 rejectButton.style.display = "none"
                 acceptButton.style.display = "none"
+                cardDiv.style.opacity = 0.50;
 
                 company.status === "Accepted" ? cardDiv.style.backgroundColor = "#239B56":false
                 company.status === "Rejected" ? cardDiv.style.backgroundColor = "#E74C3C":false
