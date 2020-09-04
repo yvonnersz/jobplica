@@ -197,6 +197,9 @@ class Companies {
         let companyDate = companyCard.querySelector('ul li:nth-child(4)')
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let companyStatusButtons = companyCard.querySelectorAll('.response-button')
+        let companyComments = companyCard.querySelectorAll('.company-comments ul li')
+        let commentButton = companyCard.querySelector('.comment-button')
+        let commentInputs = companyCard.querySelectorAll('input')
 
         editButton.style.display = 'none'
         deleteButton.style.display = null
@@ -205,7 +208,10 @@ class Companies {
         companyUrl.style.display = null
         companyStatus.style.display = 'none'
         companyDate.style.display = 'none'
+        companyComments.forEach(companyComment => companyComment.style.display = 'none')
         companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
+        commentButton.style.display = 'none'
+        commentInputs.forEach(commentInput => commentInput.style.display = 'none')
 
         // The code below does the following:
         // User will be able to edit content if content is double-clicked within card.
@@ -223,7 +229,9 @@ class Companies {
               companyUrl.style.display = 'none'
               companyStatus.style.display = null
               companyDate.style.display = null
+              companyComments.forEach(companyComment => companyComment.style.display = null)
               companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
+              commentButton.style.display = null
             }
         })
     }
