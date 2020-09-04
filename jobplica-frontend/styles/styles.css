@@ -186,7 +186,7 @@ body {
 
   /* Edit? */
 
-  .edit {
+  .edit-company-button {
     position: relative;
     height: 20px;
     width: 20px;
@@ -197,7 +197,7 @@ body {
     border-radius: 50%;
   }
 
-  .delete {
+  .delete-company-button {
     position: relative;
     height: 20px;
     width: 20px;
@@ -208,10 +208,9 @@ body {
     border-radius: 50%;
   }
 
-  button {
-    display: inline-block;
-    width: 40%;
-    height: 30px;
-    margin: 1px;
-    margin-top: 10px;
+  .delete-comment-button {
+    border-radius: 50%;
+    border: none;
+    float: right;
+    margin-right: 5px;
   }
