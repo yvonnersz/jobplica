@@ -317,16 +317,16 @@ class Companies {
         let companyCards = document.querySelectorAll('.company-card')
 
         companyCards.forEach(companyCard => {
-            let companyStatusValue = companyCard.querySelector('ul').childNodes[4].innerText
+            let companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
+            let table = document.querySelector('.total table tbody')
+            let tableData = document.querySelector('.total tr:nth-child(2)')
             let trData = document.createElement('tr')
             let tdAccepted = document.createElement('td')
             let tdRejected = document.createElement('td')
             let tdAwaiting = document.createElement('td')
             let tdTotal = document.createElement('td')
-            let table = document.querySelector('.total table tbody')
-            let tableData = document.querySelector('.total tr:nth-child(2)')
 
-            switch (companyStatusValue) {
+            switch (companyStatus) {
                 case "Accepted":
                     acceptedCompanies.push(companyCard)
                     break;
