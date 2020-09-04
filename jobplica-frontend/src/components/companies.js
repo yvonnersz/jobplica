@@ -150,10 +150,10 @@ class Companies {
             if (company.status == "Accepted" || company.status == "Rejected") {
                 rejectButton.style.display = "none"
                 acceptButton.style.display = "none"
-                cardDiv.style.opacity = 0.50;
+                // cardDiv.style.opacity = 0.50;
 
-                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#239B56":false
-                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#E74C3C":false
+                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#77A867":false
+                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#AE4747":false
             }
         }
     }
