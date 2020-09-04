@@ -194,6 +194,7 @@ class Companies {
         let companyAnchor = companyCard.querySelector('a')
         let companyName = companyCard.querySelector('ul li:nth-child(1)')
         let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
+        let companyDate = companyCard.querySelector('ul li:nth-child(4)')
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let companyStatusButtons = companyCard.querySelectorAll('.response-button')
 
@@ -203,6 +204,7 @@ class Companies {
         companyName.style.display = null
         companyUrl.style.display = null
         companyStatus.style.display = 'none'
+        companyDate.style.display = 'none'
         companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
 
         // The code below does the following:
@@ -220,6 +222,7 @@ class Companies {
               companyName.style.display = 'none'
               companyUrl.style.display = 'none'
               companyStatus.style.display = null
+              companyDate.style.display = null
               companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
             }
         })
@@ -239,15 +242,11 @@ class Companies {
                 let companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
                 let companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
                 let companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
-                let companyDateValue = companyCard.querySelector('ul li:nth-child(4)').innerText
-                let companyStatusValue = companyCard.querySelector('ul li:nth-child(5)').innerText
 
                 let updatedCompanyObject = {
                     name: companyNameValue,
                     url: companyUrlValue,
                     location: companyLocationValue,
-                    date_applied: companyDateValue,
-                    status: companyStatusValue
                 }
 
                 companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
