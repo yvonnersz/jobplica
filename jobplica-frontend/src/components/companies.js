@@ -113,6 +113,7 @@ class Companies {
             let updateCompanyDiv = document.createElement('div')
             let acceptButton = document.createElement("button");
             let rejectButton = document.createElement("button");
+            let awaitButton = document.createElement("button");
             let commentButton = document.createElement('button')
             let commentForm = document.createElement('input')
             let commentSubmitButton = document.createElement('input')
@@ -121,6 +122,8 @@ class Companies {
             updateCompanyDiv.className = 'company-update'
             acceptButton.className = 'response-button'
             rejectButton.className = 'response-button'
+            awaitButton.className = 'await-button'
+            awaitButton.style.display = 'none'
             commentButton.className = 'comment-button'
             commentForm.className = 'comment-form'
             commentForm.style.display = 'none'
@@ -133,12 +136,14 @@ class Companies {
 
             acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
             rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            awaitButton.addEventListener('click', this.updateCompanyStatus.bind(this))
             commentButton.addEventListener('click', this.buttonComment.bind(this))
             commentSubmitButton.addEventListener('click', this.createComment.bind(this))
             exitSubmit.addEventListener('click', this.buttonComment.bind(this))
 
             updateCompanyDiv.appendChild(acceptButton).innerHTML = "Accepted"
             updateCompanyDiv.appendChild(rejectButton).innerHTML = "Rejected"
+            updateCompanyDiv.appendChild(awaitButton).innerHTML = "Awaiting Response"
             updateCompanyDiv.appendChild(commentButton).innerHTML = "Leave a Comment"
             updateCompanyDiv.appendChild(commentForm)
             updateCompanyDiv.appendChild(commentSubmitButton)
@@ -152,7 +157,7 @@ class Companies {
                 rejectButton.style.display = 'none'
                 acceptButton.style.display = 'none'
                 commentButton.style.display = 'none'
-                // cardDiv.style.opacity = 0.50;
+                cardDiv.style.opacity = 0.50;
 
                 company.status === "Accepted" ? cardDiv.style.backgroundColor = "#77A867":false
                 company.status === "Rejected" ? cardDiv.style.backgroundColor = "#AE4747":false
@@ -199,6 +204,7 @@ class Companies {
         let companyDate = companyCard.querySelector('ul li:nth-child(4)')
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let companyStatusButtons = companyCard.querySelectorAll('.response-button')
+        let companyAwaitButton = companyCard.querySelector(`.await-button`)
         let companyComments = companyCard.querySelectorAll('.company-comments ul li')
         let commentButton = companyCard.querySelector('.comment-button')
         let commentInputs = companyCard.querySelectorAll('input')
@@ -212,6 +218,7 @@ class Companies {
         companyDate.style.display = 'none'
         companyComments.forEach(companyComment => companyComment.style.display = 'none')
         companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
+        companyAwaitButton.style.display = null
         commentButton.style.display = 'none'
         commentInputs.forEach(commentInput => commentInput.style.display = 'none')
 
@@ -232,6 +239,7 @@ class Companies {
               companyStatus.style.display = null
               companyDate.style.display = null
               companyComments.forEach(companyComment => companyComment.style.display = null)
+              companyAwaitButton.style.display = 'none'
 
               if (companyStatus.innerHTML === "Awaiting Response") {
                 companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
@@ -279,6 +287,7 @@ class Companies {
         let companyCard = document.querySelector(`#card-${companyId}`)
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let awaitButton = companyCard.querySelector(`.await-button`)
         let commentButton = companyCard.querySelector('.comment-button')
         let commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
         let statusPick = e.target.innerHTML
@@ -291,12 +300,19 @@ class Companies {
             if (statusPick === "Rejected") {
                 companyCard.style.backgroundColor = "#AE4747"
                 companyStatus.innerHTML = 'Rejected'
+                companyCard.style.opacity = 0.50;
             } else if (statusPick === "Accepted") {
                 companyCard.style.backgroundColor = "#77A867"
                 companyStatus.innerHTML = 'Accepted'
+                companyCard.style.opacity = 0.50;
+            } else {
+                companyCard.style.backgroundColor = 'white'
+                companyCard.style.opacity = null;
+                companyStatus.innerHTML = 'Awaiting Response'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
             commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
+            awaitButton.style.display = 'none'
             commentButton.style.display = 'none'
         })
     }
