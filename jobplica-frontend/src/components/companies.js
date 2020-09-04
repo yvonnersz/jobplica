@@ -100,7 +100,7 @@ class Companies {
                 deleteButton.addEventListener('click', this.deleteComment.bind(this))
 
                 ulComments.appendChild(commentLi).innerHTML = comment.content
-                commentLi.appendChild(deleteButton).innerHTML = 'x'
+                company.status === "Awaiting Response" ? commentLi.appendChild(deleteButton).innerHTML = 'x':false
             })
 
             divComments.className = 'company-comments'
@@ -280,6 +280,7 @@ class Companies {
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let responseButtons = companyCard.querySelectorAll(`.response-button`)
         let commentButton = companyCard.querySelector('.comment-button')
+        let commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
         let statusPick = e.target.innerHTML
 
         let updateCompanyStatus = {
@@ -295,6 +296,7 @@ class Companies {
                 companyStatus.innerHTML = 'Accepted'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
+            commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
             commentButton.style.display = 'none'
         })
     }
