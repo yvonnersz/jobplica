@@ -281,15 +281,14 @@ class Companies {
     deleteCompany(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
-
-        // Delete company comments.
         let companyComments = companyCard.querySelectorAll('.company-comments li')
+
         companyComments.forEach(companyComment => {
             let commentId = companyComment.id.split('-')[1]
             this.adapterComments.deleteComment(commentId)
         })
 
-        // Communicate with the database.
+        // Communicate with the database to delete company.
         this.adapterCompanies.deleteCompany(companyId).then(companyObject => {
             companyCard.remove()
         })
