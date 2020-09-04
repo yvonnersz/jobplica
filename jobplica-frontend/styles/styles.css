@@ -227,3 +227,16 @@ body {
     height: 25px;
     margin: 1px;
   }
+
+  .comment-form {
+    width: 200px;
+    height: 35px;
+    margin: 5px;
+  }
+
+  .submit-comment-button, .exit-comment-button {
+    display: inline-block;
+    margin: 1px;
+    width: 100px;
+    height: 25px;
+  }

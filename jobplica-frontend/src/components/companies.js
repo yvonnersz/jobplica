@@ -122,6 +122,7 @@ class Companies {
             acceptButton.className = 'response-button'
             rejectButton.className = 'response-button'
             commentButton.className = 'comment-button'
+            commentForm.className = 'comment-form'
             commentForm.style.display = 'none'
             commentSubmitButton.setAttribute('type', 'submit')
             commentSubmitButton.className = 'submit-comment-button'
@@ -393,17 +394,21 @@ class Companies {
         const commentForm = companyCard.querySelector('input')
         const commentSubmit = companyCard.querySelector('.submit-comment-button')
         const commentExit = companyCard.querySelector('.exit-comment-button')
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
 
         if (e.target.innerHTML === "Leave a Comment") {
             commentButton.style.display = 'none'
             commentForm.style.display = null
             commentSubmit.style.display = null
             commentExit.style.display = null
+            responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
+
         } else {
             commentButton.style.display = null
             commentForm.style.display = 'none'
             commentSubmit.style.display = 'none'
             commentExit.style.display = 'none'
+            responseButtons.forEach(responseButton => {responseButton.style.display = null})
         }
     }
 
