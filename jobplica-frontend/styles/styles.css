@@ -214,3 +214,16 @@ body {
     float: right;
     margin-right: 5px;
   }
+
+  .response-button {
+    margin: 1px;
+    display: inline-block;
+    width: 100px;
+    height: 25px;
+  }
+
+  .comment-button {
+    width: 202px;
+    height: 25px;
+    margin: 1px;
+  }
