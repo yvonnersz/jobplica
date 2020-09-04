@@ -255,11 +255,10 @@ class Companies {
 
     updateCompanyStatus(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4]
         let companyCard = document.querySelector(`#card-${companyId}`)
-        let statusPick = e.target.innerHTML
+        let companyStatusValue = companyCard.querySelector('ul li:nth-child(4)')
         let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let statusPick = e.target.innerHTML
 
         let updateCompanyStatus = {
             status: statusPick
@@ -267,14 +266,13 @@ class Companies {
 
         this.adapterCompanies.updateCompany(updateCompanyStatus, companyId).then(company => {
             if (statusPick === "Rejected") {
-                companyStatusValue.innerHTML = 'Rejected'
                 companyCard.style.backgroundColor = "#E74C3C"
+                companyStatusValue.innerHTML = 'Rejected'
             } else if (statusPick === "Accepted") {
-                companyStatusValue.innerHTML = 'Accepted'
                 companyCard.style.backgroundColor = "#239B56"
+                companyStatusValue.innerHTML = 'Accepted'
             }
-
-            responseButtons.forEach(responseButton => responseButton.style.display = 'none')
+            responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
         })
     }
 
