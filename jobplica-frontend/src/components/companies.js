@@ -162,26 +162,25 @@ class Companies {
         // After submitting a form, the default behavior is to refresh the page. The following line prevents that.
         e.preventDefault();
 
-        let newCompanyName = document.getElementById('new-company-name')
-        let newCompanyLocation = document.getElementById('new-company-location')
-        let newCompanyUrl = document.getElementById('new-company-url')
-        let newCompanyDate = document.getElementById('new-company-date')
+        let newCompanyName = document.getElementById('new-company-name').value
+        let newCompanyLocation = document.getElementById('new-company-location').value
+        let newCompanyUrl = document.getElementById('new-company-url').value
+        let newCompanyDate = document.getElementById('new-company-date').value
 
         const newCompany = {
-            name: newCompanyName.value,
-            location: newCompanyLocation.value,
-            url: newCompanyUrl.value,
-            date_applied: newCompanyDate.value,
+            name: newCompanyName,
+            location: newCompanyLocation,
+            url: newCompanyUrl,
+            date_applied: newCompanyDate,
         }
 
         this.adapterCompanies.createCompany(newCompany).then(company => {
             this.render(new Array(company));
-
-            // Clearing the form values.
-            newCompanyName.value = null
-            newCompanyLocation.value = null
-            newCompanyUrl.value = null
-            newCompanyDate.value = null
+            
+            newCompanyName = null
+            newCompanyLocation = null
+            newCompanyUrl = null
+            newCompanyDate = null
         })
     }
 
