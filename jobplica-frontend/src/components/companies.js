@@ -194,12 +194,16 @@ class Companies {
         let companyAnchor = companyCard.querySelector('a')
         let companyName = companyCard.querySelector('ul li:nth-child(1)')
         let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        let companyStatusButtons = companyCard.querySelectorAll('.response-button')
 
         editButton.style.display = 'none'
         deleteButton.style.display = null
         companyAnchor.style.display = 'none'
         companyName.style.display = null
         companyUrl.style.display = null
+        companyStatus.style.display = 'none'
+        companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
 
         // The code below does the following:
         // User will be able to edit content if content is double-clicked within card.
@@ -215,6 +219,8 @@ class Companies {
               companyAnchor.style.display = null
               companyName.style.display = 'none'
               companyUrl.style.display = 'none'
+              companyStatus.style.display = null
+              companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
             }
         })
     }
@@ -256,7 +262,7 @@ class Companies {
     updateCompanyStatus(e) {
         let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         let companyCard = document.querySelector(`#card-${companyId}`)
-        let companyStatusValue = companyCard.querySelector('ul li:nth-child(4)')
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let responseButtons = companyCard.querySelectorAll(`.response-button`)
         let statusPick = e.target.innerHTML
 
@@ -267,10 +273,10 @@ class Companies {
         this.adapterCompanies.updateCompany(updateCompanyStatus, companyId).then(company => {
             if (statusPick === "Rejected") {
                 companyCard.style.backgroundColor = "#E74C3C"
-                companyStatusValue.innerHTML = 'Rejected'
+                companyStatus.innerHTML = 'Rejected'
             } else if (statusPick === "Accepted") {
                 companyCard.style.backgroundColor = "#239B56"
-                companyStatusValue.innerHTML = 'Accepted'
+                companyStatus.innerHTML = 'Accepted'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
         })
