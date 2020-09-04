@@ -190,12 +190,12 @@ class Companies {
         let companyCard = document.querySelector(`#card-${companyId}`)
         let editButton = companyCard.querySelector(`.edit-company-button`)
         let deleteButton = companyCard.querySelector(`.delete-company-button`)
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyAnchor = companyInfoDiv.querySelector('a')
-        let companyName = companyInfoDiv.querySelector('ul').childNodes[0]
-        let companyUrl = companyInfoDiv.querySelector('ul').childNodes[1]
+        let companyInfoDiv = companyCard.querySelector(`.company-info`)
+        let companyAnchor = companyCard.querySelector('a')
+        let companyName = companyCard.querySelector('ul li:nth-child(1)')
+        let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
 
-        editButton.style.display = "none"
+        editButton.style.display = 'none'
         deleteButton.style.display = null
         companyAnchor.style.display = 'none'
         companyName.style.display = null
@@ -211,10 +211,10 @@ class Companies {
             } else {
               e.target.contentEditable = false
               editButton.style.display = null
-              deleteButton.style.display = "none"
+              deleteButton.style.display = 'none'
               companyAnchor.style.display = null
               companyName.style.display = 'none'
-              companyUrl.style.display = "none"
+              companyUrl.style.display = 'none'
             }
         })
     }
