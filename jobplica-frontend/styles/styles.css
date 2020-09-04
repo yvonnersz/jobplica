@@ -215,9 +215,9 @@ body {
     margin-right: 5px;
   }
 
-  .response-button {
-    margin: 1px;
+  .response-button, .submit-comment-button, .exit-comment-button {
     display: inline-block;
+    margin: 1px;
     width: 100px;
     height: 25px;
   }
@@ -232,11 +232,4 @@ body {
     width: 200px;
     height: 35px;
     margin: 5px;
-  }
-
-  .submit-comment-button, .exit-comment-button {
-    display: inline-block;
-    margin: 1px;
-    width: 100px;
-    height: 25px;
   }
