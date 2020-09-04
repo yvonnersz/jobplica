@@ -220,21 +220,21 @@ class Companies {
     }
 
     updateCompany(e) {
-        let companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
-        let companyInfoDiv = document.querySelector(`#card-${companyId}`).childNodes[1]
-        let companyAnchor = companyInfoDiv.querySelector('a')
         let companyCards = this
+        let companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyHead = companyCard.querySelector('a')
         let editInfo = e.target
 
         editInfo.contentEditable = true
 
         editInfo.addEventListener('keydown', function(e) {
             if (e.key == "Enter") {
-                let companyNameValue = companyInfoDiv.querySelector('ul').childNodes[0].innerText
-                let companyUrlValue =  companyInfoDiv.querySelector('ul').childNodes[1].innerText
-                let companyLocationValue = companyInfoDiv.querySelector('ul').childNodes[2].innerText
-                let companyDateValue = companyInfoDiv.querySelector('ul').childNodes[3].innerText
-                let companyStatusValue = companyInfoDiv.querySelector('ul').childNodes[4].innerText
+                let companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
+                let companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
+                let companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
+                let companyDateValue = companyCard.querySelector('ul li:nth-child(4)').innerText
+                let companyStatusValue = companyCard.querySelector('ul li:nth-child(5)').innerText
 
                 let updatedCompanyObject = {
                     name: companyNameValue,
@@ -246,8 +246,8 @@ class Companies {
 
                 companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
                     editInfo.contentEditable = false
-                    companyAnchor.href = companyUrlValue
-                    companyAnchor.innerHTML = companyNameValue
+                    companyHead.href = companyUrlValue
+                    companyHead.innerHTML = companyNameValue
                 })
             }
         })
