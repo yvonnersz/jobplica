@@ -279,6 +279,7 @@ class Companies {
         let companyCard = document.querySelector(`#card-${companyId}`)
         let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
         let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let commentButton = companyCard.querySelector('.comment-button')
         let statusPick = e.target.innerHTML
 
         let updateCompanyStatus = {
@@ -294,6 +295,7 @@ class Companies {
                 companyStatus.innerHTML = 'Accepted'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
+            commentButton.style.display = 'none'
         })
     }
 
