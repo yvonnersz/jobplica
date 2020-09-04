@@ -1,5 +1,5 @@
 body {
-  background-color: #EBF5FB;
+  background-color: #F5F5F5;
   overflow-x: hidden;
  }
 
@@ -40,6 +40,10 @@ body {
     text-align: center;
     padding: 5px;
     margin: 1px;
+  }
+
+  #new-company-submit {
+    width: 265px;
   }
 
 /* Filter CSS */
@@ -127,7 +131,7 @@ body {
     text-align: center;
     padding-bottom: 20px;
     overflow: hidden;
-    background-color: white;
+    background-color: #E0D9D2;
     border-radius: 10px;
     box-shadow: -3px 3px 8px #888888;
   }

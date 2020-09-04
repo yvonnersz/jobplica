@@ -159,8 +159,8 @@ class Companies {
                 commentButton.style.display = 'none'
                 cardDiv.style.opacity = 0.50;
 
-                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#77A867":false
-                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#AE4747":false
+                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#9EB371":false
+                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#E17878":false
             }
         }
     }
