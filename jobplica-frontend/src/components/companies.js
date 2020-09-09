@@ -301,17 +301,18 @@ class Companies {
                 companyCard.style.backgroundColor = "#AE4747"
                 companyStatus.innerHTML = 'Rejected'
                 companyCard.style.opacity = 0.50;
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
             } else if (statusPick === "Accepted") {
                 companyCard.style.backgroundColor = "#77A867"
                 companyStatus.innerHTML = 'Accepted'
                 companyCard.style.opacity = 0.50;
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
             } else {
                 companyCard.style.backgroundColor = 'white'
                 companyCard.style.opacity = null;
                 companyStatus.innerHTML = 'Awaiting Response'
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
-            commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
             awaitButton.style.display = 'none'
             commentButton.style.display = 'none'
         })

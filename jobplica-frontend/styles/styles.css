@@ -1,5 +1,5 @@
 body {
-  background-color: #F5F5F5;
+  background-color: #D4C8BE;
   overflow-x: hidden;
  }
 
@@ -24,7 +24,7 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -54,7 +54,7 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -89,7 +89,7 @@ body {
     padding-right: 17.5px;
     width: 262px;
     bottom: 437px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
     font-size: 30px;
   }
@@ -103,7 +103,7 @@ body {
     padding-right: 17.5px;
     width: 262px;
     bottom: 437px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
     font-size: 30px;
   }
@@ -131,7 +131,7 @@ body {
     text-align: center;
     padding-bottom: 20px;
     overflow: hidden;
-    background-color: #E0D9D2;
+    background-color: #D4BAB0;
     border-radius: 10px;
     box-shadow: -3px 3px 8px #888888;
   }
@@ -141,7 +141,7 @@ body {
     text-align: center;
     padding-bottom: 20px;
     overflow: hidden;
-    background-color: white;
+    background-color: #D3C3BE;
     border-radius: 10px;
     box-shadow: -3px 3px 8px #888888;
     opacity: 100% !important;
