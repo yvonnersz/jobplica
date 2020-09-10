@@ -308,9 +308,10 @@ class Companies {
                 companyCard.style.opacity = 0.50;
                 commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
             } else {
-                companyCard.style.backgroundColor = 'white'
+                companyCard.style.backgroundColor = '#EAE6DF'
                 companyCard.style.opacity = null;
                 companyStatus.innerHTML = 'Awaiting Response'
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = null})
             }
             responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
             awaitButton.style.display = 'none'

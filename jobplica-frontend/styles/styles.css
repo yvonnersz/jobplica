@@ -131,7 +131,7 @@ body {
     text-align: center;
     padding-bottom: 20px;
     overflow: hidden;
-    background-color: #D4BAB0;
+    background-color: #EAE6DF;
     border-radius: 10px;
     box-shadow: -3px 3px 8px #888888;
   }
@@ -151,9 +151,10 @@ body {
   .company-card a, a:visited {
     font-size: 35px;
     text-decoration: none;
-    font-family: 'Architects Daughter', cursive;
+    font-family: 'Amatic SC', cursive;
     color: black;
     margin-left: -20px;
+    text-decoration: underline;
   }
 
   .company-card a:hover {
