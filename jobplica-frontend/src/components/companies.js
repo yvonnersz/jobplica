@@ -169,6 +169,7 @@ class Companies {
         // After submitting a form, the default behavior is to refresh the page. The following line prevents that.
         e.preventDefault();
 
+        let newCompanyForm = document.querySelector('#new-company')
         let newCompanyName = document.getElementById('new-company-name').value
         let newCompanyLocation = document.getElementById('new-company-location').value
         let newCompanyUrl = document.getElementById('new-company-url').value
@@ -184,10 +185,7 @@ class Companies {
         this.adapterCompanies.createCompany(newCompany).then(company => {
             this.render(new Array(company));
             
-            newCompanyName = null
-            newCompanyLocation = null
-            newCompanyUrl = null
-            newCompanyDate = null
+            newCompanyForm.reset();
         })
     }
 
