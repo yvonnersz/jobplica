@@ -57,14 +57,20 @@ class Companies {
 
             let ul = document.createElement('ul')
 
+            let ul = document.createElement('ul')
+
             let companyUrl = document.createElement('li')
             companyUrl.setAttribute('id', 'url-' + company.id)
             companyUrl.style.display = "none"
+<<<<<<< .merge_file_IR4KDI
 <<<<<<< .merge_file_7P1zF5
             ulCompanyInfo.appendChild(companyUrl).innerHTML = company.url
 =======
             ul.appendChild(companyUrl).innerHTML = company.url
 >>>>>>> .merge_file_7xOHve
+=======
+            ul.appendChild(companyUrl).innerHTML = company.url
+>>>>>>> .merge_file_9rk9zL
 
             let locationLi = document.createElement('li')
             ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
