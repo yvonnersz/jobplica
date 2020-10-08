@@ -45,12 +45,12 @@
             <select id="status-dropdown" name="select-status">
                 <option value="" disabled selected>by Status</option>
                 <option value="All">None</option>
-                <option value="Approved">Approved</option>
+                <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
                 <option value="Awaiting Response">Pending</option>
             </select><br>
     
-            <select id="date-dropdown" name="select-status">
+            <select id="date-dropdown" name="select-date">
                 <option value="" disabled selected>by Day</option>
                 <option value="All">None</option>
                 <option value="This Month">This Month</option>
@@ -61,32 +61,21 @@
          <div class="new-company">
             <h2>Add a Company</h2>
             <form id="new-company">
-                <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name"/><br>
-                <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location"/><br>
-                <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url"/><br>
-                <input type="date" name="company-date" id="new-company-date"/><br>
-                <input type="submit" />
+                <input type="text" name="company-name" placeholder="Enter in company name." id="new-company-name" required="true"/><br>
+                <input type="text" name="company-location" placeholder="Enter in company location." id="new-company-location" required="true"/><br>
+                <input type="text" name="company-url" placeholder="Enter in company url." id="new-company-url" required="true"/><br>
+                <input type="date" name="company-date" id="new-company-date" required="true"/><br>
+                <input type="submit" value="Create Company" id="new-company-submit"/>
             </form>
         </div>
     </div>
 
     <div class = "content">
-        <div class="company">
+        <div class="company-cards">
             <!-- Company cards will be inserted here. -->
         </div>
 
-        <div class="statistics">
-            <div class="avg-table">
-                <h2>Average</h2>
-                <table>
-                    <tr>
-                        <th>Applies per Day</th>
-                        <th>Applies per Week</th>
-                        <th>Applies per Month</th>
-                    </tr>
-                </table>
-            </div>
-        
+        <div class="statistics">        
             <div class="total">
                 <h2>Total</h2>
                 <table>
@@ -96,9 +85,6 @@
                         <th>Awaiting</th>
                         <th>Total Applies</th>
                     </tr>
-                    <tr id="total-input">
-
-                    </tr>
                 </table>
             </div>
         </div>
@@ -107,14 +93,11 @@
 
     <script src="src/components/companies.js"></script>
     <script src="src/components/comments.js"></script>
-
     <script src="src/components/company.js"></script>
     <script src="src/components/comment.js"></script>
-
     <script src="src/components/app.js"></script>
     <script src="src/adapters/CompaniesAdapter.js"></script>
     <script src="src/adapters/CommentsAdapter.js"></script>
-
     <script src="src/index.js"></script>
 
 </body>

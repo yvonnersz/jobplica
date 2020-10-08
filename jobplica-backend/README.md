@@ -1,25 +1,3 @@
-# README
+# Jobplica
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# jobplica
+This app is intended to help a student organize all their job applications. The user will fill out a form with the company information and upon submission, will create a card with the submitted details. The user will have the option to leave comments on a company card or edit/delete companies, in case of a mistake. The user will also have the ability to filter out cards by either status or date, or view some basic statistics.

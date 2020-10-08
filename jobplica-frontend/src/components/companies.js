@@ -1,60 +1,52 @@
+const companyCardsContainer = document.querySelector('.company-cards')
+const statisticsContainer = document.querySelector('.statistics')
+const cardsButton = document.querySelector('.cards-click')
+const statisticsButton = document.querySelector('.statistics-click')
+const filterByStatus = document.querySelector('#status-dropdown')
+const filterByDate = document.querySelector('#date-dropdown')
+const companyForm = document.getElementById('new-company')
+
 class Companies {
     constructor() {
-        this.companies = []
         this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
-        this.fetchAndLoadCompanies()
-        this.bindingAndEventListener()
-        this.bindStatistics()
-        this.bindCards()
-        this.filterStatus()
-        this.filterDate()
+        this.fetchCompanies()
+        this.bindEventListeners()
     }
 
-    fetchAndLoadCompanies() {
-        this.adapterCompanies.getCompanies()
-            .then(companies => { 
-                companies.forEach(company => this.companies.push(new Company(company)))
-            }).then (() => {
-                this.renderAll()
+    bindEventListeners() {
+        companyForm.addEventListener('submit', this.createCompany.bind(this))
+        filterByStatus.addEventListener('change', this.filter.bind(this))
+        filterByDate.addEventListener('change', this.filter.bind(this))
+        cardsButton.addEventListener('click', this.showContent.bind(this))
+        statisticsButton.addEventListener('click', this.showContent.bind(this))
 
-            })
+        statisticsContainer.style.display = 'none'
+        cardsButton.style.display = 'none'
     }
 
-    renderAll() {
-        let companiesContainer = document.querySelector('.company')
+    fetchCompanies() {
+        this.adapterCompanies.getCompanies().then(companies => { 
+            this.render(companies)
+        })
+    }
 
-        for (const company of this.companies) {
+    render(companies) {
+        for (const company of companies) {
 
-            let div = document.createElement('div')
-            div.setAttribute('id', 'container-' + company.id)
-            div.className = "company-card"
+            // Create company card div.
 
-            let editDiv = document.createElement('button')
-            editDiv.className = "edit"
-            editDiv.setAttribute('id', 'edit-' + company.id)
-            editDiv.innerHTML = '...'
-            editDiv.addEventListener('focus', this.updateCompany.bind(this))
-            div.appendChild(editDiv)
+            let cardDiv = document.createElement('div')
+            cardDiv.className = "company-card"
+            cardDiv.setAttribute('id', 'card-' + company.id)
 
+            // Create edit and delete buttons for company card.
+
+            let editCardDiv = document.createElement('div')
+            let editButton = document.createElement('button')
             let deleteButton = document.createElement('button')
-            deleteButton.className = "delete"
-            deleteButton.setAttribute('id', 'delete-' + company.id)
-            deleteButton.innerHTML = "Delete"
-            deleteButton.style.display = "none"
-            div.appendChild(deleteButton)
 
-            let divInfo = document.createElement('div')
-            divInfo.className = "company-info"
-            divInfo.setAttribute('id', 'company-info-' + company.id)
-
-            let a = document.createElement('a')
-            a.text = company.name
-            a.href = `${company.url}`
-            divInfo.appendChild(a)
-
-            let ulCompanyInfo = document.createElement('ul')
-
+<<<<<<< HEAD
             let ul = document.createElement('ul')
 
             let ul = document.createElement('ul')
@@ -77,574 +69,426 @@ class Companies {
 =======
             ul.appendChild(companyUrl).innerHTML = company.url
 >>>>>>> ca7936cd5a4b6f8b16d8e0a70d25e82af92374e6
+=======
+            editCardDiv.className = 'company-edit'
+            editButton.className = "edit-company-button"
+            editButton.innerHTML = '...'
+            deleteButton.className = "delete-company-button"
+            deleteButton.innerHTML = "Delete"
+            deleteButton.style.display = 'none'
+>>>>>>> 65f3243808f145797ce84ccd7867cdb932aa1ac8
 
-            let locationLi = document.createElement('li')
-            ulCompanyInfo.appendChild(locationLi).innerHTML = company.location
+            editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
+            deleteButton.addEventListener('click', this.deleteCompany.bind(this))
 
-            let dateLi = document.createElement('li')
-            ulCompanyInfo.appendChild(dateLi).innerHTML = company.renderDate()
+            editCardDiv.appendChild(editButton)
+            editCardDiv.appendChild(deleteButton)
+            cardDiv.appendChild(editCardDiv)
 
-            let statusLi = document.createElement('li')
-            ulCompanyInfo.appendChild(statusLi).innerHTML = company.status
-            let companyInfo = divInfo.appendChild(ulCompanyInfo)
+            // Create company info elements such as: name, url, location, date, and status.
 
-            div.appendChild(divInfo)
+            let companyInfoDiv = document.createElement('div')
+            let companyHead = document.createElement('a')
+            let ulCompanyInfo = document.createElement('ul')
+            let liName = document.createElement('li')
+            let liUrl = document.createElement('li')
+            let liLocation = document.createElement('li')
+            let liDate = document.createElement('li')
+            let liStatus = document.createElement('li')
+
+            companyInfoDiv.className = "company-info"
+            companyHead.href = company.url
+            liName.style.display = 'none'
+            liUrl.style.display = 'none'
+
+            ulCompanyInfo.appendChild(liName).innerHTML = company.name
+            ulCompanyInfo.appendChild(liUrl).innerHTML = company.url
+            ulCompanyInfo.appendChild(liLocation).innerHTML = company.location
+            ulCompanyInfo.appendChild(liDate).innerHTML = new Company(company).renderDate
+            ulCompanyInfo.appendChild(liStatus).innerHTML = company.status
+            companyInfoDiv.appendChild(companyHead).innerHTML = company.name
+            companyInfoDiv.appendChild(ulCompanyInfo)
+            cardDiv.appendChild(companyInfoDiv)
+
+            // Create company comments.
 
             let divComments = document.createElement('div')
-            divComments.className = 'company-comments'
-            divComments.setAttribute('id', 'company-comments-' + company.id)
-
             let ulComments = document.createElement('ul')
-            ulComments.className = 'comments'
 
-            for (let comment of company.comments) {
+            company.comments.forEach(comment => {
                 let commentLi = document.createElement('li')
-                commentLi.setAttribute('id', 'comment-' + comment.id)
-                ulComments.appendChild(commentLi).innerHTML = comment.content
-
                 let deleteButton = document.createElement('button')
-                deleteButton.innerHTML = "Delete"
-                deleteButton.setAttribute('id', comment.id)
+
+                commentLi.setAttribute('id', 'comment-' + comment.id)
                 deleteButton.className = 'delete-comment-button'
+
                 deleteButton.addEventListener('click', this.deleteComment.bind(this))
-                commentLi.appendChild(deleteButton)
-            }
+
+                ulComments.appendChild(commentLi).innerHTML = comment.content
+                company.status === "Awaiting Response" ? commentLi.appendChild(deleteButton).innerHTML = 'x':false
+            })
+
+            divComments.className = 'company-comments'
 
             divComments.appendChild(ulComments)
-            div.appendChild(divComments)
+            cardDiv.appendChild(divComments)
 
-            let responseButton = document.createElement("button");
-            responseButton.innerHTML = "Response"
-            responseButton.setAttribute('id', 'approved-' + company.id)
-            responseButton.addEventListener('click', this.responseResponse.bind(this))
-            div.appendChild(responseButton)
+            // Create status update and leave comment buttons.
 
-            let rejectedButton = document.createElement("button");
-            rejectedButton.innerHTML = "Rejected"
-            rejectedButton.setAttribute('id', 'rejected-' + company.id)
-            rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
-            div.appendChild(rejectedButton)
-
+            let updateCompanyDiv = document.createElement('div')
+            let acceptButton = document.createElement("button");
+            let rejectButton = document.createElement("button");
+            let awaitButton = document.createElement("button");
             let commentButton = document.createElement('button')
-            commentButton.innerHTML = "Leave a Comment"
-            commentButton.className = "comment"
-            commentButton.setAttribute('id', 'comment-' + company.id)
-            commentButton.addEventListener('click', this.leaveComment.bind(this))
-            div.appendChild(commentButton)
+            let commentForm = document.createElement('input')
+            let commentSubmitButton = document.createElement('input')
+            let exitSubmit = document.createElement('input')
 
-            companiesContainer.appendChild(div)
+            updateCompanyDiv.className = 'company-update'
+            acceptButton.className = 'response-button'
+            rejectButton.className = 'response-button'
+            awaitButton.className = 'await-button'
+            awaitButton.style.display = 'none'
+            commentButton.className = 'comment-button'
+            commentForm.className = 'comment-form'
+            commentForm.style.display = 'none'
+            commentSubmitButton.setAttribute('type', 'submit')
+            commentSubmitButton.className = 'submit-comment-button'
+            commentSubmitButton.style.display = 'none'
+            exitSubmit.className = 'exit-comment-button'
+            exitSubmit.setAttribute('type', 'submit')
+            exitSubmit.style.display = 'none'
 
-            // Changes background color depending on status.
+            acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            awaitButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+            commentButton.addEventListener('click', this.buttonComment.bind(this))
+            commentSubmitButton.addEventListener('click', this.createComment.bind(this))
+            exitSubmit.addEventListener('click', this.buttonComment.bind(this))
 
-            // if (company.status == "Accepted") {
-            //     div.style.backgroundColor = "#239B56"
-            //     rejectedButton.style.display = "none"
-            //     responseButton.style.display = "none"
-            // } else if (company.status == "Rejected") {
-            //     div.style.backgroundColor = "#E74C3C"
-            //     rejectedButton.style.display = "none"
-            //     responseButton.style.display = "none"
-            // }
+            updateCompanyDiv.appendChild(acceptButton).innerHTML = "Accepted"
+            updateCompanyDiv.appendChild(rejectButton).innerHTML = "Rejected"
+            updateCompanyDiv.appendChild(awaitButton).innerHTML = "Awaiting Response"
+            updateCompanyDiv.appendChild(commentButton).innerHTML = "Leave a Comment"
+            updateCompanyDiv.appendChild(commentForm)
+            updateCompanyDiv.appendChild(commentSubmitButton)
+            updateCompanyDiv.appendChild(exitSubmit).value = "Exit"
+            cardDiv.appendChild(updateCompanyDiv)
+            companyCardsContainer.appendChild(cardDiv)
+
+            // Changes background color depending on company status.
+
+            if (company.status == "Accepted" || company.status == "Rejected") {
+                rejectButton.style.display = 'none'
+                acceptButton.style.display = 'none'
+                commentButton.style.display = 'none'
+                cardDiv.style.opacity = 0.50;
+
+                company.status === "Accepted" ? cardDiv.style.backgroundColor = "#9EB371":false
+                company.status === "Rejected" ? cardDiv.style.backgroundColor = "#E17878":false
+            }
         }
-    }
-
-    render(company) {
-        let companiesContainer = document.querySelector('.company')
-
-        let div = document.createElement('div')
-        div.setAttribute('id', 'container-' + company.id)
-        div.className = "company-card"
-
-        let editDiv = document.createElement('button')
-        editDiv.className = "edit"
-        editDiv.setAttribute('id', 'edit-' + company.id)
-        editDiv.innerHTML = '...'
-        editDiv.addEventListener('focus', this.updateCompany.bind(this))
-        div.appendChild(editDiv)
-
-        let deleteButton = document.createElement('button')
-        deleteButton.className = "delete"
-        deleteButton.setAttribute('id', 'delete-' + company.id)
-        deleteButton.innerHTML = "Delete"
-        deleteButton.style.display = "none"
-        div.appendChild(deleteButton)
-
-        let a = document.createElement('a')
-        a.text = company.name
-        a.href = `${company.url}`
-        div.appendChild(a)
-
-        let ul = document.createElement('ul')
-
-        let companyUrl = document.createElement('li')
-        companyUrl.setAttribute('id', 'url-' + company.id)
-        companyUrl.style.display = "none"
-        ul.appendChild(companyUrl).innerHTML = company.url
-
-        let locationLi = document.createElement('li')
-        ul.appendChild(locationLi).innerHTML = company.location
-
-        let dateLi = document.createElement('li')
-        let date = new Date(company.date_applied)
-        let fullDate = date.toDateString()
-
-        let dateArray = fullDate.split(' ')
-        let month = dateArray[1]
-        let day = parseInt(dateArray[2]) + 1
-        let year = dateArray[3]
-
-        let modifiedDate = month + " " + day + " " + year
-
-        ul.appendChild(dateLi).innerHTML = modifiedDate
-
-        let statusLi = document.createElement('li')
-        ul.appendChild(statusLi).innerHTML = company.status
-        let companyInfo = div.appendChild(ul)
-
-        let responseButton = document. createElement("button");
-        responseButton.innerHTML = "Response"
-        responseButton.setAttribute('id', 'approved-' + company.id)
-        responseButton.addEventListener('click', this.responseResponse.bind(this))
-        div.appendChild(responseButton)
-
-        let rejectedButton = document. createElement("button");
-        rejectedButton.innerHTML = "Rejected"
-        rejectedButton.setAttribute('id', 'rejected-' + company.id)
-        rejectedButton.addEventListener('click', this.rejectedResponse.bind(this))
-        div.appendChild(rejectedButton)
-
-        companiesContainer.prepend(div)
-    }
-
-    bindingAndEventListener() {
-        this.companyForm = document.getElementById('new-company')
-        this.companyForm.addEventListener('submit', this.createCompany.bind(this))
-        
-        this.newCompanyName = document.getElementById('new-company-name')
-        this.newCompanyLocation = document.getElementById('new-company-location')
-        this.newCompanyUrl = document.getElementById('new-company-url')
-        this.newCompanyDate = document.getElementById('new-company-date')
-        this.newCompanyStatus = document.getElementById('new-company-status')
     }
 
     createCompany(e) {
-        e.preventDefault() // This prevents the default behavior. Anytime you submit a form, the default behavior is to refresh the page.
+        // After submitting a form, the default behavior is to refresh the page. The following line prevents that.
+        e.preventDefault();
 
-        console.log(this)
+        let newCompanyForm = document.querySelector('#new-company')
+        let newCompanyName = document.getElementById('new-company-name').value
+        let newCompanyLocation = document.getElementById('new-company-location').value
+        let newCompanyUrl = document.getElementById('new-company-url').value
+        let newCompanyDate = document.getElementById('new-company-date').value
 
-        const companyObject = {
-            name: this.newCompanyName.value,
-            location: this.newCompanyLocation.value,
-            url: this.newCompanyUrl.value,
-            date_applied: this.newCompanyDate.value,
+        const newCompany = {
+            name: newCompanyName,
+            location: newCompanyLocation,
+            url: newCompanyUrl,
+            date_applied: newCompanyDate,
         }
 
-        this.adapter.createCompany(companyObject).then(company => {
-            this.companies.push(new Company(company))
-            this.render(company);
+        this.adapterCompanies.createCompany(newCompany).then(company => {
+            this.render(new Array(company));
+            
+            newCompanyForm.reset();
+        })
+    }
 
-            // Clear form values
-            let newCompanyName = document.getElementById('new-company-name')
-            let newCompanyLocation = document.getElementById('new-company-location')
-            let newCompanyUrl = document.getElementById('new-company-url')
-            let newCompanyDate = document.getElementById('new-company-date')
+    buttonEditCompany(e) {
+        let companyCards = this
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let editButton = companyCard.querySelector(`.edit-company-button`)
+        let deleteButton = companyCard.querySelector(`.delete-company-button`)
+        let companyInfoDiv = companyCard.querySelector(`.company-info`)
+        let companyAnchor = companyCard.querySelector('a')
+        let companyName = companyCard.querySelector('ul li:nth-child(1)')
+        let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
+        let companyDate = companyCard.querySelector('ul li:nth-child(4)')
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        let companyStatusButtons = companyCard.querySelectorAll('.response-button')
+        let companyAwaitButton = companyCard.querySelector(`.await-button`)
+        let companyComments = companyCard.querySelectorAll('.company-comments ul li')
+        let commentButton = companyCard.querySelector('.comment-button')
+        let commentInputs = companyCard.querySelectorAll('input')
 
-            newCompanyName.value = null
-            newCompanyLocation.value = null
-            newCompanyUrl.value = null
-            newCompanyDate.value = null
+        editButton.style.display = 'none'
+        deleteButton.style.display = null
+        companyAnchor.style.display = 'none'
+        companyName.style.display = null
+        companyUrl.style.display = null
+        companyStatus.style.display = 'none'
+        companyDate.style.display = 'none'
+        companyComments.forEach(companyComment => companyComment.style.display = 'none')
+        companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
+        companyAwaitButton.style.display = null
+        commentButton.style.display = 'none'
+        commentInputs.forEach(commentInput => commentInput.style.display = 'none')
+
+        // The code below does the following:
+        // User will be able to edit content if content is double-clicked within card.
+        // Else the edit buttons will default to default card position.
+
+        window.addEventListener('dblclick', function(e) {   
+            if (companyInfoDiv.contains(e.target)) {
+                companyCards.updateCompany(e)
+            } else {
+              e.target.contentEditable = false
+              editButton.style.display = null
+              deleteButton.style.display = 'none'
+              companyAnchor.style.display = null
+              companyName.style.display = 'none'
+              companyUrl.style.display = 'none'
+              companyStatus.style.display = null
+              companyDate.style.display = null
+              companyComments.forEach(companyComment => companyComment.style.display = null)
+              companyAwaitButton.style.display = 'none'
+
+              if (companyStatus.innerHTML === "Awaiting Response") {
+                companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = null)
+                commentButton.style.display = null
+              } else {
+                companyStatusButtons.forEach(companyStatusButton => companyStatusButton.style.display = 'none')
+                commentButton.style.display = 'none'
+              }
+            }
         })
     }
 
     updateCompany(e) {
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
-        let editContainer = document.querySelector(`#company-info-${selectedId}`)
+        let companyCards = this
+        let companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyHead = companyCard.querySelector('a')
+        let editInfo = e.target
 
-        let displayUrl = document.querySelector(`li#url-${selectedId}`)
-        displayUrl.style.display = null
-        displayUrl.style.visibility = "visible"
-        displayUrl.style.overflow = 'hidden'
+        editInfo.contentEditable = true
 
-        let editButton = document.querySelector(`#edit-${selectedId}`)
-        editButton.style.display = "none"
+        editInfo.addEventListener('keydown', function(e) {
+            if (e.key == "Enter") {
+                let companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
+                let companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
+                let companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
 
-        let deleteButton = document.querySelector(`#delete-${selectedId}`)
-        deleteButton.style.display = null
-        deleteButton.style.visibility = "visible"
-        deleteButton.addEventListener('click', this.deleteCompany.bind(this))
-        
-
-        // Exits out of edit
-
-        window.addEventListener('dblclick', function(e) {   
-            if (editContainer.contains(e.target)){
-                let edit = e.target
-
-                // if edit button = none then contenteditable is true
-                if (editButton.style.display === "none") {
-                    edit.contentEditable = true
+                let updatedCompanyObject = {
+                    name: companyNameValue,
+                    url: companyUrlValue,
+                    location: companyLocationValue,
                 }
-                // end
-                
-            edit.addEventListener('keydown', function(e) {
-                if (event.key == "Enter") {
-                    const newValue = edit.innerHTML
 
-                    // Company Object
-
-                    let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-                    let companyUrl =  document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-                    let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-                    let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
-                    let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
-
-                    let newCompanyObject = {
-                        name: companyName,
-                        url: companyUrl,
-                        location: companyLocation,
-                        date_applied: companyDate,
-                        status: companyResponse
-                    }
-
-                    // Comments Object
-
-                    document.querySelector(`#container-${selectedId} a`).href = companyUrl
-                    savedThis.adapter.updateCompany(newCompanyObject, newValue, selectedId)
-                    edit.contentEditable = false
-                }
-            })
-            } else{
-                editButton.style.display = null
-                editButton.style.visibility = "visible"
-                deleteButton.style.display = "none"
-                e.target.contentEditable = false
-                displayUrl.style.display = "none"
+                companyCards.adapterCompanies.updateCompany(updatedCompanyObject, companyId).then(company => {
+                    editInfo.contentEditable = false
+                    companyHead.href = companyUrlValue
+                    companyHead.innerHTML = companyNameValue
+                })
             }
-          });
+        })
+    }
+
+    updateCompanyStatus(e) {
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let awaitButton = companyCard.querySelector(`.await-button`)
+        let commentButton = companyCard.querySelector('.comment-button')
+        let commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
+        let statusPick = e.target.innerHTML
+
+        let updateCompanyStatus = {
+            status: statusPick
+        }
+
+        this.adapterCompanies.updateCompany(updateCompanyStatus, companyId).then(company => {
+            if (statusPick === "Rejected") {
+                companyCard.style.backgroundColor = "#AE4747"
+                companyStatus.innerHTML = 'Rejected'
+                companyCard.style.opacity = 0.50;
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
+            } else if (statusPick === "Accepted") {
+                companyCard.style.backgroundColor = "#77A867"
+                companyStatus.innerHTML = 'Accepted'
+                companyCard.style.opacity = 0.50;
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = 'none'})
+            } else {
+                companyCard.style.backgroundColor = '#EAE6DF'
+                companyCard.style.opacity = null;
+                companyStatus.innerHTML = 'Awaiting Response'
+                commentDeleteButtons.forEach(commentDeleteButton => {commentDeleteButton.style.display = null})
+            }
+            responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
+            awaitButton.style.display = 'none'
+            commentButton.style.display = 'none'
+        })
     }
 
     deleteCompany(e) {
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyComments = companyCard.querySelectorAll('.company-comments li')
 
-        let companyName = document.querySelector(`#container-${selectedId} a`).innerText
-        let companyUrl = document.querySelector(`#container-${selectedId} a`).href
-        let companyLocation = document.querySelector(`#container-${selectedId} ul li:nth-child(1)`).innerText
-        let companyDate = document.querySelector(`#container-${selectedId} ul li:nth-child(2)`).innerText
-        let companyTakeaway = document.querySelector(`#container-${selectedId} ul li:nth-child(3)`).innerText
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
+        companyComments.forEach(companyComment => {
+            let commentId = companyComment.id.split('-')[1]
+            this.adapterComments.deleteComment(commentId)
+        })
 
-        let newCompanyObject = {
-            name: companyName,
-            location: companyLocation,
-            url: companyUrl,
-            date_applied: companyDate,
-            takeaway: companyTakeaway,
-            status: companyResponse
-        }
-
-        savedThis.adapter.deleteCompany(newCompanyObject, selectedId)
-
-        let cards = document.querySelector('.company')
-        let card = document.querySelector(`#container-${selectedId}`)
-        cards.removeChild(card)
-    }
-
-    rejectedResponse(e) {
-        e.preventDefault
-        
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
-
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
-
-        let newCompanyObject = {
-            status: "Rejected"
-        }
-
-        savedThis.adapter.rejectedStatusUpdate(newCompanyObject, selectedId)
-
-        // Change company card's response to "Rejected"
-        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Rejected"
-
-        let companyCard = document.querySelector(`#container-${selectedId}`)
-        companyCard.style.backgroundColor = "#E74C3C"
-
-        // Buttons will disappear
-
-        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
-
-        // acceptButton.style.display = "none"
-        // rejectButton.style.display = "none"
-    }
-
-    responseResponse(e) {
-        e.preventDefault
-        
-        let savedThis = this
-        let selectedId = e.target.id.split('-')[1]
-
-        let companyResponse = document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText
-
-        let newCompanyObject = {
-            status: "Accepted"
-        }
-
-        savedThis.adapter.approvedStatusUpdate(newCompanyObject, selectedId)
-
-        // Change company card's response to "Approved"
-        document.querySelector(`#container-${selectedId} ul li:nth-child(4)`).innerText = "Accepted"
-
-        let companyCard = document.querySelector(`#container-${selectedId}`)
-        companyCard.style.backgroundColor = "#239B56"
-
-        
-        // Buttons will disappear
-
-        // let acceptButton = document.querySelector(`#approved-${selectedId}`)
-        // let rejectButton = document.querySelector(`#rejected-${selectedId}`)
-
-        // acceptButton.style.display = "none"
-        // rejectButton.style.display = "none"
-    }
-
-    filterStatus() {
-        let companies = this.companies
-    
-        document.querySelector('#status-dropdown').addEventListener('change', function(e) {
-            
-            let statusPick = document.querySelector('#status-dropdown').value
-            let companyCards = document.querySelectorAll('.company-card')
-            
-            for (let companyCard of companyCards) {
-                companyCard.style.display = "none"
-
-                let companyId = companyCard.id.split('-')[1]
-                let companyResponse = companyCard.querySelector(`ul li:nth-child(4)`).innerText
-
-                if (companyResponse == statusPick) {
-                    companyCard.style.display = null
-                    companyCard.style.visibility = "visible"
-                    document.querySelector('#status-dropdown').selectedIndex = null
-                } else if (statusPick == "All") {
-                    for (let companyCard of companyCards) {
-                        companyCard.style.display = null
-                        companyCard.style.visibility = "visible"
-                        document.querySelector('#status-dropdown').selectedIndex = null
-                    }
-                }
-             }
+        // Communicate with the database to delete company.
+        this.adapterCompanies.deleteCompany(companyId).then(companyObject => {
+            companyCard.remove()
         })
     }
 
-    filterDate() {
-        let companies = this.companies
-        let companyCards = document.querySelectorAll('.company-card')
-    
-        document.querySelector('#date-dropdown').addEventListener('change', function(e) {
-
-            for (let companyCard of companyCards) {
-                companyCard.style.display = "none"
-            }
-
-            let today = new Date();
-            let thisMonth = today.getMonth() + 1 // 8
-            let lastMonth = today.getMonth() - 1 // 7
-            let datePick = document.querySelector('#date-dropdown').value
-
-            for (let companyCard of companyCards) {
-                let companyId = companyCard.id.split('-')[1]
-                let companyDate = companyCard.querySelector(`ul li:nth-child(3)`).innerText // Fri Aug 07 2020
-                let companyNewDate = new Date(companyDate) // Fri Aug 07 2020 00:00:00 GMT-0700 (Pacific Daylight Time)
-                let companyNewMonth = companyNewDate.getMonth() + 1 // 8
-
-                if (datePick == "This Month") {
-                    if (companyNewMonth == thisMonth) {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
-                    }
-                } else if (datePick == "Last Month") {
-                    if (companyNewMonth == lastMonth) {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
-                    }
-                } else if (datePick == "All") {
-                        companyCard.style.display = null
-                        companyCard.visibility = "visible"
-                        document.querySelector('#date-dropdown').selectedIndex = null
-                }
-            }
-        })
-    }
-
-    bindStatistics() {
-        let companies = this
-
-        let companyCards = document.querySelector('.company')
-        let statisticsContainer = document.querySelector('.statistics')
-        let statisticsButton = document.querySelector('.statistics-click')
-        let cardsButton = document.querySelector('.cards-click')
-
-        statisticsContainer.style.display = "none"
-        cardsButton.style.display = "none"
-
-        statisticsButton.addEventListener('click', function(e) {
-            companyCards.style.display = "none"
+    showContent(e) {
+        if (e.target.innerHTML === "View Statistics") {
+            companyCardsContainer.style.display = 'none'
             statisticsContainer.style.display = null
-            statisticsButton.style.display = "none"
+            statisticsButton.style.display = 'none'
             cardsButton.style.display = null
-
-            companies.statistics()
-        })
-    }
-
-    bindCards() {
-
-        let companyCards = document.querySelector('.company')
-        let statisticsContainer = document.querySelector('.statistics')
-        let statisticsButton = document.querySelector('.statistics-click')
-        let cardsButton = document.querySelector('.cards-click')
-
-        cardsButton.addEventListener('click', function(e) {
-            companyCards.style.display = null
+            this.statistics()
+        } else if (e.target.innerHTML === "View Cards") {
+            companyCardsContainer.style.display = null
             statisticsContainer.style.display = "none"
             statisticsButton.style.display = null
             cardsButton.style.display = "none"
-        })
+        }
     }
 
     statistics() {
-        let acceptedArray = []
-        let rejectedArray = []
-        let awaitingArray = []
+        let acceptedCompanies = new Array
+        let rejectedCompanies = new Array
+        let awaitingCompanies = new Array
+        let companyCards = document.querySelectorAll('.company-card')
 
-        this.adapter.getCompanies()
-        .then(companies => {
-            companies.forEach(company => {
-                if (company.status == "Accepted") {
-                    acceptedArray.push(company)
-                } else if (company.status == "Rejected") {
-                    rejectedArray.push(company)
-                } else {
-                    awaitingArray.push(company)
-                }
-            })
-        })
+        companyCards.forEach(companyCard => {
+            let companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
+            let table = document.querySelector('.total table tbody')
+            let tableData = document.querySelector('.total tr:nth-child(2)')
+            let trData = document.createElement('tr')
+            let tdAccepted = document.createElement('td')
+            let tdRejected = document.createElement('td')
+            let tdAwaiting = document.createElement('td')
+            let tdTotal = document.createElement('td')
 
-        let tr = document.querySelector('#total-input')
-
-        let tdAccepted = document.createElement('td')
-        tdAccepted.innerHTML = acceptedArray.length
-        tr.appendChild(tdAccepted)
-
-        let tdRejected = document.createElement('td')
-        tdRejected.innerHTML = rejectedArray.length
-        tr.appendChild(tdRejected)
-
-        let tdAwaiting = document.createElement('td')
-        tdAwaiting.innerHTML = awaitingArray.length
-        tr.appendChild(tdAwaiting)
-
-        let tdTotal = document.createElement('td')
-        tdTotal.innerHTML = acceptedArray.length + rejectedArray.length + awaitingArray.length
-        tr.appendChild(tdTotal)
-    }
-
-    leaveComment(e) {
-        let selectedId = e.target.id.split('-')[1]
-        let companies = this
-
-        let form = document.createElement('input')
-        let companyCard = document.querySelector(`#container-${selectedId}`)
-        let commentSubmit = document.createElement('input')
-        commentSubmit.setAttribute('type', 'submit')
-
-                
-        // Leave comment button disappears
-        let commentButton = document.querySelector(`button#comment-${selectedId}`)
-        companyCard.removeChild(commentButton)
-        //
-
-        let exitSubmit = document.createElement('input')
-        exitSubmit.setAttribute('type', 'submit')
-        exitSubmit.value = "Exit"
-
-        companyCard.appendChild(form)
-        companyCard.appendChild(commentSubmit)
-        companyCard.appendChild(exitSubmit)
-
-        exitSubmit.addEventListener('click', function() {
-            companyCard.removeChild(form)
-            companyCard.removeChild(commentSubmit)
-            companyCard.removeChild(exitSubmit)
-            companyCard.appendChild(commentButton)
-
-        })
-
-        commentSubmit.addEventListener('click', function() {            
-            let commentValue = document.querySelector(`#container-${selectedId} input`).value
-
-            let commentObject = {
-                content: commentValue,
-                company_id: selectedId
+            switch (companyStatus) {
+                case "Accepted":
+                    acceptedCompanies.push(companyCard)
+                    break;
+                case "Rejected":
+                    rejectedCompanies.push(companyCard)
+                    break;
+                case "Awaiting Response":
+                    awaitingCompanies.push(companyCard)
+                    break;
             }
 
-            //Good up to this point. Now I have to CREATE the comment (link it to the database)
+            tdAccepted.innerHTML = acceptedCompanies.length
+            tdRejected.innerHTML = rejectedCompanies.length
+            tdAwaiting.innerHTML = awaitingCompanies.length
+            tdTotal.innerHTML = acceptedCompanies.length + rejectedCompanies.length + awaitingCompanies.length
 
-            companies.adapterComments.createComment(commentObject).then(comment => {
-
-                let ulComment = companyCard.querySelector(`ul.comments`)
-                let li = document.createElement('li')
-                li.setAttribute('id', 'comment-' + comment.id)
-                li.innerHTML = commentValue
+            trData.appendChild(tdAccepted)
+            trData.appendChild(tdRejected)
+            trData.appendChild(tdAwaiting)
+            trData.appendChild(tdTotal)
     
-                let deleteButton = document.createElement('button')
-                deleteButton.setAttribute('id', comment.id)
-                deleteButton.innerHTML = "Delete"
-                deleteButton.className = 'delete-comment-button'
-                li.appendChild(deleteButton)
-                deleteButton.addEventListener('click', companies.deleteComment.bind(companies))
-                
-                ulComment.appendChild(li)
+            tableData != null ? tableData.remove():false
     
-    
-                // The input disappears.
-                companyCard.removeChild(form)
-                companyCard.removeChild(commentSubmit)
-                companyCard.removeChild(exitSubmit)
-                companyCard.appendChild(commentButton)
-            })
+            table.appendChild(trData)
+        })
+    }
 
-            // Up until this point, comments are created into the database. Next step:
-            // Upon comment submission, append comment to company-card.
+    filter() {
+        const companyCards = document.querySelectorAll('.company-card')
+        let statusPick = document.querySelector('#status-dropdown').value
+        let datePick = document.querySelector('#date-dropdown').value
+        let thisMonth = new Date().getMonth() + 1
+        let lastMonth = new Date().getMonth() + 1 - 1
 
+        companyCards.forEach(companyCard => {
+            let companyStatus = companyCard.querySelector('.company-info ul li:nth-child(5)').innerHTML
+            let companyDate = companyCard.querySelector(`.company-info ul li:nth-child(4)`).innerHTML
+            let companyMonth = new Date(companyDate).getMonth() + 1
+
+            companyCard.style.display = 'none'
+            
+            if (companyStatus === statusPick || statusPick === "All" || (datePick === "This Month" && companyMonth === thisMonth) || (datePick == "Last Month" && companyMonth === lastMonth) || datePick === "All") {
+                companyCard.style.display = null
+                document.querySelector('#status-dropdown').selectedIndex = null
+                document.querySelector('#date-dropdown').selectedIndex = null
+            }
+        })
+    }
+
+    buttonComment(e) {
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        const commentButton = companyCard.querySelector(`.comment-button`)
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
+        const commentForm = companyCard.querySelector('input')
+        const commentSubmit = companyCard.querySelector('.submit-comment-button')
+        const commentExit = companyCard.querySelector('.exit-comment-button')
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
+
+        if (e.target.innerHTML === "Leave a Comment") {
+            commentButton.style.display = 'none'
+            commentForm.style.display = null
+            commentSubmit.style.display = null
+            commentExit.style.display = null
+            responseButtons.forEach(responseButton => {responseButton.style.display = 'none'})
+
+        } else {
+            commentButton.style.display = null
+            commentForm.style.display = 'none'
+            commentSubmit.style.display = 'none'
+            commentExit.style.display = 'none'
+            responseButtons.forEach(responseButton => { companyStatus === "Awaiting Response" ? responseButton.style.display = null:false })
+        }
+    }
+
+    createComment(e) {
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCards = document.querySelectorAll(`.company-card`)
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let commentValue = companyCard.querySelector(`input`).value
+
+        let commentObject = {
+            content: commentValue,
+            company_id: companyId
+        }
+
+        this.adapterComments.createComment(commentObject).then(comment => {
+            companyCards.forEach(companyCard => { companyCard.remove() })
+            this.fetchCompanies()
         })
     }
 
     deleteComment(e) {
-        console.log(e.target)
-        console.log(this)
+        let commentId = e.target.parentNode.id.split('-')[1]
 
-        let commentId = e.target.id
-        let companies = this
-
-        let commentValue = document.querySelector(`.comments #comment-${commentId}`).innerText.split('D')[0]
-
-        let commentObject = {
-            content: commentValue,
-            company_id: commentId
-        }
-
-        companies.adapterComments.deleteComment(commentObject, commentId)
-
-        // Remove comment from DOM
-        
-        let commentLi = document.querySelector(`#comment-${commentId}`)
-
-        commentLi.parentNode.removeChild(commentLi)
+        // Communicate with the database.
+        this.adapterComments.deleteComment(commentId).then(comment => {
+            let commentLi = document.querySelector(`#comment-${commentId}`)
+            commentLi.remove()
+        })
     }
 }

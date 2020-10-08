@@ -23,7 +23,7 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
-    updateCompany(newCompanyObject, value, id) {
+    updateCompany(newCompanyObject, id) {
         const company = newCompanyObject
 
         return fetch(`${this.baseUrl}/${id}`, {
@@ -35,40 +35,12 @@ class CompaniesAdapter {
         }).then(resp => resp.json())
     }
 
-    deleteCompany(newCompanyObject, id) {
-        const company = newCompanyObject
-
+    deleteCompany(id) {
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-            },
-            body: JSON.stringify({company}),
+            }
         }).then(resp => resp.json())
     }
-
-    rejectedStatusUpdate(newCompanyObject, id) {
-        const company = newCompanyObject
-
-        return fetch(`${this.baseUrl}/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({company}),
-        }).then(resp => resp.json())
-    }
-
-    approvedStatusUpdate(newCompanyObject, id) {
-        const company = newCompanyObject
-
-        return fetch(`${this.baseUrl}/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({company}),
-        }).then(resp => resp.json())
-    }
-
 }

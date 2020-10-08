@@ -1,5 +1,5 @@
 body {
-  background-color: #EBF5FB;
+  background-color: #D4C8BE;
   overflow-x: hidden;
  }
 
@@ -24,7 +24,7 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -42,6 +42,10 @@ body {
     margin: 1px;
   }
 
+  #new-company-submit {
+    width: 265px;
+  }
+
 /* Filter CSS */
 
   .filter {
@@ -50,7 +54,7 @@ body {
     text-align: center;
     border: 1px solid black;
     padding: 15px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
   }
 
@@ -85,7 +89,7 @@ body {
     padding-right: 17.5px;
     width: 262px;
     bottom: 437px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
     font-size: 30px;
   }
@@ -99,7 +103,7 @@ body {
     padding-right: 17.5px;
     width: 262px;
     bottom: 437px;
-    background-color: #F5F5F5;
+    background-color: #EAE6DF;
     box-shadow: -3px 3px 8px #888888;
     font-size: 30px;
   }
@@ -114,34 +118,40 @@ body {
 
   /* Cards */
 
-  .company {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+  .company-cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
-  .company-card {
-    border: 0.5px solid black;
+  .company-card, .total {
+    margin: 5px;
+    width: 225px;
     text-align: center;
     padding-bottom: 20px;
     overflow: hidden;
-    background-color: white;
+    background-color: #EAE6DF;
     border-radius: 10px;
     box-shadow: -3px 3px 8px #888888;
+  }
+  
+  .company-card:hover {
+    border: 0.75px solid black;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: -3px 3px 8px #888888;
+    opacity: 100% !important;
+    /* transition: 0.5s; */
   }
 
   .company-card a, a:visited {
     font-size: 35px;
     text-decoration: none;
-    font-family: 'Architects Daughter', cursive;
+    font-family: 'Amatic SC', cursive;
     color: black;
     margin-left: -20px;
-  }
-
-  .company-card a:hover {
-    background-color:  #99ccff;
-    transition: 3s;
-    opacity: 35%;
+    text-decoration: underline;
   }
 
   .company-card ul {
@@ -160,21 +170,9 @@ body {
     overflow-wrap: break-word;
   }
 
-  /* .company-card ul {
-    padding:0;
-    margin-left: -30px;
-    text-align: center;
-    width: 300px;
-    list-style: none;
-  } */
-
-  /* .company-card li {
-    padding: 1px;
-  } */
-
   /* Edit? */
 
-  .edit {
+  .edit-company-button {
     position: relative;
     height: 20px;
     width: 20px;
@@ -185,7 +183,7 @@ body {
     border-radius: 50%;
   }
 
-  .delete {
+  .delete-company-button {
     position: relative;
     height: 20px;
     width: 20px;
@@ -194,29 +192,53 @@ body {
     border: none;
     opacity: 50%;
     border-radius: 50%;
-  }
-
-  button {
-    display: inline-block;
-    width: 40%;
-    height: 30px;
-    margin: 1px;
-    margin-top: 10px;
-  }
-
-  /* Graph */
-
-  .table {
-    display: inline-block;
-  }
-
-  .graph {
-    display: inline-block;
-    float: right;
   }
 
   .delete-comment-button {
-    width: 20%;
-    height: 10%;
-    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    float: right;
+    margin-right: 5px;
   }
+
+  .response-button, .submit-comment-button, .exit-comment-button {
+    display: inline-block;
+    margin: 1px;
+    width: 100px;
+    height: 25px;
+  }
+
+  .await-button {
+    width: 202px;
+    height: 25px;
+    margin: 1px;
+  }
+
+  .comment-button {
+    vertical-align: bottom;
+    width: 202px;
+    height: 25px;
+    margin: 1px;
+  }
+
+  .comment-form {
+    width: 200px;
+    height: 35px;
+    margin: 5px;
+  }
+  
+  .statistics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+
+  /* .total {
+    border: 0.5px solid black;
+    text-align: center;
+    padding-bottom: 20px;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -3px 3px 8px #888888;
+  } */
