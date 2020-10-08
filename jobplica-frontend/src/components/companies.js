@@ -208,21 +208,21 @@ class Companies {
 
     buttonEditCompany(e) {
         const companyCards = this
-        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const editButton = companyCard.querySelector(`.edit-company-button`)
-        const deleteButton = companyCard.querySelector(`.delete-company-button`)
-        const companyInfoDiv = companyCard.querySelector(`.company-info`)
-        const companyAnchor = companyCard.querySelector('a')
-        const companyName = companyCard.querySelector('ul li:nth-child(1)')
-        const companyUrl = companyCard.querySelector('ul li:nth-child(2)')
-        const companyDate = companyCard.querySelector('ul li:nth-child(4)')
-        const companyStatus = companyCard.querySelector('ul li:nth-child(5)')
-        const companyStatusButtons = companyCard.querySelectorAll('.response-button')
-        const companyAwaitButton = companyCard.querySelector(`.await-button`)
-        const companyComments = companyCard.querySelectorAll('.company-comments ul li')
-        const commentButton = companyCard.querySelector('.comment-button')
-        const commentInputs = companyCard.querySelectorAll('input')
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let editButton = companyCard.querySelector(`.edit-company-button`)
+        let deleteButton = companyCard.querySelector(`.delete-company-button`)
+        let companyInfoDiv = companyCard.querySelector(`.company-info`)
+        let companyAnchor = companyCard.querySelector('a')
+        let companyName = companyCard.querySelector('ul li:nth-child(1)')
+        let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
+        let companyDate = companyCard.querySelector('ul li:nth-child(4)')
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        let companyStatusButtons = companyCard.querySelectorAll('.response-button')
+        let companyAwaitButton = companyCard.querySelector(`.await-button`)
+        let companyComments = companyCard.querySelectorAll('.company-comments ul li')
+        let commentButton = companyCard.querySelector('.comment-button')
+        let commentInputs = companyCard.querySelectorAll('input')
 
         editButton.style.display = 'none'
         deleteButton.style.display = null
@@ -269,18 +269,18 @@ class Companies {
 
     updateCompany(e) {
         const companyCards = this
-        const companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const companyHead = companyCard.querySelector('a')
-        const editInfo = e.target
+        let companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyHead = companyCard.querySelector('a')
+        let editInfo = e.target
 
         editInfo.contentEditable = true
 
         editInfo.addEventListener('keydown', function(e) {
             if (e.key == "Enter") {
-                const companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
-                const companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
-                const companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
+                let companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
+                let companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
+                let companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
 
                 const updatedCompanyObject = {
                     name: companyNameValue,
@@ -298,16 +298,16 @@ class Companies {
     }
 
     updateCompanyStatus(e) {
-        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const companyStatus = companyCard.querySelector('ul li:nth-child(5)')
-        const responseButtons = companyCard.querySelectorAll(`.response-button`)
-        const awaitButton = companyCard.querySelector(`.await-button`)
-        const commentButton = companyCard.querySelector('.comment-button')
-        const commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
-        const statusPick = e.target.innerHTML
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let awaitButton = companyCard.querySelector(`.await-button`)
+        let commentButton = companyCard.querySelector('.comment-button')
+        let commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
+        let statusPick = e.target.innerHTML
 
-        const updateCompanyStatus = {
+        let updateCompanyStatus = {
             status: statusPick
         }
 
@@ -335,12 +335,12 @@ class Companies {
     }
 
     deleteCompany(e) {
-        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const companyComments = companyCard.querySelectorAll('.company-comments li')
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let companyComments = companyCard.querySelectorAll('.company-comments li')
 
         companyComments.forEach(companyComment => {
-            const commentId = companyComment.id.split('-')[1]
+            let commentId = companyComment.id.split('-')[1]
             this.adapterComments.deleteComment(commentId)
         })
 
@@ -366,15 +366,15 @@ class Companies {
     }
 
     statistics() {
-        const acceptedCompanies = new Array
-        const rejectedCompanies = new Array
-        const awaitingCompanies = new Array
-        const companyCards = document.querySelectorAll('.company-card')
+        let acceptedCompanies = new Array
+        let rejectedCompanies = new Array
+        let awaitingCompanies = new Array
+        let companyCards = document.querySelectorAll('.company-card')
 
         companyCards.forEach(companyCard => {
-            const companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
-            const table = document.querySelector('.total table tbody')
-            const tableData = document.querySelector('.total tr:nth-child(2)')
+            let companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
+            let table = document.querySelector('.total table tbody')
+            let tableData = document.querySelector('.total tr:nth-child(2)')
             const trData = document.createElement('tr')
             const tdAccepted = document.createElement('td')
             const tdRejected = document.createElement('td')
@@ -410,7 +410,7 @@ class Companies {
     }
 
     filter() {
-        const companyCards = document.querySelectorAll('.company-card')
+        let companyCards = document.querySelectorAll('.company-card')
         let statusPick = document.querySelector('#status-dropdown').value
         let datePick = document.querySelector('#date-dropdown').value
         let thisMonth = new Date().getMonth() + 1
@@ -432,14 +432,14 @@ class Companies {
     }
 
     buttonComment(e) {
-        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const commentButton = companyCard.querySelector(`.comment-button`)
-        const companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
-        const commentForm = companyCard.querySelector('input')
-        const commentSubmit = companyCard.querySelector('.submit-comment-button')
-        const commentExit = companyCard.querySelector('.exit-comment-button')
-        const responseButtons = companyCard.querySelectorAll(`.response-button`)
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let commentButton = companyCard.querySelector(`.comment-button`)
+        let companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
+        let commentForm = companyCard.querySelector('input')
+        let commentSubmit = companyCard.querySelector('.submit-comment-button')
+        let commentExit = companyCard.querySelector('.exit-comment-button')
+        let responseButtons = companyCard.querySelectorAll(`.response-button`)
 
         if (e.target.innerHTML === "Leave a Comment") {
             commentButton.style.display = 'none'
@@ -458,10 +458,10 @@ class Companies {
     }
 
     createComment(e) {
-        const companyCards = document.querySelectorAll(`.company-card`)
-        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        const companyCard = document.querySelector(`#card-${companyId}`)
-        const commentValue = companyCard.querySelector(`input`).value
+        let companyCards = document.querySelectorAll(`.company-card`)
+        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        let companyCard = document.querySelector(`#card-${companyId}`)
+        let commentValue = companyCard.querySelector(`input`).value
 
         const newComment = {
             company_id: companyId,
@@ -475,8 +475,8 @@ class Companies {
     }
 
     deleteComment(e) {
-        const commentId = e.target.parentNode.id.split('-')[1]
-        const commentLi = document.querySelector(`#comment-${commentId}`)
+        let commentId = e.target.parentNode.id.split('-')[1]
+        let commentLi = document.querySelector(`#comment-${commentId}`)
 
         this.adapterComments.deleteComment(commentId).then(comment => {
             commentLi.remove()
