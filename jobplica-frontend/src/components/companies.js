@@ -36,21 +36,21 @@ class Companies {
 
             // Create company card div.
 
-            let cardDiv = document.createElement('div')
+            const cardDiv = document.createElement('div')
                 cardDiv.className = "company-card"
                 cardDiv.setAttribute('id', 'card-' + company.id)
 
             // Create edit and delete buttons for company card.
 
-            let editButtonsDiv = document.createElement('div')
+            const editButtonsDiv = document.createElement('div')
                 editButtonsDiv.className = 'company-edit'
 
-            let editButton = document.createElement('button')
+            const editButton = document.createElement('button')
                 editButton.className = "edit-company-button"
                 editButton.innerHTML = '...'
                 editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
 
-            let deleteButton = document.createElement('button')   
+            const deleteButton = document.createElement('button')   
                 deleteButton.className = "delete-company-button"
                 deleteButton.innerHTML = "Delete"
                 deleteButton.style.display = 'none'
@@ -62,30 +62,30 @@ class Companies {
 
             // Create company info elements such as: name, url, location, date, and status.
 
-            let companyInfoDiv = document.createElement('div')
+            const companyInfoDiv = document.createElement('div')
                 companyInfoDiv.className = 'company-info'
 
-            let companyHead = document.createElement('a')
+            const companyHead = document.createElement('a')
                 companyHead.href = company.url
                 companyHead.innerHTML = company.name
 
-            let ulCompanyInfo = document.createElement('ul')
+            const ulCompanyInfo = document.createElement('ul')
 
-                let liName = document.createElement('li')
+                const liName = document.createElement('li')
                     liName.style.display = 'none'
                     liName.innerHTML = company.name
 
-                let liUrl = document.createElement('li')
+                const liUrl = document.createElement('li')
                     liUrl.style.display = 'none'
                     liUrl.innerHTML = company.url
 
-                let liLocation = document.createElement('li')
+                const liLocation = document.createElement('li')
                     liLocation.innerHTML = company.location
 
-                let liDate = document.createElement('li')
+                const liDate = document.createElement('li')
                     liDate.innerHTML = new Company(company).renderDate
 
-                let liStatus = document.createElement('li')
+                const liStatus = document.createElement('li')
                     liStatus.innerHTML = company.status
 
             ulCompanyInfo.appendChild(liName)
@@ -99,16 +99,16 @@ class Companies {
 
             // Create company comments.
 
-            let divComments = document.createElement('div')
+            const divComments = document.createElement('div')
                 divComments.className = 'company-comments'
 
-            let ulComments = document.createElement('ul')
+            const ulComments = document.createElement('ul')
 
                 company.comments.forEach(comment => {
-                    let commentLi = document.createElement('li')
+                    const commentLi = document.createElement('li')
                         commentLi.setAttribute('id', 'comment-' + comment.id)
                         commentLi.innerHTML = comment.content
-                    let deleteButton = document.createElement('button')
+                    const deleteButton = document.createElement('button')
                         deleteButton.className = 'delete-comment-button'
                         deleteButton.addEventListener('click', this.deleteComment.bind(this))
 
@@ -120,42 +120,42 @@ class Companies {
             cardDiv.appendChild(divComments)
 
             // Create status update and leave comment buttons.
-            
-            let updateCompanyDiv = document.createElement('div')
+
+            const updateCompanyDiv = document.createElement('div')
                 updateCompanyDiv.className = 'company-update'
 
-            let acceptButton = document.createElement("button");
+            const acceptButton = document.createElement("button");
                 acceptButton.className = 'response-button'
                 acceptButton.innerHTML = 'Accepted'
                 acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
 
-            let rejectButton = document.createElement("button");
+            const rejectButton = document.createElement("button");
                 rejectButton.className = 'response-button'
                 rejectButton.innerHTML = 'Rejected'
                 rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
 
-            let awaitButton = document.createElement("button");
+            const awaitButton = document.createElement("button");
                 awaitButton.className = 'await-button'
                 awaitButton.style.display = 'none'
                 awaitButton.innerHTML = 'Awaiting Response'
                 awaitButton.addEventListener('click', this.updateCompanyStatus.bind(this))
 
-            let commentButton = document.createElement('button')
+            const commentButton = document.createElement('button')
                 commentButton.className = 'comment-button'
                 commentButton.innerHTML = 'Leave a Comment'
                 commentButton.addEventListener('click', this.buttonComment.bind(this))
 
-            let commentForm = document.createElement('input')
+            const commentForm = document.createElement('input')
                 commentForm.className = 'comment-form'
                 commentForm.style.display = 'none'
 
-            let commentSubmitButton = document.createElement('input')
+            const commentSubmitButton = document.createElement('input')
                 commentSubmitButton.setAttribute('type', 'submit')
                 commentSubmitButton.className = 'submit-comment-button'
                 commentSubmitButton.style.display = 'none'
                 commentSubmitButton.addEventListener('click', this.createComment.bind(this))
 
-            let exitSubmit = document.createElement('input')
+            const exitSubmit = document.createElement('input')
                 exitSubmit.className = 'exit-comment-button'
                 exitSubmit.setAttribute('type', 'submit')
                 exitSubmit.style.display = 'none'
