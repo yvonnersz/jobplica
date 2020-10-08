@@ -1,3 +1,3 @@
 # Jobplica
 
-This app is intended to help a student organize all their job applications. The user will fill out a form with the company information and upon submission, will create a card with the submitted details. The user will have the option to leave comments on a company card or edit/delete companies, in case of a mistake. The user will also have the ability to filter out cards by either status or date, or view some basic statistics.
+This app is intended to help a student organize all their job applications after graduation. The user will fill out a form with the company information and upon submission, the app will create a card with the submitted details. The user will have the option to leave comments on a company card or edit/delete companies, in case of a mistake. The user will also have the ability to filter out cards by either status or date, or view some basic statistics.
