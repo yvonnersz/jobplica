@@ -1,28 +1,28 @@
-const companyCardsContainer = document.querySelector('.company-cards')
-const statisticsContainer = document.querySelector('.statistics')
-const cardsButton = document.querySelector('.cards-click')
 const statisticsButton = document.querySelector('.statistics-click')
+const cardsButton = document.querySelector('.cards-click')
 const filterByStatus = document.querySelector('#status-dropdown')
 const filterByDate = document.querySelector('#date-dropdown')
 const companyForm = document.getElementById('new-company')
+const companyCardsContainer = document.querySelector('.company-cards')
+const statisticsContainer = document.querySelector('.statistics')
 
 class Companies {
     constructor() {
         this.adapterCompanies = new CompaniesAdapter()
         this.adapterComments = new CommentsAdapter()
-        this.fetchCompanies()
         this.bindEventListeners()
+        this.fetchCompanies()
     }
 
     bindEventListeners() {
-        companyForm.addEventListener('submit', this.createCompany.bind(this))
+        statisticsButton.addEventListener('click', this.showContent.bind(this))
+        cardsButton.addEventListener('click', this.showContent.bind(this))
         filterByStatus.addEventListener('change', this.filter.bind(this))
         filterByDate.addEventListener('change', this.filter.bind(this))
-        cardsButton.addEventListener('click', this.showContent.bind(this))
-        statisticsButton.addEventListener('click', this.showContent.bind(this))
+        companyForm.addEventListener('submit', this.createCompany.bind(this))
 
-        statisticsContainer.style.display = 'none'
         cardsButton.style.display = 'none'
+        statisticsContainer.style.display = 'none'
     }
 
     fetchCompanies() {
