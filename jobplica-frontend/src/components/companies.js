@@ -268,21 +268,21 @@ class Companies {
     }
 
     updateCompany(e) {
-        let companyCards = this
-        let companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let companyHead = companyCard.querySelector('a')
-        let editInfo = e.target
+        const companyCards = this
+        const companyId = e.target.parentNode.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
+        const companyHead = companyCard.querySelector('a')
+        const editInfo = e.target
 
         editInfo.contentEditable = true
 
         editInfo.addEventListener('keydown', function(e) {
             if (e.key == "Enter") {
-                let companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
-                let companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
-                let companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
+                const companyNameValue = companyCard.querySelector('ul li:nth-child(1)').innerText
+                const companyUrlValue =  companyCard.querySelector('ul li:nth-child(2)').innerText
+                const companyLocationValue = companyCard.querySelector('ul li:nth-child(3)').innerText
 
-                let updatedCompanyObject = {
+                const updatedCompanyObject = {
                     name: companyNameValue,
                     url: companyUrlValue,
                     location: companyLocationValue,
@@ -298,16 +298,16 @@ class Companies {
     }
 
     updateCompanyStatus(e) {
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
-        let responseButtons = companyCard.querySelectorAll(`.response-button`)
-        let awaitButton = companyCard.querySelector(`.await-button`)
-        let commentButton = companyCard.querySelector('.comment-button')
-        let commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
-        let statusPick = e.target.innerHTML
+        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
+        const companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        const responseButtons = companyCard.querySelectorAll(`.response-button`)
+        const awaitButton = companyCard.querySelector(`.await-button`)
+        const commentButton = companyCard.querySelector('.comment-button')
+        const commentDeleteButtons = companyCard.querySelectorAll('.delete-comment-button')
+        const statusPick = e.target.innerHTML
 
-        let updateCompanyStatus = {
+        const updateCompanyStatus = {
             status: statusPick
         }
 
@@ -335,12 +335,12 @@ class Companies {
     }
 
     deleteCompany(e) {
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let companyComments = companyCard.querySelectorAll('.company-comments li')
+        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
+        const companyComments = companyCard.querySelectorAll('.company-comments li')
 
         companyComments.forEach(companyComment => {
-            let commentId = companyComment.id.split('-')[1]
+            const commentId = companyComment.id.split('-')[1]
             this.adapterComments.deleteComment(commentId)
         })
 
@@ -432,14 +432,14 @@ class Companies {
     }
 
     buttonComment(e) {
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
+        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
         const commentButton = companyCard.querySelector(`.comment-button`)
-        let companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
+        const companyStatus = companyCard.querySelector('ul li:nth-child(5)').innerHTML
         const commentForm = companyCard.querySelector('input')
         const commentSubmit = companyCard.querySelector('.submit-comment-button')
         const commentExit = companyCard.querySelector('.exit-comment-button')
-        let responseButtons = companyCard.querySelectorAll(`.response-button`)
+        const responseButtons = companyCard.querySelectorAll(`.response-button`)
 
         if (e.target.innerHTML === "Leave a Comment") {
             commentButton.style.display = 'none'
