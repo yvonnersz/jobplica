@@ -476,10 +476,9 @@ class Companies {
 
     deleteComment(e) {
         let commentId = e.target.parentNode.id.split('-')[1]
+        let commentLi = document.querySelector(`#comment-${commentId}`)
 
-        // Communicate with the database.
         this.adapterComments.deleteComment(commentId).then(comment => {
-            let commentLi = document.querySelector(`#comment-${commentId}`)
             commentLi.remove()
         })
     }
