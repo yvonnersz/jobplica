@@ -366,20 +366,20 @@ class Companies {
     }
 
     statistics() {
-        let acceptedCompanies = new Array
-        let rejectedCompanies = new Array
-        let awaitingCompanies = new Array
-        let companyCards = document.querySelectorAll('.company-card')
+        const acceptedCompanies = new Array
+        const rejectedCompanies = new Array
+        const awaitingCompanies = new Array
+        const companyCards = document.querySelectorAll('.company-card')
 
         companyCards.forEach(companyCard => {
-            let companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
-            let table = document.querySelector('.total table tbody')
-            let tableData = document.querySelector('.total tr:nth-child(2)')
-            let trData = document.createElement('tr')
-            let tdAccepted = document.createElement('td')
-            let tdRejected = document.createElement('td')
-            let tdAwaiting = document.createElement('td')
-            let tdTotal = document.createElement('td')
+            const companyStatus = companyCard.querySelector('ul').childNodes[4].innerText
+            const table = document.querySelector('.total table tbody')
+            const tableData = document.querySelector('.total tr:nth-child(2)')
+            const trData = document.createElement('tr')
+            const tdAccepted = document.createElement('td')
+            const tdRejected = document.createElement('td')
+            const tdAwaiting = document.createElement('td')
+            const tdTotal = document.createElement('td')
 
             switch (companyStatus) {
                 case "Accepted":
