@@ -458,25 +458,25 @@ class Companies {
     }
 
     createComment(e) {
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
         const companyCards = document.querySelectorAll(`.company-card`)
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let commentValue = companyCard.querySelector(`input`).value
+        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
+        const commentValue = companyCard.querySelector(`input`).value
 
-        let commentObject = {
-            content: commentValue,
-            company_id: companyId
+        const newComment = {
+            company_id: companyId,
+            content: commentValue
         }
 
-        this.adapterComments.createComment(commentObject).then(comment => {
+        this.adapterComments.createComment(newComment).then(comment => {
             companyCards.forEach(companyCard => { companyCard.remove() })
             this.fetchCompanies()
         })
     }
 
     deleteComment(e) {
-        let commentId = e.target.parentNode.id.split('-')[1]
-        let commentLi = document.querySelector(`#comment-${commentId}`)
+        const commentId = e.target.parentNode.id.split('-')[1]
+        const commentLi = document.querySelector(`#comment-${commentId}`)
 
         this.adapterComments.deleteComment(commentId).then(comment => {
             commentLi.remove()
