@@ -207,22 +207,22 @@ class Companies {
     }
 
     buttonEditCompany(e) {
-        let companyCards = this
-        let companyId = e.target.parentNode.parentNode.id.split('-')[1]
-        let companyCard = document.querySelector(`#card-${companyId}`)
-        let editButton = companyCard.querySelector(`.edit-company-button`)
-        let deleteButton = companyCard.querySelector(`.delete-company-button`)
-        let companyInfoDiv = companyCard.querySelector(`.company-info`)
-        let companyAnchor = companyCard.querySelector('a')
-        let companyName = companyCard.querySelector('ul li:nth-child(1)')
-        let companyUrl = companyCard.querySelector('ul li:nth-child(2)')
-        let companyDate = companyCard.querySelector('ul li:nth-child(4)')
-        let companyStatus = companyCard.querySelector('ul li:nth-child(5)')
-        let companyStatusButtons = companyCard.querySelectorAll('.response-button')
-        let companyAwaitButton = companyCard.querySelector(`.await-button`)
-        let companyComments = companyCard.querySelectorAll('.company-comments ul li')
-        let commentButton = companyCard.querySelector('.comment-button')
-        let commentInputs = companyCard.querySelectorAll('input')
+        const companyCards = this
+        const companyId = e.target.parentNode.parentNode.id.split('-')[1]
+        const companyCard = document.querySelector(`#card-${companyId}`)
+        const editButton = companyCard.querySelector(`.edit-company-button`)
+        const deleteButton = companyCard.querySelector(`.delete-company-button`)
+        const companyInfoDiv = companyCard.querySelector(`.company-info`)
+        const companyAnchor = companyCard.querySelector('a')
+        const companyName = companyCard.querySelector('ul li:nth-child(1)')
+        const companyUrl = companyCard.querySelector('ul li:nth-child(2)')
+        const companyDate = companyCard.querySelector('ul li:nth-child(4)')
+        const companyStatus = companyCard.querySelector('ul li:nth-child(5)')
+        const companyStatusButtons = companyCard.querySelectorAll('.response-button')
+        const companyAwaitButton = companyCard.querySelector(`.await-button`)
+        const companyComments = companyCard.querySelectorAll('.company-comments ul li')
+        const commentButton = companyCard.querySelector('.comment-button')
+        const commentInputs = companyCard.querySelectorAll('input')
 
         editButton.style.display = 'none'
         deleteButton.style.display = null
