@@ -3,9 +3,7 @@ class CommentsAdapter {
         this.baseUrl = 'http://localhost:3000/api/v1/comments'
     }
 
-    createComment(commentObject) {
-        const comment = commentObject
-
+    createComment(comment) {
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {
