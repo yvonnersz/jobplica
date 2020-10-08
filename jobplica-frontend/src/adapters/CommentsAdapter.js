@@ -9,7 +9,8 @@ class CommentsAdapter {
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({comment}),
         }).then(resp => resp.json())
@@ -19,7 +20,8 @@ class CommentsAdapter {
         return fetch(`${this.baseUrl}/${id}`, {
             method: 'DELETE',
             headers: {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         }).then(resp => resp.json())
     }
