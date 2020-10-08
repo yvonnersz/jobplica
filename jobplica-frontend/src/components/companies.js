@@ -37,122 +37,142 @@ class Companies {
             // Create company card div.
 
             let cardDiv = document.createElement('div')
-            cardDiv.className = "company-card"
-            cardDiv.setAttribute('id', 'card-' + company.id)
+                cardDiv.className = "company-card"
+                cardDiv.setAttribute('id', 'card-' + company.id)
 
             // Create edit and delete buttons for company card.
 
-            let editCardDiv = document.createElement('div')
+            let editButtonsDiv = document.createElement('div')
+                editButtonsDiv.className = 'company-edit'
+
             let editButton = document.createElement('button')
-            let deleteButton = document.createElement('button')
+                editButton.className = "edit-company-button"
+                editButton.innerHTML = '...'
+                editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
 
-            editCardDiv.className = 'company-edit'
-            editButton.className = "edit-company-button"
-            editButton.innerHTML = '...'
-            deleteButton.className = "delete-company-button"
-            deleteButton.innerHTML = "Delete"
-            deleteButton.style.display = 'none'
+            let deleteButton = document.createElement('button')   
+                deleteButton.className = "delete-company-button"
+                deleteButton.innerHTML = "Delete"
+                deleteButton.style.display = 'none'
+                deleteButton.addEventListener('click', this.deleteCompany.bind(this))
 
-            editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
-            deleteButton.addEventListener('click', this.deleteCompany.bind(this))
-
-            editCardDiv.appendChild(editButton)
-            editCardDiv.appendChild(deleteButton)
-            cardDiv.appendChild(editCardDiv)
+            editButtonsDiv.appendChild(editButton)
+            editButtonsDiv.appendChild(deleteButton)
+            cardDiv.appendChild(editButtonsDiv)
 
             // Create company info elements such as: name, url, location, date, and status.
 
             let companyInfoDiv = document.createElement('div')
+                companyInfoDiv.className = 'company-info'
+
             let companyHead = document.createElement('a')
+                companyHead.href = company.url
+                companyHead.innerHTML = company.name
+
             let ulCompanyInfo = document.createElement('ul')
-            let liName = document.createElement('li')
-            let liUrl = document.createElement('li')
-            let liLocation = document.createElement('li')
-            let liDate = document.createElement('li')
-            let liStatus = document.createElement('li')
 
-            companyInfoDiv.className = "company-info"
-            companyHead.href = company.url
-            liName.style.display = 'none'
-            liUrl.style.display = 'none'
+                let liName = document.createElement('li')
+                    liName.style.display = 'none'
+                    liName.innerHTML = company.name
 
-            ulCompanyInfo.appendChild(liName).innerHTML = company.name
-            ulCompanyInfo.appendChild(liUrl).innerHTML = company.url
-            ulCompanyInfo.appendChild(liLocation).innerHTML = company.location
-            ulCompanyInfo.appendChild(liDate).innerHTML = new Company(company).renderDate
-            ulCompanyInfo.appendChild(liStatus).innerHTML = company.status
-            companyInfoDiv.appendChild(companyHead).innerHTML = company.name
+                let liUrl = document.createElement('li')
+                    liUrl.style.display = 'none'
+                    liUrl.innerHTML = company.url
+
+                let liLocation = document.createElement('li')
+                    liLocation.innerHTML = company.location
+
+                let liDate = document.createElement('li')
+                    liDate.innerHTML = new Company(company).renderDate
+
+                let liStatus = document.createElement('li')
+                    liStatus.innerHTML = company.status
+
+            ulCompanyInfo.appendChild(liName)
+            ulCompanyInfo.appendChild(liUrl)
+            ulCompanyInfo.appendChild(liLocation)
+            ulCompanyInfo.appendChild(liDate)
+            ulCompanyInfo.appendChild(liStatus)
+            companyInfoDiv.appendChild(companyHead)
             companyInfoDiv.appendChild(ulCompanyInfo)
             cardDiv.appendChild(companyInfoDiv)
 
             // Create company comments.
 
             let divComments = document.createElement('div')
+                divComments.className = 'company-comments'
+
             let ulComments = document.createElement('ul')
 
-            company.comments.forEach(comment => {
-                let commentLi = document.createElement('li')
-                let deleteButton = document.createElement('button')
+                company.comments.forEach(comment => {
+                    let commentLi = document.createElement('li')
+                        commentLi.setAttribute('id', 'comment-' + comment.id)
+                        commentLi.innerHTML = comment.content
+                    let deleteButton = document.createElement('button')
+                        deleteButton.className = 'delete-comment-button'
+                        deleteButton.addEventListener('click', this.deleteComment.bind(this))
 
-                commentLi.setAttribute('id', 'comment-' + comment.id)
-                deleteButton.className = 'delete-comment-button'
-
-                deleteButton.addEventListener('click', this.deleteComment.bind(this))
-
-                ulComments.appendChild(commentLi).innerHTML = comment.content
-                company.status === "Awaiting Response" ? commentLi.appendChild(deleteButton).innerHTML = 'x':false
-            })
-
-            divComments.className = 'company-comments'
+                    ulComments.appendChild(commentLi)
+                    company.status === "Awaiting Response" ? commentLi.appendChild(deleteButton).innerHTML = 'X':false
+                })
 
             divComments.appendChild(ulComments)
             cardDiv.appendChild(divComments)
 
             // Create status update and leave comment buttons.
-
+            
             let updateCompanyDiv = document.createElement('div')
+                updateCompanyDiv.className = 'company-update'
+
             let acceptButton = document.createElement("button");
+                acceptButton.className = 'response-button'
+                acceptButton.innerHTML = 'Accepted'
+                acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+
             let rejectButton = document.createElement("button");
+                rejectButton.className = 'response-button'
+                rejectButton.innerHTML = 'Rejected'
+                rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+
             let awaitButton = document.createElement("button");
+                awaitButton.className = 'await-button'
+                awaitButton.style.display = 'none'
+                awaitButton.innerHTML = 'Awaiting Response'
+                awaitButton.addEventListener('click', this.updateCompanyStatus.bind(this))
+
             let commentButton = document.createElement('button')
+                commentButton.className = 'comment-button'
+                commentButton.innerHTML = 'Leave a Comment'
+                commentButton.addEventListener('click', this.buttonComment.bind(this))
+
             let commentForm = document.createElement('input')
+                commentForm.className = 'comment-form'
+                commentForm.style.display = 'none'
+
             let commentSubmitButton = document.createElement('input')
+                commentSubmitButton.setAttribute('type', 'submit')
+                commentSubmitButton.className = 'submit-comment-button'
+                commentSubmitButton.style.display = 'none'
+                commentSubmitButton.addEventListener('click', this.createComment.bind(this))
+
             let exitSubmit = document.createElement('input')
+                exitSubmit.className = 'exit-comment-button'
+                exitSubmit.setAttribute('type', 'submit')
+                exitSubmit.style.display = 'none'
+                exitSubmit.value = 'Exit'
+                exitSubmit.addEventListener('click', this.buttonComment.bind(this))
 
-            updateCompanyDiv.className = 'company-update'
-            acceptButton.className = 'response-button'
-            rejectButton.className = 'response-button'
-            awaitButton.className = 'await-button'
-            awaitButton.style.display = 'none'
-            commentButton.className = 'comment-button'
-            commentForm.className = 'comment-form'
-            commentForm.style.display = 'none'
-            commentSubmitButton.setAttribute('type', 'submit')
-            commentSubmitButton.className = 'submit-comment-button'
-            commentSubmitButton.style.display = 'none'
-            exitSubmit.className = 'exit-comment-button'
-            exitSubmit.setAttribute('type', 'submit')
-            exitSubmit.style.display = 'none'
-
-            acceptButton.addEventListener('click', this.updateCompanyStatus.bind(this))
-            rejectButton.addEventListener('click', this.updateCompanyStatus.bind(this))
-            awaitButton.addEventListener('click', this.updateCompanyStatus.bind(this))
-            commentButton.addEventListener('click', this.buttonComment.bind(this))
-            commentSubmitButton.addEventListener('click', this.createComment.bind(this))
-            exitSubmit.addEventListener('click', this.buttonComment.bind(this))
-
-            updateCompanyDiv.appendChild(acceptButton).innerHTML = "Accepted"
-            updateCompanyDiv.appendChild(rejectButton).innerHTML = "Rejected"
-            updateCompanyDiv.appendChild(awaitButton).innerHTML = "Awaiting Response"
-            updateCompanyDiv.appendChild(commentButton).innerHTML = "Leave a Comment"
+            updateCompanyDiv.appendChild(acceptButton)
+            updateCompanyDiv.appendChild(rejectButton)
+            updateCompanyDiv.appendChild(awaitButton)
+            updateCompanyDiv.appendChild(commentButton)
             updateCompanyDiv.appendChild(commentForm)
             updateCompanyDiv.appendChild(commentSubmitButton)
-            updateCompanyDiv.appendChild(exitSubmit).value = "Exit"
+            updateCompanyDiv.appendChild(exitSubmit)
             cardDiv.appendChild(updateCompanyDiv)
             companyCardsContainer.appendChild(cardDiv)
 
             // Changes background color depending on company status.
-
             if (company.status == "Accepted" || company.status == "Rejected") {
                 rejectButton.style.display = 'none'
                 acceptButton.style.display = 'none'
