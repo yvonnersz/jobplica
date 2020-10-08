@@ -46,37 +46,12 @@ class Companies {
             let editButton = document.createElement('button')
             let deleteButton = document.createElement('button')
 
-<<<<<<< HEAD
-            let ul = document.createElement('ul')
-
-            let ul = document.createElement('ul')
-
-            let ul = document.createElement('ul')
-
-            let companyUrl = document.createElement('li')
-            companyUrl.setAttribute('id', 'url-' + company.id)
-            companyUrl.style.display = "none"
-<<<<<<< HEAD
-<<<<<<< .merge_file_IR4KDI
-<<<<<<< .merge_file_7P1zF5
-            ulCompanyInfo.appendChild(companyUrl).innerHTML = company.url
-=======
-            ul.appendChild(companyUrl).innerHTML = company.url
->>>>>>> .merge_file_7xOHve
-=======
-            ul.appendChild(companyUrl).innerHTML = company.url
->>>>>>> .merge_file_9rk9zL
-=======
-            ul.appendChild(companyUrl).innerHTML = company.url
->>>>>>> ca7936cd5a4b6f8b16d8e0a70d25e82af92374e6
-=======
             editCardDiv.className = 'company-edit'
             editButton.className = "edit-company-button"
             editButton.innerHTML = '...'
             deleteButton.className = "delete-company-button"
             deleteButton.innerHTML = "Delete"
             deleteButton.style.display = 'none'
->>>>>>> 65f3243808f145797ce84ccd7867cdb932aa1ac8
 
             editButton.addEventListener('focus', this.buttonEditCompany.bind(this))
             deleteButton.addEventListener('click', this.deleteCompany.bind(this))
