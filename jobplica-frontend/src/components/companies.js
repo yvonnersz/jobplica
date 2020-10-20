@@ -27,11 +27,22 @@ class Companies {
 
     fetchCompanies() {
         this.adapterCompanies.getCompanies().then(companies => { 
-            this.render(companies)
+            // let sortedCompanies = companies.sort()
+            let sortedCompanies = companies.sort(function (a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                } else if (a.name > b.name) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            })
+
+            this.render(sortedCompanies)
         })
     }
 
-    render(companies) {
+    render(companies) {        
         for (const company of companies) {
 
             // Create company card div.
